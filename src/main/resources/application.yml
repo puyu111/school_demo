@@ -1,0 +1,231 @@
+# ============================================
+# 智能排课系统 - 生产环境配置文件
+# ============================================
+
+spring:
+  application:
+    name: school-demo-scheduler
+
+  # ============================================
+  # MySQL 数据库配置
+  # ============================================
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/school_scheduler?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+    # HikariCP 连接池生产级配置
+    hikari:
+      # 连接池名称（用于日志和监控）
+      pool-name: SchedulerHikariPool
+      # 最大连接数（根据应用实例数和数据库最大连接数调整）
+      maximum-pool-size: 20
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 连接超时时间（毫秒）
+      connection-timeout: 30000
+      # 空闲连接超时时间（毫秒），应小于 max-lifetime
+      idle-timeout: 600000
+      # 连接最大生命周期（毫秒），建议设置为数据库 wait_timeout 的 60-70%
+      max-lifetime: 1800000
+      # 连接泄露检测阈值（毫秒），0 表示禁用（生产建议开启）
+      leak-detection-threshold: 60000
+      # 连接测试查询（MySQL 8+）
+      connection-test-query: SELECT 1
+      # 是否启用 JMX 监控
+      jmx-enabled: true
+      # 是否启用内部指标收集
+      register-mbeans: true
+
+  # ============================================
+  # JPA / Hibernate 配置
+  # ============================================
+  jpa:
+    # Hibernate DDL 模式
+    # none: 不自动创建表结构（生产推荐）
+    # validate: 验证表结构（需要手动同步）
+    # update: 自动更新表结构（开发可用）
+    # create: 每次启动重建表（仅测试）
+    # 开发阶段使用 update 让 Hibernate 自动同步表结构
+    hibernate:
+      ddl-auto: update
+    # 显示 SQL（生产建议关闭）
+    show-sql: false
+    # SQL 格式化
+    format-sql: false
+    # 使用本地事务
+    open-in-view: false
+    properties:
+      hibernate:
+        # 方言
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        # 批处理大小
+        jdbc:
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+        # 查询缓存
+        query:
+          plan_cache_max_size: 2048
+        # 统计信息
+        generate_statistics: false
+
+  # ============================================
+  # Jackson JSON 配置
+  # ============================================
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      fail-on-empty-beans: false
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+# ============================================
+# 服务器配置
+# ============================================
+server:
+  port: 8081
+  # 请求头最大值
+  max-http-request-header-size: 16KB
+  # 优雅停机
+  shutdown: graceful
+
+# ============================================
+# 模拟退火算法参数配置
+# ============================================
+scheduling:
+  sa:
+    # 初始温度
+    initial-temperature: 1000.0
+    # 终止温度
+    min-temperature: 0.1
+    # 冷却率 (0.90-0.99)
+    cooling-rate: 0.95
+    # 每温度迭代次数
+    iterations-per-temperature: 100
+    # 无改进提前终止阈值
+    no-improvement-threshold: 50
+    # 硬约束权重
+    hard-constraint-weight: 1000.0
+    # 软约束权重
+    teacher-preference-weight: 1.0
+    continuous-class-weight: 2.0
+    classroom-balance-weight: 1.5
+    # 随机种子（null 表示随机）
+    random-seed: null
+    # 详细日志
+    enable-detailed-logging: false
+
+# ============================================
+# 线程池配置（异步任务执行器）
+# ============================================
+threadpool:
+  async:
+    # 核心线程数（CPU 核心数 + 1）
+    core-pool-size: 4
+    # 最大线程数
+    max-pool-size: 8
+    # 队列容量
+    queue-capacity: 100
+    # 空闲线程存活时间（秒）
+    keep-alive-seconds: 60
+    # 线程名称前缀
+    thread-name-prefix: async-scheduler-
+    # 等待任务处理完成的最大时间（秒），用于优雅停机
+    await-termination-seconds: 30
+    # 是否等待任务完成
+    wait-for-tasks-to-complete-on-shutdown: true
+    # 拒绝执行策略：caller-runs, abort, discard
+    rejected-execution-handler: caller-runs
+
+# ============================================
+# 对象池配置（Apache Commons Pool 2）
+# ============================================
+objectpool:
+  solution:
+    # 最大总对象数
+    max-total: 50
+    # 最大空闲对象数
+    max-idle: 20
+    # 最小空闲对象数
+    min-idle: 5
+    # 当池耗尽时是否阻塞
+    block-when-exhausted: true
+    # 借出时是否验证
+    test-on-borrow: false
+    # 归还时是否验证
+    test-on-return: false
+    # 空闲时验证
+    test-while-idle: true
+    # 验证间隔（毫秒）
+    time-between-eviction-runs-millis: 30000
+    # 对象最小空闲时间（毫秒）
+    min-evictable-idle-time-millis: 600000
+
+# ============================================
+# Actuator 监控端点配置
+# ============================================
+management:
+  # 端点暴露
+  endpoints:
+    enabled-by-default: true
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  # 健康检查配置
+  endpoint:
+    health:
+      show-details: when_authorized
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: db,ping
+        liveness:
+          include: ping
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+  # 健康组
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+    db:
+      enabled: true
+
+# ============================================
+# 日志配置
+# ============================================
+logging:
+  level:
+    root: INFO
+    org.example.school_demo: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: WARN
+    org.hibernate.SQL: WARN
+    com.zaxxer.hikari: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/school-demo.log
+    max-size: 100MB
+    max-history: 30
+
+# ============================================
+# 应用信息（用于 /actuator/info）
+# ============================================
+info:
+  app:
+    name: 智能排课系统
+    description: 基于模拟退火算法的课程自动排课系统
+    version: 2.0.0-production
+  build:
+    group: org.example
+    artifact: school_demo

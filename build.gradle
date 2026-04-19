@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'org.example'
+version = '0.0.1-SNAPSHOT'
+description = 'school_demo - 智能排课系统 (生产版)'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // ==================== Spring Boot Core ====================
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // ==================== 数据库相关 ====================
+    // Spring Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // MySQL 驱动
+    runtimeOnly 'com.mysql:mysql-connector-j:8.3.0'
+    // HikariCP (Spring Boot 默认连接池，已内置)
+
+    // ==================== 对象池 ====================
+    implementation 'org.apache.commons:commons-pool2:2.12.0'
+
+    // ==================== 工具类 ====================
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    // 日志增强
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
+
+    // ==================== 测试 ====================
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // H2 内存数据库（用于测试）
+    testRuntimeOnly 'com.h2database:h2:2.2.224'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// 禁用 bootJar 以兼容 Gradle 9.x
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
