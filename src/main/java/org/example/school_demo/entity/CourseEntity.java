@@ -11,74 +11,70 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 /**
- * 课程实体
+ * 课程实体类
+ * <p>
  * 对应数据库表：course
+ * 存储课程的基础信息。
+ *
+ * @author 排课系统开发团队
+ * @since 2025-03-01
  */
-@Entity
-@Table(name = "course")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "course", indexes = {
+        @Index(name = "idx_course_type", columnList = "course_type")
+})
 public class CourseEntity {
 
     /**
-     * 课程 ID
+     * 主键 ID（数据库主键）
      */
     @Id
-    @Column(name = "id", length = 32)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_id")
+    private Long courseId;
 
     /**
      * 课程名称
      */
-    @Column(name = "name", nullable = false, length = 200)
-    private String name;
+    @Column(name = "course_name", length = 200, nullable = false)
+    private String courseName;
 
     /**
-     * 所需课时数
+     * 学分
      */
-    @Column(name = "required_periods", nullable = false)
-    private Integer requiredPeriods;
+    @Column(name = "credits", nullable = false, precision = 3, scale = 1)
+    private java.math.BigDecimal credits;
 
     /**
-     * 选课学生人数
+     * 持续周数
      */
-    @Column(name = "student_count", nullable = false)
-    private Integer studentCount;
+    @Column(name = "duration", nullable = false)
+    private Integer duration;
 
     /**
-     * 任课教师 ID
+     * 排课优先级（数字越小优先级越高）
      */
-    @Column(name = "teacher_id", nullable = false, length = 32)
-    private String teacherId;
-
-    /**
-     * 优先教室类型
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(name = "preferred_classroom_type", length = 32)
-    private ClassroomEntity.ClassroomType preferredClassroomType;
-
-    /**
-     * 所属班级/专业 ID
-     */
-    @Column(name = "class_id", length = 32)
-    private String classId;
-
-    /**
-     * 学期
-     */
-    @Column(name = "semester", length = 50)
-    private String semester;
-
-    /**
-     * 状态：ACTIVE=有效，INACTIVE=无效
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
+    @Column(name = "priority", nullable = false)
     @Builder.Default
-    private CourseStatus status = CourseStatus.ACTIVE;
+    private Integer priority = 1;
+
+    /**
+     * 课程类型
+     * THEORY=理论课，PRACTICE=实践课，LAB=实验课
+     */
+    @Column(name = "course_type", nullable = false, length = 50)
+    @Builder.Default
+    private String courseType = "THEORY";
+
+    /**
+     * 总学时
+     */
+    @Column(name = "total_hours", nullable = false)
+    private Integer totalHours;
 
     /**
      * 创建时间
@@ -95,44 +91,21 @@ public class CourseEntity {
     private LocalDateTime updatedTime;
 
     /**
-     * 课程状态枚举
+     * 课程类型枚举
      */
-    public enum CourseStatus {
-        ACTIVE("有效"),
-        INACTIVE("无效");
+    public enum CourseType {
+        THEORY("理论课"),
+        PRACTICE("实践课"),
+        LAB("实验课");
 
         private final String description;
 
-        CourseStatus(String description) {
+        CourseType(String description) {
             this.description = description;
         }
 
         public String getDescription() {
             return description;
         }
-    }
-
-    /**
-     * 检查是否需要特定类型的教室
-     */
-    public boolean hasClassroomTypeRequirement() {
-        return preferredClassroomType != null;
-    }
-
-    /**
-     * 检查教室类型是否匹配
-     */
-    public boolean isClassroomTypeSuitable(ClassroomEntity.ClassroomType type) {
-        if (preferredClassroomType == null) {
-            return true;
-        }
-        return preferredClassroomType == type;
-    }
-
-    /**
-     * 检查教室容量是否足够
-     */
-    public boolean isClassroomCapacitySufficient(ClassroomEntity classroom) {
-        return classroom.getCapacity() >= this.studentCount;
     }
 }

@@ -34,7 +34,7 @@ public class TeacherPreferredSlotEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "teacher_id", nullable = false)
-    private TeacherEntity teacher;
+    private TeacherEnt teacher;
 
     /**
      * 时间段

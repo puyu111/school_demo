@@ -13,71 +13,50 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 教师实体类
- * <p>
+ * 教师实体
  * 对应数据库表：teacher
- * 存储教师的基础信息。
- *
- * @author 排课系统开发团队
- * @since 2025-03-01
  */
+@Entity
+@Table(name = "teacher")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "teacher", indexes = {
-        @Index(name = "uk_job_number", columnList = "job_number", unique = true),
-        @Index(name = "idx_department", columnList = "department")
-})
-public class TeacherEntity {
+public class TeacherEnt {
 
     /**
-     * 主键 ID（数据库主键）
+     * 教师 ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teacher_id")
-    private Long teacherId;
+    @Column(name = "id", length = 32)
+    private String id;
 
     /**
      * 教师姓名
      */
-    @Column(name = "name", length = 100, nullable = false)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     /**
-     * 工号
+     * 最大连续授课节数
      */
-    @Column(name = "job_number", length = 50, nullable = false, unique = true)
-    private String jobNumber;
-
-    /**
-     * 所属院系
-     */
-    @Column(name = "department", length = 100)
-    private String department;
-
-    /**
-     * 每日最大授课节数
-     */
-    @Column(name = "max_daily_courses", nullable = false)
+    @Column(name = "max_continuous_periods", nullable = false)
     @Builder.Default
-    private Integer maxDailyCourses = 6;
+    private Integer maxContinuousPeriods = 4;
 
     /**
      * 可用时间段集合
      */
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<TeacherAvailableSlot> availableSlots = new HashSet<>();
+    private Set<TeacherAvailableSlotEntity> availableSlots = new HashSet<>();
 
     /**
      * 偏好时间段集合
      */
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<TeacherPreferredSlot> preferredSlots = new HashSet<>();
+    private Set<TeacherPreferredSlotEntity> preferredSlots = new HashSet<>();
 
     /**
      * 创建时间
@@ -97,7 +76,7 @@ public class TeacherEntity {
      * 添加可用时间段
      */
     public void addAvailableSlot(TimeSlotEntity timeSlot) {
-        TeacherAvailableSlot slot = TeacherAvailableSlot.builder()
+        TeacherAvailableSlotEntity slot = TeacherAvailableSlotEntity.builder()
                 .teacher(this)
                 .timeSlot(timeSlot)
                 .build();
@@ -108,7 +87,7 @@ public class TeacherEntity {
      * 添加偏好时间段
      */
     public void addPreferredSlot(TimeSlotEntity timeSlot) {
-        TeacherPreferredSlot slot = TeacherPreferredSlot.builder()
+        TeacherPreferredSlotEntity slot = TeacherPreferredSlotEntity.builder()
                 .teacher(this)
                 .timeSlot(timeSlot)
                 .build();

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 排课数据服务
@@ -43,7 +42,7 @@ public class SchedulingDataService {
                 .toList();
 
         // 加载所有教师
-        List<TeacherEntity> teacherEntities = teacherRepository.findAll();
+        List<TeacherEnt> teacherEntities = teacherRepository.findAll();
         List<Teacher> teachers = teacherEntities.stream()
                 .map(this::convertToTeacher)
                 .toList();
@@ -55,9 +54,9 @@ public class SchedulingDataService {
                 .toList();
 
         // 加载所有有效课程
-        List<CourseEntity> courseEntities = courseRepository.findAll();
+        List<CourseEnt> courseEntities = courseRepository.findAll();
         List<Course> courses = courseEntities.stream()
-                .filter(c -> c.getStatus() == CourseEntity.CourseStatus.ACTIVE)
+                .filter(c -> c.getStatus() == CourseEnt.CourseStatus.ACTIVE)
                 .map(this::convertToCourse)
                 .toList();
 
@@ -161,7 +160,7 @@ public class SchedulingDataService {
 
     // ==================== 实体转换方法 ====================
 
-    private Teacher convertToTeacher(TeacherEntity entity) {
+    private Teacher convertToTeacher(TeacherEnt entity) {
         Teacher teacher = Teacher.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -200,7 +199,7 @@ public class SchedulingDataService {
         return classroom;
     }
 
-    private Course convertToCourse(CourseEntity entity) {
+    private Course convertToCourse(CourseEnt entity) {
         return Course.builder()
                 .id(entity.getId())
                 .name(entity.getName())

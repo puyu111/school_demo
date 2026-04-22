@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
  * 对应数据库表：teacher_available_slot
  */
 @Entity
-@Table(name = "teacher_available_slot",
+@Table(name = "teacher_available_slot_v2",
        uniqueConstraints = @UniqueConstraint(columnNames = {"teacher_id", "time_slot_id"}))
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeacherAvailableSlotEntity {
+public class TeacherAvailableSlot {
 
     /**
      * 主键 ID
@@ -34,7 +34,7 @@ public class TeacherAvailableSlotEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "teacher_id", nullable = false)
-    private TeacherEnt teacher;
+    private TeacherEntity teacher;
 
     /**
      * 时间段
