@@ -1,4 +1,4 @@
--- ============================================================
+-- ===========================================================
 -- 排课系统数据库建表语句 (MySQL 8.0+)
 -- 根据排课业务模块实体关系图设计
 -- ============================================================
@@ -28,14 +28,17 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '课程 ID',
     `course_name` VARCHAR(200) NOT NULL COMMENT '课程名称',
+    `name` VARCHAR(100) DEFAULT NULL COMMENT '旧字段（保留兼容）',
     `credits` DECIMAL(3,1) NOT NULL COMMENT '学分',
     `duration` INT NOT NULL COMMENT '持续周数',
     `priority` INT NOT NULL DEFAULT 1 COMMENT '排课优先级（数字越小优先级越高）',
     `course_type` VARCHAR(50) NOT NULL DEFAULT 'THEORY' COMMENT '课程类型：THEORY=理论课，PRACTICE=实践课，LAB=实验课',
+    `id` VARCHAR(50) DEFAULT NULL COMMENT '业务ID，如 C001',
     `total_hours` INT NOT NULL COMMENT '总学时',
     `created_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`course_id`)
+    PRIMARY KEY (`course_id`),
+    UNIQUE KEY `uk_course_business_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='课程信息表';
 
 -- ============================================================
@@ -138,17 +141,17 @@ INSERT INTO `teacher` (`name`, `job_number`, `department`, `max_daily_courses`) 
 -- ============================================================
 -- 2. 插入课程数据 (COURSE) - 10 条记录
 -- ============================================================
-INSERT INTO `course` (`course_name`, `credits`, `duration`, `priority`, `course_type`, `total_hours`) VALUES
-('Java 程序设计', 4.0, 16, 1, 'THEORY', 64),
-('数据结构', 3.5, 16, 1, 'THEORY', 56),
-('数据库原理', 3.0, 16, 2, 'THEORY', 48),
-('计算机网络', 3.0, 16, 2, 'THEORY', 48),
-('操作系统', 3.5, 16, 1, 'THEORY', 56),
-('Web 开发技术', 2.5, 12, 3, 'PRACTICE', 40),
-('Python 编程', 3.0, 16, 2, 'THEORY', 48),
-('算法分析与设计', 3.0, 16, 1, 'THEORY', 48),
-('软件工程', 2.5, 12, 3, 'THEORY', 40),
-('人工智能基础', 2.0, 12, 3, 'THEORY', 32);
+INSERT INTO `course` (`id`, `course_name`, `name`, `credits`, `duration`, `priority`, `course_type`, `total_hours`) VALUES
+('C001', 'Java 程序设计', 'Java 程序设计', 4.0, 16, 1, 'THEORY', 64),
+('C002', '数据结构', '数据结构', 3.5, 16, 1, 'THEORY', 56),
+('C003', '数据库原理', '数据库原理', 3.0, 16, 2, 'THEORY', 48),
+('C004', '计算机网络', '计算机网络', 3.0, 16, 2, 'THEORY', 48),
+('C005', '操作系统', '操作系统', 3.5, 16, 1, 'THEORY', 56),
+('C006', 'Web 开发技术', 'Web 开发技术', 2.5, 12, 3, 'PRACTICE', 40),
+('C007', 'Python 编程', 'Python 编程', 3.0, 16, 2, 'THEORY', 48),
+('C008', '算法分析与设计', '算法分析与设计', 3.0, 16, 1, 'THEORY', 48),
+('C009', '软件工程', '软件工程', 2.5, 12, 3, 'THEORY', 40),
+('C010', '人工智能基础', '人工智能基础', 2.0, 12, 3, 'THEORY', 32);
 
 -- ============================================================
 -- 3. 插入班级数据 (CLASS) - 8 条记录

@@ -42,7 +42,9 @@ public class CourseEntity {
      */
     @Column(name = "course_name", length = 200, nullable = false)
     private String courseName;
-
+    //课程id
+    @Column(name = "id", length = 50, unique = true)
+    private String id;  // 业务ID，如 "C001"
     /**
      * 学分
      */
@@ -53,7 +55,8 @@ public class CourseEntity {
      * 持续周数
      */
     @Column(name = "duration", nullable = false)
-    private Integer duration;
+    @Builder.Default
+    private Integer duration = 45;
 
     /**
      * 排课优先级（数字越小优先级越高）
@@ -89,23 +92,4 @@ public class CourseEntity {
     @UpdateTimestamp
     @Column(name = "updated_time", nullable = false)
     private LocalDateTime updatedTime;
-
-    /**
-     * 课程类型枚举
-     */
-    public enum CourseType {
-        THEORY("理论课"),
-        PRACTICE("实践课"),
-        LAB("实验课");
-
-        private final String description;
-
-        CourseType(String description) {
-            this.description = description;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-    }
 }
