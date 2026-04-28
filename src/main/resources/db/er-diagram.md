@@ -1,583 +1,601 @@
-# 智能排课系统 - 完整 ER 图
+# 智能排课系统 - 数据库 ER 图
 
-## 全貌 ER 图（21 张表）
+> 版本: v3.0 | 基于前端 7 个 API 文档设计
+
+## 完整 ER 关系图（24 张表）
 
 ```mermaid
 erDiagram
-
     %% ===== 基础数据模块 =====
-    course {
-        bigint course_id PK
-        varchar id UK "业务ID如C001"
-        varchar course_name "课程名称"
-        decimal credits "学分"
-        int duration "持续周数"
-        int priority "排课优先级"
-        varchar course_type "课程类型"
-        int total_hours "总学时"
-        datetime created_time
-        datetime updated_time
-    }
+    course_setting ||--o{ course_prerequisite : "1:N"
+    major ||--o{ major_required_course : "1:N"
+    major ||--o{ class : "1:N"
+    teacher ||--o{ teacher_teachable_course : "1:N"
+    teacher ||--o{ course_entity : "1:N"
+    teacher ||--o{ teacher_available_slot_v2 : "1:N"
+    teacher ||--o{ teacher_preferred_slot_v2 : "1:N"
+    semester_calendar ||--o{ calendar_disabled_date : "1:N"
 
     course_setting {
         bigint id PK
-        varchar course_name "课程名称"
+        string name "课程名称"
         int priority "优先级"
-        varchar semester "开课学期"
+        string semester "开课学期"
         datetime created_time
         datetime updated_time
     }
-
     course_prerequisite {
         bigint id PK
-        bigint course_setting_id FK "课程设置ID"
-        varchar prerequisite_name "先修课程名称"
+        bigint course_setting_id FK
+        string prerequisite_name "先修课程名称"
     }
-
+    course_entity {
+        bigint courseId PK
+        string id "业务ID"
+        string courseName "课程名称"
+        float credits "学分"
+        int duration "持续时间"
+        int priority "优先级"
+        string courseType "课程类型"
+        float totalHours "总学时"
+    }
     major {
         bigint id PK
-        varchar major_id UK "业务ID如M001"
-        varchar major_name "专业名称"
+        string major_id UK "业务ID"
+        string name "专业名称"
         int class_size "班级人数"
-        int duration "学制年"
+        int duration "学制"
         datetime created_time
         datetime updated_time
     }
-
     major_required_course {
         bigint id PK
-        bigint major_id FK "专业ID"
-        varchar course_name "必修课程名"
+        bigint major_id FK
+        string course_name "必修课程名称"
     }
-
     teacher {
-        bigint teacher_id PK
-        varchar name "姓名"
-        varchar job_number UK "工号"
-        varchar department "院系"
-        int max_daily_courses "每日最大课程数"
+        bigint teacherId PK
+        string name "姓名"
+        string jobNumber "工号"
+        string department "院系"
+        int maxDailyCourses "每日最大课数"
+    }
+    teacher_teachable_course {
+        bigint id PK
+        bigint teacher_id FK
+        string course_name "可授课程名称"
+    }
+    semester_calendar {
+        bigint id PK
+        date start_date "学期开始"
+        date end_date "学期结束"
         datetime created_time
         datetime updated_time
     }
-
-    teacher_teachable_course {
+    calendar_disabled_date {
         bigint id PK
-        bigint teacher_id FK "教师ID"
-        varchar course_name "可授课程名"
+        bigint calendar_id FK
+        date date_value "禁用日期"
+        string remark "备注"
     }
 
     %% ===== 课表管理模块 =====
+    semester ||--o{ class : "1:N"
+    semester ||--o{ schedule : "1:N"
+    class ||--o{ schedule : "1:N"
+    room ||--o{ schedule : "1:N"
+    course_entity ||--o{ schedule : "1:N"
+    teacher ||--o{ schedule : "1:N"
+    time_slot ||--o{ schedule : "1:N"
+
     semester {
-        bigint semester_id PK
-        varchar semester_name UK "学期名称"
-        date start_date "开始日期"
-        date end_date "结束日期"
-        datetime created_time
-        datetime updated_time
+        bigint semesterId PK
+        string semesterName "学期名称"
+        date startDate "开始日期"
+        date endDate "结束日期"
     }
-
     class {
-        bigint class_id PK
-        varchar class_name "班级名称"
-        varchar major_id FK "专业ID"
-        int student_count "学生人数"
-        varchar grade "年级"
-        datetime created_time
-        datetime updated_time
+        bigint classId PK
+        string classId "业务ID"
+        string className "班级名称"
+        string majorId "专业ID"
+        int studentCount "学生人数"
+        int grade "年级"
     }
-
     room {
-        bigint room_id PK
-        varchar room_name "教室名称"
+        bigint roomId PK
+        string roomName "教室名称"
         int capacity "容量"
-        varchar type "类型"
-        varchar building "所在楼宇"
-        tinyint floor "楼层"
-        datetime created_time
-        datetime updated_time
+        string type "类型"
+        string building "楼宇"
+        int floor "楼层"
     }
-
     time_slot {
-        varchar id PK "如Mon-1"
-        int day_of_week "星期1-7"
-        int period "节次1-12"
-        varchar display_name "显示名"
-        datetime created_time
-        datetime updated_time
+        string id PK "如Mon-1"
+        int dayOfWeek "星期1-7"
+        int period "节次1-10"
+        string displayName "显示名"
     }
-
     schedule {
-        bigint schedule_id PK
-        bigint course_id FK "课程ID"
-        bigint teacher_id FK "教师ID"
-        bigint class_id FK "班级ID"
-        bigint room_id FK "教室ID"
-        bigint semester_id FK "学期ID"
-        date class_time "上课日期"
-        int week "第几周"
-        int period "第几节"
-        varchar status "状态"
-        datetime created_time
-        datetime updated_time
+        bigint scheduleId PK
+        bigint courseId FK
+        bigint teacherId FK
+        bigint classId FK
+        bigint roomId FK
+        bigint semesterId FK
+        string classTime "上课时间"
+        int week "周次"
+        int period "节次"
+        string status "状态"
     }
-
     teacher_available_slot_v2 {
         bigint id PK
-        bigint teacher_id FK "教师ID"
-        varchar time_slot_id FK "时间段ID"
-        datetime created_time
+        bigint teacherId FK
+        string timeSlotId FK
     }
-
     teacher_preferred_slot_v2 {
         bigint id PK
-        bigint teacher_id FK "教师ID"
-        varchar time_slot_id FK "时间段ID"
-        datetime created_time
+        bigint teacherId FK
+        string timeSlotId FK
     }
 
     %% ===== 调课申请审核模块 =====
+    teacher ||--o{ course_adjustment : "1:N"
+    course_adjustment ||--o{ adjustment_history : "1:N"
+    course_adjustment }o--o{ schedule : "关联"
+    room }o--o{ course_adjustment : "原教室"
+    room }o--o{ course_adjustment : "目标教室"
+
     course_adjustment {
         bigint id PK
-        varchar application_no UK "申请编号"
-        bigint teacher_id FK "教师ID"
-        varchar teacher_name "教师姓名"
-        varchar department "院系"
-        varchar original_course_id FK "原课程ID"
-        varchar original_course "原课程信息"
-        varchar target_course "调整后信息"
-        tinyint target_week_day "目标星期"
-        int target_slot "目标节次"
-        varchar reason "调课原因"
-        varchar urgency "紧急程度"
-        varchar status "状态"
-        varchar review_comment "审核意见"
-        varchar reviewer_id "审核人ID"
-        varchar reviewer_name "审核人姓名"
-        datetime review_time "审核时间"
+        string applicationNo UK "申请编号"
+        bigint teacherId FK
+        string teacherName "教师姓名"
+        string department "院系"
+        string originalCourseId "原课程业务ID"
+        string originalCourse "原课程信息"
+        int originalWeekDay "原星期"
+        int originalSlot "原节次"
+        bigint originalRoomId "原教室ID"
+        string targetCourse "调整后课程"
+        int targetWeekDay "目标星期"
+        int targetSlot "目标节次"
+        bigint targetRoomId "目标教室ID"
+        string reason "调课原因"
+        string urgency "紧急程度"
+        string status "状态"
+        string reviewComment "审核意见"
+        datetime reviewTime "审核时间"
         json attachments "附件"
-        datetime created_time
-        datetime updated_time
     }
-
     adjustment_history {
         bigint id PK
-        bigint application_id FK "申请ID"
-        varchar action "操作类型"
-        varchar action_name "操作名称"
-        varchar operator_id "操作人ID"
-        varchar operator_name "操作人姓名"
-        varchar operator_type "操作人类型"
-        varchar comment "备注"
+        bigint applicationId FK
+        string action "操作类型"
+        string actionName "操作名称"
+        string operatorId "操作人ID"
+        string operatorName "操作人姓名"
+        string operatorType "操作人类型"
+        string comment "备注"
         datetime timestamp "操作时间"
     }
 
     %% ===== 规则配置模块 =====
-    scheduling_rule {
-        bigint id PK
-        varchar rule_key UK "规则Key"
-        varchar rule_name "规则名称"
-        text description "描述"
-        bigint valid_date_start "有效期开始"
-        bigint valid_date_end "有效期结束"
-        datetime created_time
-        datetime updated_time
-    }
-
-    rule_teacher {
-        bigint id PK
-        varchar rule_key FK "规则Key"
-        varchar teacher_name "教师姓名"
-    }
-
-    unavailable_date {
-        bigint id PK
-        varchar date_key UK "记录Key"
-        bigint teacher_id FK "教师ID"
-        varchar teacher_name "教师姓名"
-        bigint valid_date_start "开始日期"
-        bigint valid_date_end "结束日期"
-        varchar reason "原因"
-        varchar type "类型"
-        varchar range_type "范围类型"
-        datetime created_time
-    }
-
-    rule_weight_config {
-        bigint id PK
-        varchar weight_key UK "权重Key"
-        varchar name "规则名称"
-        varchar category "分类"
-        int current_weight "当前权重"
-        int default_weight "默认权重"
-        int min_weight "最小值"
-        int max_weight "最大值"
-        tinyint enabled "是否启用"
-        text description "描述"
-        datetime created_time
-        datetime updated_time
-    }
-
-    weight_change_history {
-        bigint id PK
-        bigint weight_config_id FK "权重配置ID"
-        varchar rule_name "规则名称"
-        int old_value "原权重"
-        int new_value "新权重"
-        datetime change_time "变更时间"
-        varchar operator_id "操作人ID"
-        varchar operator_name "操作人姓名"
-    }
-
-    %% ===== 智能排课模块 =====
-    schedule_operation_history {
-        bigint id PK
-        varchar action "操作类型"
-        varchar course_id "课程业务ID"
-        varchar course_name "课程名称"
-        varchar teacher_name "教师姓名"
-        varchar class_name "班级名称"
-        tinyint day_of_week "星期"
-        int period "节次"
-        int week "周次"
-        bigint schedule_id FK "排课记录ID"
-        varchar operator "操作人"
-        datetime timestamp "操作时间"
-    }
-
-    %% ===== 关系定义 =====
-
-    %% 基础数据
-    course_setting ||--o{ course_prerequisite : "先修课程"
-    major ||--o{ major_required_course : "必修课程"
-    teacher ||--o{ teacher_teachable_course : "可授课程"
-    class }o--|| major : "所属专业"
-
-    %% 课表管理
-    schedule }o--|| course : "排课课程"
-    schedule }o--|| teacher : "排课教师"
-    schedule }o--|| class : "排课班级"
-    schedule }o--|| room : "排课教室"
-    schedule }o--|| semester : "所属学期"
-    teacher ||--o{ teacher_available_slot_v2 : "可用时间"
-    teacher ||--o{ teacher_preferred_slot_v2 : "偏好时间"
-    time_slot ||--o{ teacher_available_slot_v2 : "时间段"
-    time_slot ||--o{ teacher_preferred_slot_v2 : "时间段"
-
-    %% 调课审核
-    course_adjustment }o--|| teacher : "申请教师"
-    course_adjustment ||--o{ adjustment_history : "审核历史"
-
-    %% 规则配置
-    scheduling_rule ||--o{ rule_teacher : "关联教师"
-    teacher ||--o{ unavailable_date : "不可用日期"
-    rule_weight_config ||--o{ weight_change_history : "变更历史"
-
-    %% 智能排课
-    schedule ||--o{ schedule_operation_history : "操作历史"
-
-```
-
----
-
-## 分模块 ER 图
-
-### 模块一：基础数据管理 (base-data-api.md)
-
-```mermaid
-erDiagram
-
-    course {
-        bigint course_id PK
-        varchar id UK "业务ID"
-        varchar course_name "课程名称"
-        decimal credits "学分"
-        int priority "优先级"
-        varchar course_type "课程类型"
-        int total_hours "总学时"
-    }
-
-    course_setting {
-        bigint id PK
-        varchar course_name "课程名称"
-        int priority "优先级"
-        varchar semester "开课学期"
-    }
-
-    course_prerequisite {
-        bigint id PK
-        bigint course_setting_id FK
-        varchar prerequisite_name "先修课程"
-    }
-
-    major {
-        bigint id PK
-        varchar major_id UK "业务ID"
-        varchar major_name "专业名称"
-        int class_size "班级人数"
-        int duration "学制年"
-    }
-
-    major_required_course {
-        bigint id PK
-        bigint major_id FK
-        varchar course_name "必修课程"
-    }
-
-    class {
-        bigint class_id PK
-        varchar class_name "班级名称"
-        varchar major_id "专业ID"
-        int student_count "学生人数"
-        varchar grade "年级"
-    }
-
-    teacher {
-        bigint teacher_id PK
-        varchar name "姓名"
-        varchar job_number UK "工号"
-        varchar department "院系"
-        int max_daily_courses "每日最大课程数"
-    }
-
-    teacher_teachable_course {
-        bigint id PK
-        bigint teacher_id FK
-        varchar course_name "可授课程"
-    }
-
-    course_setting ||--o{ course_prerequisite : "1:N"
-    major ||--o{ major_required_course : "1:N"
-    class }o--|| major : "N:1"
-    teacher ||--o{ teacher_teachable_course : "1:N"
-
-```
-
-### 模块二：课表管理 (schedule-api.md + drag-schedule-api.md)
-
-```mermaid
-erDiagram
-
-    semester {
-        bigint semester_id PK
-        varchar semester_name UK "学期名称"
-        date start_date "开始日期"
-        date end_date "结束日期"
-    }
-
-    course {
-        bigint course_id PK
-        varchar course_name "课程名称"
-    }
-
-    teacher {
-        bigint teacher_id PK
-        varchar name "姓名"
-    }
-
-    class {
-        bigint class_id PK
-        varchar class_name "班级名称"
-    }
-
-    room {
-        bigint room_id PK
-        varchar room_name "教室名称"
-        int capacity "容量"
-        varchar type "类型"
-        varchar building "楼宇"
-    }
-
-    time_slot {
-        varchar id PK "如Mon-1"
-        int day_of_week "星期"
-        int period "节次"
-        varchar display_name "显示名"
-    }
-
-    schedule {
-        bigint schedule_id PK
-        bigint course_id FK
-        bigint teacher_id FK
-        bigint class_id FK
-        bigint room_id FK
-        bigint semester_id FK
-        date class_time "上课日期"
-        int week "周次"
-        int period "节次"
-        varchar status "状态"
-    }
-
-    teacher_available_slot_v2 {
-        bigint id PK
-        bigint teacher_id FK
-        varchar time_slot_id FK
-    }
-
-    teacher_preferred_slot_v2 {
-        bigint id PK
-        bigint teacher_id FK
-        varchar time_slot_id FK
-    }
-
-    schedule }o--|| course : "课程"
-    schedule }o--|| teacher : "教师"
-    schedule }o--|| class : "班级"
-    schedule }o--|| room : "教室"
-    schedule }o--|| semester : "学期"
-    teacher ||--o{ teacher_available_slot_v2 : "可用时间"
-    teacher ||--o{ teacher_preferred_slot_v2 : "偏好时间"
-    time_slot ||--o{ teacher_available_slot_v2 : "时间段"
-    time_slot ||--o{ teacher_preferred_slot_v2 : "时间段"
-
-```
-
-### 模块三：调课申请审核 (course-adjustment-api.md)
-
-```mermaid
-erDiagram
-
-    teacher {
-        bigint teacher_id PK
-        varchar name "姓名"
-        varchar department "院系"
-    }
-
-    course_adjustment {
-        bigint id PK
-        varchar application_no UK "申请编号"
-        bigint teacher_id FK
-        varchar teacher_name "教师姓名"
-        varchar department "院系"
-        varchar original_course_id "原课程ID"
-        varchar original_course "原课程信息"
-        varchar target_course "调整后信息"
-        tinyint target_week_day "目标星期"
-        int target_slot "目标节次"
-        varchar reason "调课原因"
-        varchar urgency "紧急程度"
-        varchar status "状态"
-        varchar review_comment "审核意见"
-        varchar reviewer_id "审核人ID"
-        varchar reviewer_name "审核人姓名"
-        datetime review_time "审核时间"
-        json attachments "附件"
-    }
-
-    adjustment_history {
-        bigint id PK
-        bigint application_id FK
-        varchar action "操作类型"
-        varchar action_name "操作名称"
-        varchar operator_id "操作人ID"
-        varchar operator_name "操作人姓名"
-        varchar operator_type "操作人类型"
-        varchar comment "备注"
-        datetime timestamp "操作时间"
-    }
-
-    course_adjustment }o--|| teacher : "申请教师"
-    course_adjustment ||--o{ adjustment_history : "审核历史"
-
-```
-
-### 模块四：规则配置 (rule-configuration-api.md)
-
-```mermaid
-erDiagram
-
-    scheduling_rule {
-        bigint id PK
-        varchar rule_key UK "规则Key"
-        varchar rule_name "规则名称"
-        text description "描述"
-        bigint valid_date_start "有效期开始"
-        bigint valid_date_end "有效期结束"
-    }
-
-    rule_teacher {
-        bigint id PK
-        varchar rule_key FK
-        varchar teacher_name "教师姓名"
-    }
-
-    teacher {
-        bigint teacher_id PK
-        varchar name "姓名"
-    }
-
-    unavailable_date {
-        bigint id PK
-        varchar date_key UK "记录Key"
-        bigint teacher_id FK
-        varchar teacher_name "教师姓名"
-        bigint valid_date_start "开始日期"
-        bigint valid_date_end "结束日期"
-        varchar reason "原因"
-        varchar type "类型"
-        varchar range_type "范围类型"
-    }
-
-    rule_weight_config {
-        bigint id PK
-        varchar weight_key UK "权重Key"
-        varchar name "规则名称"
-        varchar category "分类"
-        int current_weight "当前权重"
-        int default_weight "默认权重"
-        int min_weight "最小值"
-        int max_weight "最大值"
-        tinyint enabled "是否启用"
-    }
-
-    weight_change_history {
-        bigint id PK
-        bigint weight_config_id FK
-        varchar rule_name "规则名称"
-        int old_value "原权重"
-        int new_value "新权重"
-        datetime change_time "变更时间"
-    }
-
     scheduling_rule ||--o{ rule_teacher : "1:N"
     teacher ||--o{ unavailable_date : "1:N"
     rule_weight_config ||--o{ weight_change_history : "1:N"
 
+    scheduling_rule {
+        bigint id PK
+        string ruleKey UK "规则Key"
+        string ruleName "规则名称"
+        text description "描述"
+        bigint validDateStart "有效期开始"
+        bigint validDateEnd "有效期结束"
+        datetime created_time
+        datetime updated_time
+    }
+    rule_teacher {
+        bigint id PK
+        string ruleKey FK
+        string teacherName "教师姓名"
+    }
+    unavailable_date {
+        bigint id PK
+        string dateKey UK "记录Key"
+        bigint teacherId FK
+        string teacherName "教师姓名"
+        bigint validDateStart "开始日期"
+        bigint validDateEnd "结束日期"
+        string reason "原因"
+        string type "类型"
+        string rangeType "范围类型"
+        datetime created_time
+    }
+    rule_weight_config {
+        bigint id PK
+        string weightKey UK "权重Key"
+        string name "规则名称"
+        string category "分类"
+        int currentWeight "当前权重"
+        int defaultWeight "默认权重"
+        int minWeight "最小值"
+        int maxWeight "最大值"
+        boolean enabled "是否启用"
+        string description "描述"
+        datetime created_time
+        datetime updated_time
+    }
+    weight_change_history {
+        bigint id PK
+        bigint weightConfigId FK
+        string ruleName "规则名称"
+        int oldValue "原权重"
+        int newValue "新权重"
+        datetime changeTime "变更时间"
+        string operatorId "操作人ID"
+        string operatorName "操作人姓名"
+    }
+
+    %% ===== 智能排课模块 =====
+    schedule ||--o{ schedule_operation_history : "1:N"
+
+    schedule_operation_history {
+        bigint id PK
+        string action "操作类型"
+        string courseId "课程业务ID"
+        string courseName "课程名称"
+        string teacherName "教师姓名"
+        string className "班级名称"
+        int dayOfWeek "星期"
+        int period "节次"
+        int week "周次"
+        bigint scheduleId FK
+        string operator "操作人"
+        datetime timestamp "操作时间"
+    }
 ```
 
 ---
 
-## 表清单与来源对照
+## 模块分图
 
-| # | 表名 | 类型 | 来源 API 文档 | 状态 |
-|---|------|------|---------------|------|
-| 1 | course | 主表 | base-data-api | 已有 |
-| 2 | course_setting | 主表 | base-data-api | 新增 |
-| 3 | course_prerequisite | 关联表 | base-data-api | 新增 |
-| 4 | major | 主表 | base-data-api | 新增 |
-| 5 | major_required_course | 关联表 | base-data-api | 新增 |
-| 6 | teacher | 主表 | base-data-api | 已有 |
-| 7 | teacher_teachable_course | 关联表 | base-data-api | 新增 |
-| 8 | semester | 主表 | - | 已有 |
-| 9 | class | 主表 | - | 已有 |
-| 10 | room | 主表 | - | 已有 |
-| 11 | time_slot | 主表 | - | 已有 |
-| 12 | schedule | 主表 | - | 已有 |
-| 13 | teacher_available_slot_v2 | 关联表 | - | 已有 |
-| 14 | teacher_preferred_slot_v2 | 关联表 | - | 已有 |
-| 15 | course_adjustment | 主表 | course-adjustment-api | 新增 |
-| 16 | adjustment_history | 明细表 | course-adjustment-api | 新增 |
-| 17 | scheduling_rule | 主表 | rule-configuration-api | 新增 |
-| 18 | rule_teacher | 关联表 | rule-configuration-api | 新增 |
-| 19 | unavailable_date | 主表 | rule-configuration-api | 新增 |
-| 20 | rule_weight_config | 主表 | rule-configuration-api | 新增 |
-| 21 | weight_change_history | 明细表 | rule-configuration-api | 新增 |
-| 22 | schedule_operation_history | 明细表 | smart-scheduling-api | 新增 |
+### 一、基础数据模块
 
-## 统计
+```mermaid
+erDiagram
+    course_setting ||--o{ course_prerequisite : "has"
+    course_setting {
+        bigint id PK
+        string name "课程名称"
+        int priority "优先级"
+        string semester "开课学期"
+    }
+    course_prerequisite {
+        bigint id PK
+        bigint course_setting_id FK
+        string prerequisite_name "先修课程名称"
+    }
 
-- **总表数**: 22 张
-- **已有表**: 9 张
-- **新增表**: 13 张
-- **主表**: 15 张
-- **关联表 (M:N)**: 5 张
-- **明细/历史表**: 2 张
+    major ||--o{ major_required_course : "requires"
+    major {
+        bigint id PK
+        string major_id UK "业务ID"
+        string name "专业名称"
+        int class_size "班级人数"
+        int duration "学制"
+    }
+    major_required_course {
+        bigint id PK
+        bigint major_id FK
+        string course_name "必修课程"
+    }
+
+    teacher ||--o{ teacher_teachable_course : "teaches"
+    teacher {
+        bigint teacherId PK
+        string name "姓名"
+        string jobNumber "工号"
+        string department "院系"
+        int maxDailyCourses "每日最大课数"
+    }
+    teacher_teachable_course {
+        bigint id PK
+        bigint teacher_id FK
+        string course_name "可授课程"
+    }
+
+    semester_calendar ||--o{ calendar_disabled_date : "has"
+    semester_calendar {
+        bigint id PK
+        date start_date "学期开始"
+        date end_date "学期结束"
+    }
+    calendar_disabled_date {
+        bigint id PK
+        bigint calendar_id FK
+        date date_value "禁用日期"
+        string remark "备注"
+    }
+```
+
+### 二、课表管理模块
+
+```mermaid
+erDiagram
+    semester ||--o{ class : "has"
+    semester ||--o{ schedule : "contains"
+    class ||--o{ schedule : "has"
+    room ||--o{ schedule : "hosts"
+    course_entity ||--o{ schedule : "scheduled_as"
+    teacher ||--o{ schedule : "teaches"
+    time_slot ||--o{ schedule : "maps_to"
+    teacher ||--o{ teacher_available_slot_v2 : "available"
+    teacher ||--o{ teacher_preferred_slot_v2 : "preferred"
+
+    semester {
+        bigint semesterId PK
+        string semesterName
+        date startDate
+        date endDate
+    }
+    class {
+        bigint classId PK
+        string className
+        string majorId
+        int studentCount
+        int grade
+    }
+    room {
+        bigint roomId PK
+        string roomName
+        int capacity
+        string type
+        string building
+    }
+    course_entity {
+        bigint courseId PK
+        string courseName
+        float credits
+        int duration
+    }
+    teacher {
+        bigint teacherId PK
+        string name
+        string jobNumber
+    }
+    time_slot {
+        string id PK
+        int dayOfWeek
+        int period
+    }
+    schedule {
+        bigint scheduleId PK
+        bigint courseId FK
+        bigint teacherId FK
+        bigint classId FK
+        bigint roomId FK
+        bigint semesterId FK
+        string classTime
+        int week
+        int period
+        string status
+    }
+    teacher_available_slot_v2 {
+        bigint id PK
+        bigint teacherId FK
+        string timeSlotId FK
+    }
+    teacher_preferred_slot_v2 {
+        bigint id PK
+        bigint teacherId FK
+        string timeSlotId FK
+    }
+```
+
+### 三、调课申请审核模块
+
+```mermaid
+erDiagram
+    teacher ||--o{ course_adjustment : "submits"
+    course_adjustment ||--o{ adjustment_history : "has"
+    course_adjustment }o--o{ schedule : "adjusts"
+    room }o--o{ course_adjustment : "original_room"
+    room }o--o{ course_adjustment : "target_room"
+
+    teacher {
+        bigint teacherId PK
+        string name
+        string department
+    }
+    course_adjustment {
+        bigint id PK
+        string applicationNo
+        bigint teacherId FK
+        string originalCourseId
+        string originalCourse
+        int originalWeekDay
+        int originalSlot
+        bigint originalRoomId FK
+        string targetCourse
+        int targetWeekDay
+        int targetSlot
+        bigint targetRoomId FK
+        string reason
+        string urgency
+        string status
+        string reviewComment
+        datetime reviewTime
+        json attachments
+    }
+    adjustment_history {
+        bigint id PK
+        bigint applicationId FK
+        string action
+        string operatorId
+        string operatorName
+        string operatorType
+        string comment
+        datetime timestamp
+    }
+    room {
+        bigint roomId PK
+        string roomName
+    }
+```
+
+### 四、规则配置模块
+
+```mermaid
+erDiagram
+    scheduling_rule ||--o{ rule_teacher : "applies_to"
+    teacher ||--o{ unavailable_date : "has"
+    rule_weight_config ||--o{ weight_change_history : "tracks"
+
+    scheduling_rule {
+        bigint id PK
+        string ruleKey
+        string ruleName
+        text description
+        bigint validDateStart
+        bigint validDateEnd
+    }
+    rule_teacher {
+        bigint id PK
+        string ruleKey FK
+        string teacherName
+    }
+    teacher {
+        bigint teacherId PK
+        string name
+    }
+    unavailable_date {
+        bigint id PK
+        string dateKey
+        bigint teacherId FK
+        string teacherName
+        bigint validDateStart
+        bigint validDateEnd
+        string reason
+        string type
+        string rangeType
+    }
+    rule_weight_config {
+        bigint id PK
+        string weightKey
+        string name
+        string category
+        int currentWeight
+        int defaultWeight
+        int minWeight
+        int maxWeight
+        boolean enabled
+    }
+    weight_change_history {
+        bigint id PK
+        bigint weightConfigId FK
+        string ruleName
+        int oldValue
+        int newValue
+        datetime changeTime
+        string operatorId
+        string operatorName
+    }
+```
+
+### 五、智能排课模块
+
+```mermaid
+erDiagram
+    schedule ||--o{ schedule_operation_history : "tracked_in"
+
+    schedule {
+        bigint scheduleId PK
+        bigint courseId
+        bigint teacherId
+        bigint classId
+        bigint roomId
+        int week
+        int period
+    }
+    schedule_operation_history {
+        bigint id PK
+        bigint scheduleId FK
+        string action
+        string courseName
+        string teacherName
+        string className
+        int dayOfWeek
+        int period
+        int week
+        string operator
+        datetime timestamp
+    }
+```
+
+---
+
+## 表清单
+
+| # | 表名 | 模块 | 说明 |
+|---|------|------|------|
+| 1 | `course` | 基础数据 | 课程表（已有 JPA Entity） |
+| 2 | `course_setting` | 基础数据 | 课程设置表 |
+| 3 | `course_prerequisite` | 基础数据 | 课程先修关系表（M:N） |
+| 4 | `major` | 基础数据 | 专业表 |
+| 5 | `major_required_course` | 基础数据 | 专业必修课程关联表（M:N） |
+| 6 | `teacher` | 基础数据 | 教师表（已有 JPA Entity） |
+| 7 | `teacher_teachable_course` | 基础数据 | 教师可授课程关联表（M:N） |
+| 8 | `semester_calendar` | 基础数据 | 学期日历表 |
+| 9 | `calendar_disabled_date` | 基础数据 | 日历禁用日期表 |
+| 10 | `semester` | 课表管理 | 学期表（已有 JPA Entity） |
+| 11 | `class` | 课表管理 | 班级表（已有 JPA Entity） |
+| 12 | `room` | 课表管理 | 教室表（已有 JPA Entity） |
+| 13 | `time_slot` | 课表管理 | 时间段表（已有 JPA Entity） |
+| 14 | `schedule` | 课表管理 | 排课记录表（已有 JPA Entity） |
+| 15 | `teacher_available_slot_v2` | 课表管理 | 教师可用时间段（已有 JPA Entity） |
+| 16 | `teacher_preferred_slot_v2` | 课表管理 | 教师偏好时间段（已有 JPA Entity） |
+| 17 | `course_adjustment` | 调课审批 | 调课申请表 |
+| 18 | `adjustment_history` | 调课审批 | 调课申请审核历史表 |
+| 19 | `scheduling_rule` | 规则配置 | 排课规则表 |
+| 20 | `rule_teacher` | 规则配置 | 规则-教师关联表（M:N） |
+| 21 | `unavailable_date` | 规则配置 | 不可用日期表 |
+| 22 | `rule_weight_config` | 规则配置 | 规则权重配置表 |
+| 23 | `weight_change_history` | 规则配置 | 权重变更记录表 |
+| 24 | `schedule_operation_history` | 智能排课 | 排课操作历史表 |
+
+---
+
+## 关系说明
+
+### 一对多关系
+- `course_setting` 1:N `course_prerequisite`
+- `major` 1:N `major_required_course`
+- `major` 1:N `class`
+- `teacher` 1:N `teacher_teachable_course`
+- `teacher` 1:N `course_entity`
+- `teacher` 1:N `teacher_available_slot_v2`
+- `teacher` 1:N `teacher_preferred_slot_v2`
+- `semester_calendar` 1:N `calendar_disabled_date`
+- `semester` 1:N `class`, `schedule`
+- `class` 1:N `schedule`
+- `room` 1:N `schedule`
+- `course_entity` 1:N `schedule`
+- `teacher` 1:N `schedule`
+- `time_slot` 1:N `schedule`
+- `teacher` 1:N `course_adjustment`
+- `course_adjustment` 1:N `adjustment_history`
+- `scheduling_rule` 1:N `rule_teacher`
+- `teacher` 1:N `unavailable_date`
+- `rule_weight_config` 1:N `weight_change_history`
+- `schedule` 1:N `schedule_operation_history`
+
+### 多对多关系（通过关联表）
+- **课程设置 先修课程**: `course_setting` ↔ `course_prerequisite`
+- **专业 必修课程**: `major` ↔ `major_required_course`
+- **教师 可授课程**: `teacher` ↔ `teacher_teachable_course`
+- **规则 教师**: `scheduling_rule` ↔ `rule_teacher`
+
+### 跨模块关联
+- `course_adjustment` → `schedule`（调课申请关联排课记录）
+- `course_adjustment` → `room`（原教室 + 目标教室两条 N:1 关系）

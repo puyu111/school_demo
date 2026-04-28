@@ -1,17 +1,17 @@
-import { SearchOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Button, Input, Space, Tag } from 'antd';
-import React, { useMemo } from 'react';
-import type { Teacher } from '../types';
-import TeacherCard from './TeacherCard';
+import { SearchOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Input, Space, Tag } from "antd";
+import React, { useMemo } from "react";
+import type { Teacher } from "../types";
+import TeacherCard from "./TeacherCard";
 
 interface TeacherSelectionPanelProps {
   teachers: Teacher[];
   selectedTeacherIds: string[];
   searchText: string;
-  activeTab: 'select' | 'manage';
+  activeTab: "select" | "manage";
   onTeacherSelect: (teacherId: string) => void;
   onSearchChange: (value: string) => void;
-  onTabChange: (tab: 'select' | 'manage') => void;
+  onTabChange: (tab: "select" | "manage") => void;
   onClearSelection: () => void;
 }
 
@@ -35,7 +35,7 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
       (teacher) =>
         teacher.name.toLowerCase().includes(searchLower) ||
         teacher.id.toLowerCase().includes(searchLower) ||
-        teacher.employeeId.toLowerCase().includes(searchLower),
+        teacher.employeeId.toLowerCase().includes(searchLower)
     );
   }, [teachers, searchText]);
 
@@ -47,10 +47,10 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
   return (
     <div
       style={{
-        background: '#f0f9ff',
+        background: "#f0f9ff",
         padding: 20,
         borderRadius: 8,
-        border: '1px solid #91d5ff',
+        border: "1px solid #91d5ff",
         marginBottom: 16,
       }}
     >
@@ -59,7 +59,7 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
         选择教师
       </h4>
 
-      <Space direction="vertical" style={{ width: '100%' }}>
+      <Space direction="vertical" style={{ width: "100%" }}>
         {/* 搜索和操作按钮 */}
         <Space wrap style={{ marginBottom: 16 }}>
           <Input
@@ -72,14 +72,14 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
           />
 
           <Button
-            type={activeTab === 'select' ? 'primary' : 'default'}
-            onClick={() => onTabChange('select')}
+            type={activeTab === "select" ? "primary" : "default"}
+            onClick={() => onTabChange("select")}
           >
             选择教师
           </Button>
           <Button
-            type={activeTab === 'manage' ? 'primary' : 'default'}
-            onClick={() => onTabChange('manage')}
+            type={activeTab === "manage" ? "primary" : "default"}
+            onClick={() => onTabChange("manage")}
           >
             管理日期
           </Button>
@@ -103,7 +103,7 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
         {selectedTeachers.length > 0 && (
           <div
             style={{
-              background: '#fff',
+              background: "#fff",
               padding: 12,
               borderRadius: 6,
               marginBottom: 16,
@@ -116,7 +116,7 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
                   key={teacher.id}
                   closable
                   onClose={() => onTeacherSelect(teacher.id)}
-                  style={{ padding: '4px 8px' }}
+                  style={{ padding: "4px 8px" }}
                 >
                   <Avatar
                     size="small"
@@ -131,15 +131,15 @@ const TeacherSelectionPanel: React.FC<TeacherSelectionPanelProps> = ({
         )}
 
         {/* 教师卡片列表 */}
-        {activeTab === 'select' && (
+        {activeTab === "select" && (
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
+              display: "flex",
+              flexWrap: "wrap",
               maxHeight: 300,
-              overflowY: 'auto',
+              overflowY: "auto",
               padding: 8,
-              background: '#fff',
+              background: "#fff",
               borderRadius: 6,
             }}
           >

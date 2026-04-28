@@ -4,21 +4,21 @@ import {
   EditOutlined,
   FileTextOutlined,
   SaveOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 import {
   Button,
   DatePicker,
   Descriptions,
   Form,
   Input,
-  Modal,
   message,
+  Modal,
   Space,
   Tag,
-} from 'antd';
-import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
-import type { RuleData, RuleEditDialogProps } from '../types';
+} from "antd";
+import dayjs from "dayjs";
+import React, { useEffect, useState } from "react";
+import type { RuleData, RuleEditDialogProps } from "../types";
 
 const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
   open,
@@ -30,9 +30,9 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState<Partial<RuleData>>({
-    key: '',
-    ruleName: '',
-    description: '',
+    key: "",
+    ruleName: "",
+    description: "",
     validDate: undefined,
   });
   const [changedFields, setChangedFields] = useState<Set<string>>(new Set());
@@ -41,9 +41,9 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
   useEffect(() => {
     if (record) {
       const initialData: RuleData = {
-        key: record.key || '',
-        ruleName: record.ruleName || '',
-        description: record.description || '',
+        key: record.key || "",
+        ruleName: record.ruleName || "",
+        description: record.description || "",
         validDate: record.validDate,
       };
 
@@ -94,19 +94,19 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
       }
 
       onSave(processedData as RuleData);
-      message.success('保存成功');
+      message.success("保存成功");
     } catch (error) {
-      console.error('表单验证失败:', error);
-      message.error('请检查输入数据');
+      console.error("表单验证失败:", error);
+      message.error("请检查输入数据");
     }
   };
 
   const handleReset = () => {
     form.resetFields();
     setFormData({
-      key: record?.key || '',
-      ruleName: record?.ruleName || '',
-      description: record?.description || '',
+      key: record?.key || "",
+      ruleName: record?.ruleName || "",
+      description: record?.description || "",
       validDate: record?.validDate,
     });
     setChangedFields(new Set());
@@ -155,11 +155,11 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
       <Form form={form} layout="vertical">
         <div
           style={{
-            background: '#fafafa',
+            background: "#fafafa",
             padding: 20,
             borderRadius: 8,
             maxHeight: 600,
-            overflowY: 'auto',
+            overflowY: "auto",
           }}
         >
           <Descriptions
@@ -171,32 +171,32 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
           >
             <Descriptions.Item label="规则 ID">{record?.key}</Descriptions.Item>
             <Descriptions.Item label="创建时间">
-              {record?.key ? new Date().toLocaleDateString() : '-'}
+              {record?.key ? new Date().toLocaleDateString() : "-"}
             </Descriptions.Item>
           </Descriptions>
 
           <Form.Item
             label="规则名称"
             name="ruleName"
-            rules={[{ required: true, message: '请输入规则名称' }]}
+            rules={[{ required: true, message: "请输入规则名称" }]}
             style={{ marginBottom: 16 }}
           >
             <Input
               placeholder="请输入规则名称"
-              onChange={(e) => handleFieldChange('ruleName', e.target.value)}
+              onChange={(e) => handleFieldChange("ruleName", e.target.value)}
             />
           </Form.Item>
 
           <Form.Item
             label="规则描述"
             name="description"
-            rules={[{ required: true, message: '请输入规则描述' }]}
+            rules={[{ required: true, message: "请输入规则描述" }]}
             style={{ marginBottom: 16 }}
           >
             <Input.TextArea
               rows={4}
               placeholder="请输入规则描述"
-              onChange={(e) => handleFieldChange('description', e.target.value)}
+              onChange={(e) => handleFieldChange("description", e.target.value)}
             />
           </Form.Item>
 
@@ -206,17 +206,17 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
             style={{ marginBottom: 16 }}
           >
             <DatePicker.RangePicker
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               format="YYYY-MM-DD"
-              placeholder={['开始日期', '结束日期']}
+              placeholder={["开始日期", "结束日期"]}
               onChange={(dates) => {
                 if (dates?.[0] && dates[1]) {
-                  handleFieldChange('validDate', [
+                  handleFieldChange("validDate", [
                     dates[0].valueOf(),
                     dates[1].valueOf(),
                   ]);
                 } else {
-                  handleFieldChange('validDate', undefined);
+                  handleFieldChange("validDate", undefined);
                 }
               }}
             />
@@ -230,14 +230,14 @@ const RuleEditDialog: React.FC<RuleEditDialogProps> = ({
           style={{
             marginTop: 16,
             padding: 12,
-            background: '#e6f7ff',
-            border: '1px solid #91d5ff',
+            background: "#e6f7ff",
+            border: "1px solid #91d5ff",
             borderRadius: 6,
           }}
         >
           <Space>
-            <CheckCircleOutlined style={{ color: '#1890ff' }} />
-            <span>检测到修改：{Array.from(changedFields).join(', ')}</span>
+            <CheckCircleOutlined style={{ color: "#1890ff" }} />
+            <span>检测到修改：{Array.from(changedFields).join(", ")}</span>
           </Space>
         </div>
       )}

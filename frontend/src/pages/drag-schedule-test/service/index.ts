@@ -1,4 +1,4 @@
-import { request } from '@umijs/max';
+import { request } from "@umijs/max";
 import type {
   ConflictCheckRequest,
   ConflictCheckResponse,
@@ -12,12 +12,12 @@ import type {
   MoveRequest,
   TimeSlotConfig,
   WeekDayConfig,
-} from '../services';
+} from "../services";
 
 // ==================== 基础配置 ====================
 
 // 基础 API 路径，后续可以修改为实际后端地址
-const BASE_URL = '/api/drag-schedule';
+const BASE_URL = "/api/drag-schedule";
 
 // 通用响应格式
 export interface ApiResponse<T = any> {
@@ -39,7 +39,7 @@ export async function getCourses(params: {
   roomId?: string;
 }): Promise<ApiResponse<Course[]>> {
   return request(`${BASE_URL}/courses`, {
-    method: 'GET',
+    method: "GET",
     params,
   });
 }
@@ -48,10 +48,10 @@ export async function getCourses(params: {
  * 获取单个课程详情
  */
 export async function getCourse(
-  courseId: string,
+  courseId: string
 ): Promise<ApiResponse<Course>> {
   return request(`${BASE_URL}/courses/${courseId}`, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
@@ -59,10 +59,10 @@ export async function getCourse(
  * 创建课程
  */
 export async function createCourse(
-  data: Partial<Course>,
+  data: Partial<Course>
 ): Promise<ApiResponse<Course>> {
   return request(`${BASE_URL}/courses`, {
-    method: 'POST',
+    method: "POST",
     data,
   });
 }
@@ -72,10 +72,10 @@ export async function createCourse(
  */
 export async function updateCourse(
   courseId: string,
-  data: Partial<Course>,
+  data: Partial<Course>
 ): Promise<ApiResponse<Course>> {
   return request(`${BASE_URL}/courses/${courseId}`, {
-    method: 'PUT',
+    method: "PUT",
     data,
   });
 }
@@ -84,10 +84,10 @@ export async function updateCourse(
  * 批量移动课程（拖拽操作）
  */
 export async function moveCourses(
-  moves: MoveRequest[],
+  moves: MoveRequest[]
 ): Promise<ApiResponse<{ success: any[]; failed: any[]; conflicts: any[] }>> {
   return request(`${BASE_URL}/courses/move`, {
-    method: 'POST',
+    method: "POST",
     data: { moves },
   });
 }
@@ -96,10 +96,10 @@ export async function moveCourses(
  * 删除课程
  */
 export async function deleteCourse(
-  courseId: string,
+  courseId: string
 ): Promise<ApiResponse<{ deletedId: string; courseName: string }>> {
   return request(`${BASE_URL}/courses/${courseId}`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
 }
 
@@ -114,7 +114,7 @@ export async function batchDeleteCourses(courseIds: string[]): Promise<
   }>
 > {
   return request(`${BASE_URL}/courses/batch-delete`, {
-    method: 'POST',
+    method: "POST",
     data: { courseIds },
   });
 }
@@ -132,7 +132,7 @@ export async function getTimeSlots(params?: { dayOfWeek?: number }): Promise<
   }>
 > {
   return request(`${BASE_URL}/time-slots`, {
-    method: 'GET',
+    method: "GET",
     params,
   });
 }
@@ -152,7 +152,7 @@ export async function updateTimeSlots(data: {
   }>
 > {
   return request(`${BASE_URL}/time-slots`, {
-    method: 'PUT',
+    method: "PUT",
     data,
   });
 }
@@ -168,7 +168,7 @@ export async function resetTimeSlots(): Promise<
   }>
 > {
   return request(`${BASE_URL}/time-slots/reset`, {
-    method: 'POST',
+    method: "POST",
   });
 }
 
@@ -179,7 +179,7 @@ export async function resetTimeSlots(): Promise<
  */
 export async function getWeekDays(): Promise<ApiResponse<WeekDayConfig[]>> {
   return request(`${BASE_URL}/week-days`, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
@@ -190,7 +190,7 @@ export async function updateWeekDays(data: {
   weekDays: WeekDayConfig[];
 }): Promise<ApiResponse<{ weekDays: WeekDayConfig[] }>> {
   return request(`${BASE_URL}/week-days`, {
-    method: 'PUT',
+    method: "PUT",
     data,
   });
 }
@@ -212,7 +212,7 @@ export async function getWeek(weekNumber: number): Promise<
   }>
 > {
   return request(`${BASE_URL}/weeks/${weekNumber}`, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
@@ -222,7 +222,7 @@ export async function getWeek(weekNumber: number): Promise<
 export async function copyWeekData(
   sourceWeek: number,
   targetWeeks: number[],
-  options?: CopyWeekOptions,
+  options?: CopyWeekOptions
 ): Promise<
   ApiResponse<{
     sourceWeek: number;
@@ -233,7 +233,7 @@ export async function copyWeekData(
   }>
 > {
   return request(`${BASE_URL}/weeks/copy`, {
-    method: 'POST',
+    method: "POST",
     data: { sourceWeek, targetWeeks, options },
   });
 }
@@ -243,7 +243,7 @@ export async function copyWeekData(
  */
 export async function clearWeek(
   weekNumber: number,
-  preserveConfig: boolean = true,
+  preserveConfig: boolean = true
 ): Promise<
   ApiResponse<{
     weekNumber: number;
@@ -252,7 +252,7 @@ export async function clearWeek(
   }>
 > {
   return request(`${BASE_URL}/weeks/${weekNumber}`, {
-    method: 'DELETE',
+    method: "DELETE",
     params: { preserveConfig },
   });
 }
@@ -263,10 +263,10 @@ export async function clearWeek(
  * 检测课程冲突
  */
 export async function checkConflicts(
-  data: ConflictCheckRequest,
+  data: ConflictCheckRequest
 ): Promise<ApiResponse<ConflictCheckResponse>> {
   return request(`${BASE_URL}/conflicts/check`, {
-    method: 'POST',
+    method: "POST",
     data,
   });
 }
@@ -284,7 +284,7 @@ export async function getConflictTypes(): Promise<
   >
 > {
   return request(`${BASE_URL}/conflicts/types`, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
@@ -294,10 +294,10 @@ export async function getConflictTypes(): Promise<
  * 导出课表数据
  */
 export async function exportSchedule(
-  params: ExportRequest,
+  params: ExportRequest
 ): Promise<ApiResponse<ExportResponse>> {
   return request(`${BASE_URL}/export`, {
-    method: 'GET',
+    method: "GET",
     params,
   });
 }
@@ -311,18 +311,18 @@ export async function importSchedule(
     overrideExisting?: boolean;
     skipConflicting?: boolean;
     startWeek?: number;
-  },
+  }
 ): Promise<ApiResponse<ImportResponse>> {
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
   if (options) {
-    formData.append('options', JSON.stringify(options));
+    formData.append("options", JSON.stringify(options));
   }
 
   return request(`${BASE_URL}/import`, {
-    method: 'POST',
+    method: "POST",
     data: formData,
-    requestType: 'form',
+    requestType: "form",
   });
 }
 
@@ -342,7 +342,7 @@ export async function saveWeekSchedule(data: {
   ApiResponse<{ week: number; savedCount: number; message: string }>
 > {
   return request(`${BASE_URL}/save`, {
-    method: 'POST',
+    method: "POST",
     data,
   });
 }
@@ -359,7 +359,7 @@ export async function refreshWeekData(week: number): Promise<
   }>
 > {
   return request(`${BASE_URL}/refresh`, {
-    method: 'GET',
+    method: "GET",
     params: { week },
   });
 }

@@ -1,10 +1,10 @@
-import { DatePicker, Select } from 'antd';
-import type { Dayjs } from 'dayjs';
-import React from 'react';
-import { MONTH_OPTIONS, QUARTER_OPTIONS } from '../constants';
+import { DatePicker, Select } from "antd";
+import type { Dayjs } from "dayjs";
+import React from "react";
+import { MONTH_OPTIONS, QUARTER_OPTIONS } from "../constants";
 
 interface DateSelectorProps {
-  selectionType: 'single' | 'week' | 'month' | 'quarter' | 'range';
+  selectionType: "single" | "week" | "month" | "quarter" | "range";
   selectedDate: Dayjs | null;
   dateRange: [Dayjs | null, Dayjs | null];
   selectedWeek: string;
@@ -30,22 +30,22 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   onChange,
 }) => {
   switch (selectionType) {
-    case 'single':
+    case "single":
       return (
         <DatePicker
           value={selectedDate}
-          onChange={(date) => onChange('date', date)}
+          onChange={(date) => onChange("date", date)}
           placeholder="选择不可排日期"
           style={{ width: 200 }}
           disabledDate={disabledDate}
         />
       );
 
-    case 'week':
+    case "week":
       return (
         <Select
           value={selectedWeek}
-          onChange={(value) => onChange('week', value)}
+          onChange={(value) => onChange("week", value)}
           placeholder="选择周"
           style={{ width: 250 }}
           options={weeks}
@@ -54,33 +54,33 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         />
       );
 
-    case 'month':
+    case "month":
       return (
         <Select
           value={selectedMonth}
-          onChange={(value) => onChange('month', value)}
+          onChange={(value) => onChange("month", value)}
           placeholder="选择月份"
           style={{ width: 200 }}
           options={MONTH_OPTIONS}
         />
       );
 
-    case 'quarter':
+    case "quarter":
       return (
         <Select
           value={selectedQuarter}
-          onChange={(value) => onChange('quarter', value)}
+          onChange={(value) => onChange("quarter", value)}
           placeholder="选择季度"
           style={{ width: 200 }}
           options={QUARTER_OPTIONS}
         />
       );
 
-    case 'range':
+    case "range":
       return (
         <DatePicker.RangePicker
           value={dateRange}
-          onChange={(dates) => onChange('range', dates)}
+          onChange={(dates) => onChange("range", dates)}
           style={{ width: 320 }}
           disabledDate={disabledDate}
         />

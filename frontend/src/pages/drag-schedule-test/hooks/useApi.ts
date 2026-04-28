@@ -1,13 +1,13 @@
-import { useRequest } from '@umijs/max';
-import { useCallback, useState } from 'react';
-import * as scheduleApi from '../service';
+import { useRequest } from "@umijs/max";
+import { useCallback, useState } from "react";
+import * as scheduleApi from "../service";
 import type {
   Course,
   DailyScheduleConfig,
   HalfDayConfig,
   TimeSlotConfig,
   WeekDayConfig,
-} from '../services';
+} from "../services";
 
 // ==================== 课程数据请求 Hooks ====================
 
@@ -22,9 +22,9 @@ export function useWeekCourses(week: number, classId?: string) {
       formatResult: (res) => res.data,
       manual: true,
       onError: (err) => {
-        console.error('获取课程失败:', err);
+        console.error("获取课程失败:", err);
       },
-    },
+    }
   );
 
   return {
@@ -45,9 +45,9 @@ export function useTimeSlots() {
     {
       formatResult: (res) => res.data,
       onError: (err) => {
-        console.error('获取时段配置失败:', err);
+        console.error("获取时段配置失败:", err);
       },
-    },
+    }
   );
 
   return {
@@ -70,9 +70,9 @@ export function useWeekDays() {
     {
       formatResult: (res) => res.data,
       onError: (err) => {
-        console.error('获取星期配置失败:', err);
+        console.error("获取星期配置失败:", err);
       },
-    },
+    }
   );
 
   return {
@@ -122,7 +122,7 @@ export function useCourseActions() {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   /**
@@ -149,7 +149,7 @@ export function useCourseActions() {
         courseId: string;
         newWeekDay: number;
         newTimeSlotIndex: number;
-      }[],
+      }[]
     ) => {
       setLoading(true);
       try {
@@ -165,7 +165,7 @@ export function useCourseActions() {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   return {
@@ -202,7 +202,7 @@ export function useConfigActions() {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   /**
@@ -264,14 +264,14 @@ export function useScheduleSubmit() {
       setLoading(true);
       try {
         const res = await scheduleApi.saveWeekSchedule(data);
-        return { success: true, data: res.data, message: '保存成功' };
+        return { success: true, data: res.data, message: "保存成功" };
       } catch (error: any) {
-        return { success: false, error: error.message, message: '保存失败' };
+        return { success: false, error: error.message, message: "保存失败" };
       } finally {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   /**
@@ -317,7 +317,7 @@ export function useConflictCheck() {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   /**
@@ -327,7 +327,7 @@ export function useConflictCheck() {
     () => scheduleApi.getConflictTypes(),
     {
       formatResult: (res) => res.data,
-    },
+    }
   );
 
   return {
@@ -360,14 +360,14 @@ interface UseScheduleDataResult {
 
   // 操作
   moveCourses: (
-    moves: { courseId: string; newWeekDay: number; newTimeSlotIndex: number }[],
+    moves: { courseId: string; newWeekDay: number; newTimeSlotIndex: number }[]
   ) => Promise<{ success: boolean; data?: any; error?: string }>;
   saveSchedule: (data: {
     week: number;
     courses: Course[];
   }) => Promise<{ success: boolean; message: string }>;
   refreshSchedule: (
-    week: number,
+    week: number
   ) => Promise<{ success: boolean; data?: any; error?: string }>;
   updateTimeSlots: (data: {
     halfDayConfigs?: HalfDayConfig[];
@@ -375,11 +375,11 @@ interface UseScheduleDataResult {
     dailyConfig?: DailyScheduleConfig;
   }) => Promise<{ success: boolean; error?: string }>;
   updateWeekDays: (
-    weekDays: WeekDayConfig[],
+    weekDays: WeekDayConfig[]
   ) => Promise<{ success: boolean; error?: string }>;
   checkConflicts: (
     week: number,
-    course?: Partial<Course>,
+    course?: Partial<Course>
   ) => Promise<{ success: boolean; data?: any; error?: string }>;
 }
 

@@ -1,11 +1,11 @@
-import dayjs, { type Dayjs } from 'dayjs';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
-import { useCallback, useMemo, useState } from 'react';
 import type {
   RuleData,
   SelectionType,
   UnavailableDate,
-} from '@/pages/rule-configuration-settings/types';
+} from "@/pages/rule-configuration-settings/types";
+import dayjs, { type Dayjs } from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import { useCallback, useMemo, useState } from "react";
 
 // 扩展 dayjs
 dayjs.extend(weekOfYear);
@@ -24,7 +24,7 @@ export const useRuleData = (initialData: RuleData[] = []) => {
   // 更新规则
   const updateRule = useCallback((key: string, updates: Partial<RuleData>) => {
     setRules((prev) =>
-      prev.map((rule) => (rule.key === key ? { ...rule, ...updates } : rule)),
+      prev.map((rule) => (rule.key === key ? { ...rule, ...updates } : rule))
     );
   }, []);
 
@@ -77,7 +77,7 @@ export const useUnavailableDates = () => {
   // 按教师 IDs 批量删除
   const bulkDeleteByTeacherIds = useCallback((teacherIds: string[]) => {
     setDates((prev) =>
-      prev.filter((item) => !teacherIds.includes(item.teacherId)),
+      prev.filter((item) => !teacherIds.includes(item.teacherId))
     );
   }, []);
 
@@ -91,7 +91,7 @@ export const useUnavailableDates = () => {
     (teacherId: string) => {
       return dates.filter((date) => date.teacherId === teacherId);
     },
-    [dates],
+    [dates]
   );
 
   // 按类型筛选
@@ -99,7 +99,7 @@ export const useUnavailableDates = () => {
     (type: string) => {
       return dates.filter((date) => date.type === type);
     },
-    [dates],
+    [dates]
   );
 
   // 获取唯一教师 IDs
@@ -126,16 +126,16 @@ export const useUnavailableDates = () => {
  * 日期选择器 Hook
  */
 export const useDateSelector = () => {
-  const [selectionType, setSelectionType] = useState<SelectionType>('single');
+  const [selectionType, setSelectionType] = useState<SelectionType>("single");
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([
     null,
     null,
   ]);
-  const [selectedWeek, setSelectedWeek] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedQuarter, setSelectedQuarter] = useState('');
-  const [reason, setReason] = useState('');
+  const [selectedWeek, setSelectedWeek] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedQuarter, setSelectedQuarter] = useState("");
+  const [reason, setReason] = useState("");
   const [addWeekendOnly, setAddWeekendOnly] = useState(false);
   const [addWorkdayOnly, setAddWorkdayOnly] = useState(false);
 
@@ -143,24 +143,24 @@ export const useDateSelector = () => {
   const resetSelector = useCallback(() => {
     setSelectedDate(null);
     setDateRange([null, null]);
-    setSelectedWeek('');
-    setSelectedMonth('');
-    setSelectedQuarter('');
-    setReason('');
+    setSelectedWeek("");
+    setSelectedMonth("");
+    setSelectedQuarter("");
+    setReason("");
     setAddWeekendOnly(false);
     setAddWorkdayOnly(false);
   }, []);
 
   // 禁用过去的日期
   const disabledDate = useCallback((current: Dayjs) => {
-    return current && current < dayjs().startOf('day');
+    return current && current < dayjs().startOf("day");
   }, []);
 
   // 获取周日期范围
   const getWeekDateRange = useCallback((year: number, week: number): string => {
-    const startOfWeek = dayjs().year(year).week(week).startOf('week');
-    const endOfWeek = startOfWeek.endOf('week');
-    return `${startOfWeek.format('MM/DD')}-${endOfWeek.format('MM/DD')}`;
+    const startOfWeek = dayjs().year(year).week(week).startOf("week");
+    const endOfWeek = startOfWeek.endOf("week");
+    return `${startOfWeek.format("MM/DD")}-${endOfWeek.format("MM/DD")}`;
   }, []);
 
   // 获取季度包含的月份
@@ -185,22 +185,22 @@ export const useDateSelector = () => {
         const isWorkday = !isWeekend;
 
         if (addWeekendOnly && !isWeekend) {
-          current = current.add(1, 'day');
+          current = current.add(1, "day");
           continue;
         }
 
         if (addWorkdayOnly && !isWorkday) {
-          current = current.add(1, 'day');
+          current = current.add(1, "day");
           continue;
         }
 
-        dates.push(current.format('YYYY-MM-DD'));
-        current = current.add(1, 'day');
+        dates.push(current.format("YYYY-MM-DD"));
+        current = current.add(1, "day");
       }
 
       return dates;
     },
-    [addWeekendOnly, addWorkdayOnly],
+    [addWeekendOnly, addWorkdayOnly]
   );
 
   return {

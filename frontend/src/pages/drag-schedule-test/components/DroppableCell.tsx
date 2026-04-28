@@ -2,12 +2,12 @@ import {
   ClockCircleOutlined,
   DragOutlined,
   WarningOutlined,
-} from '@ant-design/icons';
-import React, { useEffect, useRef } from 'react';
-import { useDrop } from 'react-dnd';
-import type { DroppableCellProps } from '../types';
-import { getHalfDayType } from '../utils';
-import DraggableCourseCard from './DraggableCourseCard';
+} from "@ant-design/icons";
+import React, { useEffect, useRef } from "react";
+import { useDrop } from "react-dnd";
+import type { DroppableCellProps } from "../types";
+import { getHalfDayType } from "../utils";
+import DraggableCourseCard from "./DraggableCourseCard";
 
 const DroppableCell: React.FC<DroppableCellProps> = ({
   weekDay,
@@ -26,16 +26,16 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
   const ref = useRef<HTMLDivElement>(null);
   const isMobileDetected =
     isMobileProp ||
-    (typeof window !== 'undefined' &&
+    (typeof window !== "undefined" &&
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        window.navigator.userAgent,
+        window.navigator.userAgent
       ));
 
   const [{ isOver, canDrop: canDropState }, drop] = useDrop(
     () => ({
-      accept: 'COURSE',
+      accept: "COURSE",
       drop: (item: any) => {
-        if (item.type === 'COURSE') {
+        if (item.type === "COURSE") {
           if (
             item.fromWeekDay !== weekDay ||
             item.fromTimeSlotIndex !== timeSlotIndex
@@ -69,7 +69,7 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
         // 检查半天配置是否可排课
         const halfDayType = getHalfDayType(timeSlot.startTime);
         const halfDayConfig = halfDayConfigs.find(
-          (h) => h.type === halfDayType,
+          (h) => h.type === halfDayType
         );
         if (!halfDayConfig?.isSchedulable) {
           return false;
@@ -95,7 +95,7 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
       onMoveCourse,
       weekDay,
       timeSlotIndex,
-    ],
+    ]
   );
 
   useEffect(() => {
@@ -118,68 +118,68 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
 
   // 根据状态确定背景色
   const getBackgroundColor = () => {
-    if (isHighlighted) return '#e6f7ff';
-    if (isForbidden) return '#f5f5f5';
-    if (isOccupied) return '#fafafa';
-    return '#fff';
+    if (isHighlighted) return "#e6f7ff";
+    if (isForbidden) return "#f5f5f5";
+    if (isOccupied) return "#fafafa";
+    return "#fff";
   };
 
   const getBorderStyle = () => {
     if (isHighlighted)
-      return isMobileDetected ? '3px dashed #1890ff' : '2px dashed #1890ff';
-    if (isForbidden) return '1px dotted #d9d9d9';
-    return '1px solid #f0f0f0';
+      return isMobileDetected ? "3px dashed #1890ff" : "2px dashed #1890ff";
+    if (isForbidden) return "1px dotted #d9d9d9";
+    return "1px solid #f0f0f0";
   };
 
   // 移动端样式变量
-  const cellPadding = isMobileDetected ? '4px' : '2px';
-  const borderRadius = isMobileDetected ? '6px' : '4px';
+  const cellPadding = isMobileDetected ? "4px" : "2px";
+  const borderRadius = isMobileDetected ? "6px" : "4px";
   const fontSize = isMobileDetected ? 12 : 11;
 
   return (
     <div
       ref={ref}
       style={{
-        height: '100%',
+        height: "100%",
         minHeight: isMobileDetected ? 56 : 48,
         padding: cellPadding,
         backgroundColor: getBackgroundColor(),
         border: getBorderStyle(),
         borderRadius,
-        transition: 'all 0.2s',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2px',
+        transition: "all 0.2s",
+        display: "flex",
+        flexDirection: "column",
+        gap: "2px",
         opacity: isForbidden ? 0.6 : 1,
-        position: 'relative',
-        boxSizing: 'border-box',
-        touchAction: 'none',
+        position: "relative",
+        boxSizing: "border-box",
+        touchAction: "none",
       }}
     >
       {isForbidden && (
         <div
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(245,245,245,0.8)',
-            pointerEvents: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            backgroundColor: "rgba(245,245,245,0.8)",
+            pointerEvents: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             zIndex: 1,
           }}
         >
           <div
             style={{
-              color: '#999',
+              color: "#999",
               fontSize,
-              textAlign: 'center',
-              backgroundColor: 'rgba(255,255,255,0.9)',
-              padding: isMobileDetected ? '4px 8px' : '2px 6px',
-              borderRadius: '4px',
+              textAlign: "center",
+              backgroundColor: "rgba(255,255,255,0.9)",
+              padding: isMobileDetected ? "4px 8px" : "2px 6px",
+              borderRadius: "4px",
             }}
           >
             <WarningOutlined
@@ -188,7 +188,7 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
                 fontSize: isMobileDetected ? 14 : 12,
               }}
             />
-            {isHalfDayForbidden ? `${halfDayConfig?.name}禁排` : '不可排课'}
+            {isHalfDayForbidden ? `${halfDayConfig?.name}禁排` : "不可排课"}
           </div>
         </div>
       )}
@@ -209,28 +209,28 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
       {!isForbidden && isRowSpanned && cellCourse && (
         <div
           style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(255,255,255,0.1)',
-            border: '1px dashed rgba(255,255,255,0.2)',
-            borderRadius: '4px',
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(255,255,255,0.1)",
+            border: "1px dashed rgba(255,255,255,0.2)",
+            borderRadius: "4px",
           }}
         >
           <div
             style={{
-              textAlign: 'center',
+              textAlign: "center",
               fontSize: isMobileDetected ? 11 : 10,
-              color: 'rgba(255,255,255,0.8)',
+              color: "rgba(255,255,255,0.8)",
               fontWeight: 500,
-              writingMode: 'vertical-rl',
+              writingMode: "vertical-rl",
             }}
           >
             <ClockCircleOutlined
               style={{
-                display: 'block',
-                marginBottom: '2px',
+                display: "block",
+                marginBottom: "2px",
                 fontSize: isMobileDetected ? 12 : 10,
               }}
             />
@@ -243,26 +243,26 @@ const DroppableCell: React.FC<DroppableCellProps> = ({
       {!isForbidden && !cellCourse && !isOccupied && (
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             minHeight: isMobileDetected ? 56 : 48,
             flex: 1,
-            color: isMobileDetected ? '#bfbfbf' : '#d9d9d9',
+            color: isMobileDetected ? "#bfbfbf" : "#d9d9d9",
             fontSize,
             backgroundColor: isHighlighted
-              ? 'rgba(24, 144, 255, 0.05)'
-              : 'transparent',
-            borderRadius: '4px',
+              ? "rgba(24, 144, 255, 0.05)"
+              : "transparent",
+            borderRadius: "4px",
           }}
         >
           {isHighlighted ? (
-            <span style={{ color: '#1890ff', fontWeight: 500 }}>
+            <span style={{ color: "#1890ff", fontWeight: 500 }}>
               <DragOutlined style={{ marginRight: 4 }} />
               释放放置
             </span>
           ) : (
-            isMobileDetected && '+'
+            isMobileDetected && "+"
           )}
         </div>
       )}

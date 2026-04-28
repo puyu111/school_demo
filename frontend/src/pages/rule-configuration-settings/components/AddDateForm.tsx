@@ -1,9 +1,9 @@
-import { CalendarOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Input, Space } from 'antd';
-import type { Dayjs } from 'dayjs';
-import React from 'react';
-import type { SelectionType } from '../types';
-import DateSelector from './DateSelector';
+import { CalendarOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Input, Space } from "antd";
+import type { Dayjs } from "dayjs";
+import React from "react";
+import type { SelectionType } from "../types";
+import DateSelector from "./DateSelector";
 
 interface AddDateFormProps {
   selectionType: SelectionType;
@@ -50,10 +50,10 @@ const AddDateForm: React.FC<AddDateFormProps> = ({
   return (
     <div
       style={{
-        background: '#f6ffed',
+        background: "#f6ffed",
         padding: 20,
         borderRadius: 8,
-        border: '1px solid #b7eb8f',
+        border: "1px solid #b7eb8f",
         marginBottom: 16,
       }}
     >
@@ -62,7 +62,7 @@ const AddDateForm: React.FC<AddDateFormProps> = ({
         添加不可排日期
       </h4>
 
-      <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+      <Space direction="vertical" size="middle" style={{ width: "100%" }}>
         {/* 日期类型选择 */}
         <Space wrap>
           <DateSelector
@@ -92,12 +92,12 @@ const AddDateForm: React.FC<AddDateFormProps> = ({
           >
             {selectedTeacherCount > 0
               ? `为${selectedTeacherCount}位教师添加`
-              : '添加'}
+              : "添加"}
           </Button>
         </Space>
 
         {/* 筛选选项 */}
-        {(selectionType === 'single' || selectionType === 'range') && (
+        {(selectionType === "single" || selectionType === "range") && (
           <Space>
             <Checkbox
               checked={addWeekendOnly}
@@ -120,16 +120,16 @@ const AddDateForm: React.FC<AddDateFormProps> = ({
           </Space>
         )}
 
-        <p style={{ margin: 0, color: '#666', fontSize: 12 }}>
+        <p style={{ margin: 0, color: "#666", fontSize: 12 }}>
           提示：将为
           {selectedTeacherCount > 0
             ? `${selectedTeacherCount}位选中的教师`
-            : '选中的教师'}
+            : "选中的教师"}
           添加不可排日期
-          {selectionType === 'range' && '（可选择日期范围批量添加）'}
-          {selectionType === 'week' && '（可添加整周日期）'}
-          {selectionType === 'month' && '（可添加整月日期）'}
-          {selectionType === 'quarter' && '（可添加整个季度日期）'}
+          {selectionType === "range" && "（可选择日期范围批量添加）"}
+          {selectionType === "week" && "（可添加整周日期）"}
+          {selectionType === "month" && "（可添加整月日期）"}
+          {selectionType === "quarter" && "（可添加整个季度日期）"}
         </p>
       </Space>
     </div>

@@ -1,4 +1,4 @@
-import { ClockCircleOutlined, SettingOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, SettingOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
@@ -8,8 +8,8 @@ import {
   message,
   Switch,
   Tag,
-} from 'antd';
-import React, { useEffect, useState } from 'react';
+} from "antd";
+import React, { useEffect, useState } from "react";
 
 // 课时配置接口
 export interface TimeSlotConfig {
@@ -25,7 +25,7 @@ export interface TimeSlotConfig {
 }
 
 // 半天时段类型
-export type HalfDayType = 'morning' | 'afternoon' | 'evening';
+export type HalfDayType = "morning" | "afternoon" | "evening";
 
 // 半天时段配置
 export interface HalfDayConfig {
@@ -50,13 +50,13 @@ interface TimeSlotConfigPanelProps {
   onChange: (
     config: TimeSlotConfig[],
     dailyConfig: DailyScheduleConfig,
-    halfDayConfig: HalfDayConfig[],
+    halfDayConfig: HalfDayConfig[]
   ) => void;
 }
 
 // 时间字符串转分钟数
 const timeToMinutes = (time: string): number => {
-  const [hours, minutes] = time.split(':').map(Number);
+  const [hours, minutes] = time.split(":").map(Number);
   return hours * 60 + minutes;
 };
 
@@ -64,17 +64,19 @@ const timeToMinutes = (time: string): number => {
 const minutesToTime = (minutes: number): string => {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
-  return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+  return `${hours.toString().padStart(2, "0")}:${mins
+    .toString()
+    .padStart(2, "0")}`;
 };
 
 // 获取时间所属的半天类型
 const getHalfDayType = (time: string): HalfDayType => {
   const minutes = timeToMinutes(time);
-  if (minutes < timeToMinutes('12:00')) return 'morning';
-  if (minutes >= timeToMinutes('14:00') && minutes < timeToMinutes('18:00'))
-    return 'afternoon';
-  if (minutes >= timeToMinutes('19:00')) return 'evening';
-  return 'morning';
+  if (minutes < timeToMinutes("12:00")) return "morning";
+  if (minutes >= timeToMinutes("14:00") && minutes < timeToMinutes("18:00"))
+    return "afternoon";
+  if (minutes >= timeToMinutes("19:00")) return "evening";
+  return "morning";
 };
 
 // 生成默认时段配置
@@ -82,7 +84,7 @@ const generateDefaultTimeSlots = (
   totalPeriods: number,
   duration: number,
   breakDuration: number,
-  startHour: number = 8,
+  startHour: number = 8
 ): TimeSlotConfig[] => {
   const slots: TimeSlotConfig[] = [];
   let currentMinutes = startHour * 60;
@@ -113,24 +115,24 @@ const generateDefaultTimeSlots = (
 // 默认半天配置
 const DEFAULT_HALF_DAY_CONFIG: HalfDayConfig[] = [
   {
-    type: 'morning',
-    name: '上午',
-    startTime: '08:00',
-    endTime: '12:00',
+    type: "morning",
+    name: "上午",
+    startTime: "08:00",
+    endTime: "12:00",
     isSchedulable: true,
   },
   {
-    type: 'afternoon',
-    name: '下午',
-    startTime: '14:00',
-    endTime: '18:00',
+    type: "afternoon",
+    name: "下午",
+    startTime: "14:00",
+    endTime: "18:00",
     isSchedulable: true,
   },
   {
-    type: 'evening',
-    name: '晚上',
-    startTime: '19:00',
-    endTime: '21:00',
+    type: "evening",
+    name: "晚上",
+    startTime: "19:00",
+    endTime: "21:00",
     isSchedulable: true,
   },
 ];
@@ -164,7 +166,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
   const callOnChange = (
     slots: TimeSlotConfig[],
     dailyCfg: DailyScheduleConfig,
-    halfCfg: HalfDayConfig[],
+    halfCfg: HalfDayConfig[]
   ) => {
     onChange(slots, dailyCfg, halfCfg);
   };
@@ -181,7 +183,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
       const newSlots = generateDefaultTimeSlots(
         value,
         newConfig.defaultDuration,
-        newConfig.defaultBreakDuration,
+        newConfig.defaultBreakDuration
       );
       // 保留原有的可排课设置
       const mergedSlots = newSlots
@@ -203,7 +205,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
     setLocalDailyConfig(newConfig);
     recalculateAllTimes(
       newConfig.defaultDuration,
-      newConfig.defaultBreakDuration,
+      newConfig.defaultBreakDuration
     );
   };
 
@@ -215,13 +217,13 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
     setLocalDailyConfig(newConfig);
     recalculateAllTimes(
       newConfig.defaultDuration,
-      newConfig.defaultBreakDuration,
+      newConfig.defaultBreakDuration
     );
   };
 
   // 重新计算所有时间
   const recalculateAllTimes = (duration: number, breakDuration: number) => {
-    let currentMinutes = timeToMinutes(timeSlots[0]?.startTime || '08:00');
+    let currentMinutes = timeToMinutes(timeSlots[0]?.startTime || "08:00");
     const newSlots = timeSlots.map((slot, index) => {
       const newStart = minutesToTime(currentMinutes);
       const newEnd = minutesToTime(currentMinutes + duration);
@@ -244,7 +246,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
         defaultDuration: duration,
         defaultBreakDuration: breakDuration,
       },
-      localHalfDayConfig,
+      localHalfDayConfig
     );
   };
 
@@ -270,7 +272,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
     // 重新计算后续时段的时间
     recalculateSubsequentTimes(
       newSlots,
-      timeSlots.findIndex((s) => s.id === id),
+      timeSlots.findIndex((s) => s.id === id)
     );
     setTimeSlots(newSlots);
     callOnChange(newSlots, localDailyConfig, localHalfDayConfig);
@@ -279,7 +281,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
   // 重新计算指定索引之后的时段
   const recalculateSubsequentTimes = (
     slots: TimeSlotConfig[],
-    startIndex: number,
+    startIndex: number
   ) => {
     if (startIndex < 0 || startIndex >= slots.length - 1) return;
 
@@ -317,11 +319,11 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
     const defaultSlots = generateDefaultTimeSlots(
       localDailyConfig.totalPeriods,
       localDailyConfig.defaultDuration,
-      localDailyConfig.defaultBreakDuration,
+      localDailyConfig.defaultBreakDuration
     );
     setTimeSlots(defaultSlots);
     callOnChange(defaultSlots, localDailyConfig, localHalfDayConfig);
-    message.success('已重置为默认配置');
+    message.success("已重置为默认配置");
   };
 
   // 切换半天可排课状态
@@ -329,14 +331,18 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
     const newHalfDayConfig = localHalfDayConfig.map((halfDay) =>
       halfDay.type === type
         ? { ...halfDay, isSchedulable: !halfDay.isSchedulable }
-        : halfDay,
+        : halfDay
     );
     setLocalHalfDayConfig(newHalfDayConfig);
     callOnChange(timeSlots, localDailyConfig, newHalfDayConfig);
 
     const halfDay = localHalfDayConfig.find((h) => h.type === type);
     message.success(
-      `${halfDay?.name}已设置为${newHalfDayConfig.find((h) => h.type === type)?.isSchedulable ? '可排课' : '禁排课'}`,
+      `${halfDay?.name}已设置为${
+        newHalfDayConfig.find((h) => h.type === type)?.isSchedulable
+          ? "可排课"
+          : "禁排课"
+      }`
     );
   };
 
@@ -344,13 +350,13 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
   const handleHalfDayReset = () => {
     setLocalHalfDayConfig(DEFAULT_HALF_DAY_CONFIG);
     callOnChange(timeSlots, localDailyConfig, DEFAULT_HALF_DAY_CONFIG);
-    message.success('半天配置已重置');
+    message.success("半天配置已重置");
   };
 
   return (
     <Card
       title={
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <SettingOutlined />
           <span>时段配置</span>
         </div>
@@ -363,7 +369,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
           size="small"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          {isExpanded ? '收起' : '展开'}
+          {isExpanded ? "收起" : "展开"}
         </Button>
       }
     >
@@ -372,10 +378,10 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
           {/* 全局配置 */}
           <div
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 24,
               marginBottom: 16,
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
             }}
           >
             <div>
@@ -425,13 +431,13 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
           <div style={{ marginBottom: 16 }}>
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
                 marginBottom: 12,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <ClockCircleOutlined />
                 <span style={{ fontWeight: 600, fontSize: 14 }}>
                   半天排课配置
@@ -442,47 +448,49 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
               </Button>
             </div>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               {localHalfDayConfig.map((halfDay) => (
                 <div
                   key={halfDay.type}
                   style={{
                     width: 180,
-                    padding: '12px',
-                    border: `1px solid ${halfDay.isSchedulable ? '#b7eb8f' : '#ffccc7'}`,
+                    padding: "12px",
+                    border: `1px solid ${
+                      halfDay.isSchedulable ? "#b7eb8f" : "#ffccc7"
+                    }`,
                     borderRadius: 8,
                     backgroundColor: halfDay.isSchedulable
-                      ? '#f6ffed'
-                      : '#fff1f0',
-                    transition: 'all 0.2s',
+                      ? "#f6ffed"
+                      : "#fff1f0",
+                    transition: "all 0.2s",
                   }}
                 >
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                       marginBottom: 8,
                     }}
                   >
                     <span style={{ fontWeight: 600, fontSize: 14 }}>
                       {halfDay.name}
                     </span>
-                    <Tag color={halfDay.isSchedulable ? 'green' : 'red'}>
-                      {halfDay.isSchedulable ? '可排课' : '禁排课'}
+                    <Tag color={halfDay.isSchedulable ? "green" : "red"}>
+                      {halfDay.isSchedulable ? "可排课" : "禁排课"}
                     </Tag>
                   </div>
-                  <div style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+                  <div style={{ fontSize: 12, color: "#666", marginBottom: 8 }}>
                     {halfDay.startTime} - {halfDay.endTime}
                   </div>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    <span style={{ fontSize: 12, color: '#666' }}>
+                    <span style={{ fontSize: 12, color: "#666" }}>
                       排课状态
                     </span>
                     <Switch
@@ -498,19 +506,19 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
             </div>
           </div>
 
-          <Divider style={{ margin: '12px 0' }} />
+          <Divider style={{ margin: "12px 0" }} />
 
           {/* 时段列表 */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '80px 100px 100px 80px 100px 100px 80px',
+                display: "grid",
+                gridTemplateColumns: "80px 100px 100px 80px 100px 100px 80px",
                 gap: 8,
                 fontWeight: 600,
                 fontSize: 13,
-                color: '#666',
-                padding: '0 8px 8px',
+                color: "#666",
+                padding: "0 8px 8px",
               }}
             >
               <span>节次</span>
@@ -526,13 +534,13 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
               <div
                 key={slot.id}
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '80px 100px 100px 80px 100px 100px 80px',
+                  display: "grid",
+                  gridTemplateColumns: "80px 100px 100px 80px 100px 100px 80px",
                   gap: 8,
-                  alignItems: 'center',
-                  padding: '8px',
-                  backgroundColor: slot.isSchedulable ? '#f6ffed' : '#fff1f0',
-                  border: '1px solid #f0f0f0',
+                  alignItems: "center",
+                  padding: "8px",
+                  backgroundColor: slot.isSchedulable ? "#f6ffed" : "#fff1f0",
+                  border: "1px solid #f0f0f0",
                   borderRadius: 4,
                 }}
               >
@@ -555,7 +563,7 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
                     updateTimeSlot(slot.id, { duration: val || 45 })
                   }
                   size="small"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                 />
                 <InputNumber
                   min={0}
@@ -566,12 +574,12 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
                     updateTimeSlot(slot.id, { breakAfter: val || 0 })
                   }
                   size="small"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   disabled={index === timeSlots.length - 1}
                 />
                 <div>
-                  <Tag color={slot.isSchedulable ? 'green' : 'red'}>
-                    {slot.isSchedulable ? '可排课' : '不可排课'}
+                  <Tag color={slot.isSchedulable ? "green" : "red"}>
+                    {slot.isSchedulable ? "可排课" : "不可排课"}
                   </Tag>
                 </div>
                 <div>
@@ -593,11 +601,11 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
       {!isExpanded && (
         <div
           style={{
-            display: 'flex',
+            display: "flex",
             gap: 16,
             fontSize: 13,
-            color: '#666',
-            flexWrap: 'wrap',
+            color: "#666",
+            flexWrap: "wrap",
           }}
         >
           <span>
@@ -606,11 +614,11 @@ const TimeSlotConfigPanel: React.FC<TimeSlotConfigPanelProps> = ({
           <span>每节 {localDailyConfig.defaultDuration} 分钟</span>
           <span>休息 {localDailyConfig.defaultBreakDuration} 分钟</span>
           <span>
-            可排课时：{timeSlots.filter((s) => s.isSchedulable).length} /{' '}
+            可排课时：{timeSlots.filter((s) => s.isSchedulable).length} /{" "}
             {timeSlots.length}
           </span>
           <span>
-            可排半天：{localHalfDayConfig.filter((h) => h.isSchedulable).length}{' '}
+            可排半天：{localHalfDayConfig.filter((h) => h.isSchedulable).length}{" "}
             / {localHalfDayConfig.length}
           </span>
         </div>

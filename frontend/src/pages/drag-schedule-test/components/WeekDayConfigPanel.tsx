@@ -2,9 +2,9 @@ import {
   CalendarOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
-} from '@ant-design/icons';
-import { Button, Card, Divider, message, Space, Switch, Tag } from 'antd';
-import React, { useState } from 'react';
+} from "@ant-design/icons";
+import { Button, Card, Divider, message, Space, Switch, Tag } from "antd";
+import React, { useState } from "react";
 
 // 星期配置接口
 export interface WeekDayConfig {
@@ -20,13 +20,13 @@ interface WeekDayConfigPanelProps {
 }
 
 const defaultWeekDays: WeekDayConfig[] = [
-  { id: 1, name: '周一', isEnabled: true, isSchedulable: true },
-  { id: 2, name: '周二', isEnabled: true, isSchedulable: true },
-  { id: 3, name: '周三', isEnabled: true, isSchedulable: true },
-  { id: 4, name: '周四', isEnabled: true, isSchedulable: true },
-  { id: 5, name: '周五', isEnabled: true, isSchedulable: true },
-  { id: 6, name: '周六', isEnabled: false, isSchedulable: false },
-  { id: 7, name: '周日', isEnabled: false, isSchedulable: false },
+  { id: 1, name: "周一", isEnabled: true, isSchedulable: true },
+  { id: 2, name: "周二", isEnabled: true, isSchedulable: true },
+  { id: 3, name: "周三", isEnabled: true, isSchedulable: true },
+  { id: 4, name: "周四", isEnabled: true, isSchedulable: true },
+  { id: 5, name: "周五", isEnabled: true, isSchedulable: true },
+  { id: 6, name: "周六", isEnabled: false, isSchedulable: false },
+  { id: 7, name: "周日", isEnabled: false, isSchedulable: false },
 ];
 
 const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
@@ -34,7 +34,7 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
   onChange,
 }) => {
   const [weekDays, setWeekDays] = useState<WeekDayConfig[]>(
-    config.length > 0 ? config : defaultWeekDays,
+    config.length > 0 ? config : defaultWeekDays
   );
 
   // 切换启用状态
@@ -55,7 +55,9 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
 
     const day = weekDays.find((d) => d.id === id);
     message.success(
-      `${day?.name}已${newWeekDays.find((d) => d.id === id)?.isEnabled ? '启用' : '禁用'}`,
+      `${day?.name}已${
+        newWeekDays.find((d) => d.id === id)?.isEnabled ? "启用" : "禁用"
+      }`
     );
   };
 
@@ -80,7 +82,7 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
     }));
     setWeekDays(newWeekDays);
     onChange(newWeekDays);
-    message.success('已设置为工作日模式（周一至周五）');
+    message.success("已设置为工作日模式（周一至周五）");
   };
 
   // 批量设置全周
@@ -92,14 +94,14 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
     }));
     setWeekDays(newWeekDays);
     onChange(newWeekDays);
-    message.success('已设置为全周模式（周一至周日）');
+    message.success("已设置为全周模式（周一至周日）");
   };
 
   // 重置为默认
   const handleReset = () => {
     setWeekDays(defaultWeekDays);
     onChange(defaultWeekDays);
-    message.success('已重置为默认配置');
+    message.success("已重置为默认配置");
   };
 
   const schedulableCount = weekDays.filter((d) => d.isSchedulable).length;
@@ -107,7 +109,7 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
   return (
     <Card
       title={
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <CalendarOutlined />
           <span>星期配置</span>
         </div>
@@ -128,44 +130,44 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
         </Space>
       }
     >
-      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {weekDays.map((day) => (
           <div
             key={day.id}
             style={{
               width: 140,
-              padding: '12px',
-              border: `1px solid ${day.isEnabled ? '#d9f7be' : '#ffccc7'}`,
+              padding: "12px",
+              border: `1px solid ${day.isEnabled ? "#d9f7be" : "#ffccc7"}`,
               borderRadius: 8,
-              backgroundColor: day.isEnabled ? '#f6ffed' : '#fff1f0',
-              transition: 'all 0.2s',
+              backgroundColor: day.isEnabled ? "#f6ffed" : "#fff1f0",
+              transition: "all 0.2s",
             }}
           >
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
                 marginBottom: 8,
               }}
             >
               <span style={{ fontWeight: 600, fontSize: 14 }}>{day.name}</span>
               {day.isEnabled ? (
-                <CheckCircleOutlined style={{ color: '#52c41a' }} />
+                <CheckCircleOutlined style={{ color: "#52c41a" }} />
               ) : (
-                <CloseCircleOutlined style={{ color: '#ff4d4f' }} />
+                <CloseCircleOutlined style={{ color: "#ff4d4f" }} />
               )}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <span style={{ fontSize: 12, color: '#666' }}>启用</span>
+                <span style={{ fontSize: 12, color: "#666" }}>启用</span>
                 <Switch
                   size="small"
                   checked={day.isEnabled}
@@ -177,12 +179,12 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
 
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <span style={{ fontSize: 12, color: '#666' }}>可排课</span>
+                <span style={{ fontSize: 12, color: "#666" }}>可排课</span>
                 <Switch
                   size="small"
                   checked={day.isSchedulable}
@@ -197,19 +199,19 @@ const WeekDayConfigPanel: React.FC<WeekDayConfigPanelProps> = ({
         ))}
       </div>
 
-      <Divider style={{ margin: '12px 0 8px' }} />
+      <Divider style={{ margin: "12px 0 8px" }} />
 
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           fontSize: 13,
-          color: '#666',
+          color: "#666",
         }}
       >
         <span>
-          已启用：{weekDays.filter((d) => d.isEnabled).length} /{' '}
+          已启用：{weekDays.filter((d) => d.isEnabled).length} /{" "}
           {weekDays.length} 天
         </span>
         <Space>

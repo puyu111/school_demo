@@ -3,6 +3,49 @@
  */
 
 export default {
+  // 学期日历 - 提交
+  'POST /api/base-data/calendar': (req: any, res: any) => {
+    const { startDate, endDate, disabledDates } = req.body;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({
+        code: 400,
+        message: '提交失败：缺少开始或结束日期',
+        timestamp: Date.now(),
+      });
+    }
+
+    return res.json({
+      code: 200,
+      message: 'success',
+      data: {
+        calendarId: 1,
+        startDate,
+        endDate,
+        disabledCount: disabledDates?.length || 0,
+      },
+      timestamp: Date.now(),
+    });
+  },
+
+  // 学期日历 - 获取
+  'GET /api/base-data/calendar': (_req: any, res: any) => {
+    return res.json({
+      code: 200,
+      message: 'success',
+      data: {
+        calendarId: 1,
+        startDate: '2026-09-01',
+        endDate: '2027-01-15',
+        disabledDates: [
+          { date: '2026-10-01', remark: '国庆节' },
+          { date: '2026-10-02', remark: '国庆节' },
+        ],
+      },
+      timestamp: Date.now(),
+    });
+  },
+
   // 课程录入批量导入
   'POST /api/base-data/courses/import': async (req: any, res: any) => {
     try {

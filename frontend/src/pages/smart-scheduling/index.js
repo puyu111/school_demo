@@ -303,7 +303,10 @@ const SmartSchedulingPage = () => {
             <Col span={6}>
               <StatCard
                 title="排课完成度"
-                value={`${Math.round((scheduledCount / (scheduledCount + pendingCourses.length)) * 100)}%`}
+                value={`${Math.round(
+                  (scheduledCount / (scheduledCount + pendingCourses.length)) *
+                    100,
+                )}%`}
                 color="#1890ff"
                 icon={<ScheduleOutlined />}
               />
@@ -418,7 +421,9 @@ const HistoryList = ({ history, weekDays }) => (
         size="small"
         style={{
           marginBottom: '8px',
-          borderLeft: `4px solid ${item.action === 'removed' ? '#ff4d4f' : '#52c41a'}`,
+          borderLeft: `4px solid ${
+            item.action === 'removed' ? '#ff4d4f' : '#52c41a'
+          }`,
         }}
       >
         <Row align="middle">

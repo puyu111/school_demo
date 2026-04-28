@@ -1,6 +1,6 @@
-import React from 'react';
-import { MyTabs, StepsComponent } from './components';
-import { useSteps } from './hooks/useRuleData';
+import React from "react";
+import { MyTabs, StepsComponent } from "./components";
+import { useSteps } from "./hooks/useRuleData";
 
 /**
  * 规则配置设置页面
@@ -14,7 +14,7 @@ const RuleConfigurationSettings: React.FC = () => {
   return (
     <div>
       <div
-        style={{ maxWidth: '50%', marginLeft: '24px', marginBottom: '16px' }}
+        style={{ maxWidth: "50%", marginLeft: "24px", marginBottom: "16px" }}
       >
         <StepsComponent current={activeStep} />
       </div>

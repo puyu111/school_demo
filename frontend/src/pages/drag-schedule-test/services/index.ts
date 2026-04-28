@@ -20,7 +20,7 @@ export interface Course {
 
 // ==================== 时段配置类型 ====================
 
-export type HalfDayType = 'morning' | 'afternoon' | 'evening';
+export type HalfDayType = "morning" | "afternoon" | "evening";
 
 export interface HalfDayConfig {
   type: HalfDayType;
@@ -105,7 +105,7 @@ export interface ConflictCheckRequest {
 export interface ConflictCheckResponse {
   hasConflicts: boolean;
   conflicts: {
-    type: 'teacher' | 'room' | 'class' | 'duration';
+    type: "teacher" | "room" | "class" | "duration";
     message: string;
     existingCourse?: Course;
   }[];
@@ -124,7 +124,7 @@ export interface ExportRequest {
   startWeek: number;
   endWeek: number;
   classId?: string;
-  format?: 'json' | 'csv' | 'xlsx';
+  format?: "json" | "csv" | "xlsx";
 }
 
 /**
@@ -201,7 +201,7 @@ export interface DroppableCellProps {
   onMoveCourse: (
     courseId: string,
     newWeekDay: number,
-    newTimeSlotIndex: number,
+    newTimeSlotIndex: number
   ) => void;
   isFirstCell: boolean;
   spanCount?: number;
@@ -241,7 +241,7 @@ export interface TimeSlotConfigPanelProps {
   onChange: (
     config: TimeSlotConfig[],
     dailyConfig: DailyScheduleConfig,
-    halfDayConfig: HalfDayConfig[],
+    halfDayConfig: HalfDayConfig[]
   ) => void;
 }
 

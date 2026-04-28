@@ -1,21 +1,21 @@
-import { CalendarOutlined } from '@ant-design/icons';
-import { message, Tag } from 'antd';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { CalendarOutlined } from "@ant-design/icons";
+import { message, Tag } from "antd";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import type {
   CellCourseInfo,
   Course,
   CourseOccupancyEntry,
   ScheduleTableProps,
-} from '../types';
+} from "../types";
 import {
   calculateEndTime,
   getCourseSpanCount,
   getCourseStartTimeSlotIndex,
   getHalfDayType,
   timeToMinutes,
-} from '../utils';
-import DroppableCell from './DroppableCell';
-import WeekSelector from './WeekSelector';
+} from "../utils";
+import DroppableCell from "./DroppableCell";
+import WeekSelector from "./WeekSelector";
 
 const ScheduleTable: React.FC<ScheduleTableProps> = ({
   courses,
@@ -82,13 +82,13 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       // 检查星期是否可排课
       const targetWeekDay = weekDays.find((d) => d.id === newWeekDay);
       if (!targetWeekDay?.isEnabled || !targetWeekDay.isSchedulable) {
-        message.error('目标星期不可排课');
+        message.error("目标星期不可排课");
         return;
       }
 
       // 检查时段是否可排课
       if (!newTimeSlot.isSchedulable) {
-        message.error('目标时段不可排课');
+        message.error("目标时段不可排课");
         return;
       }
 
@@ -112,7 +112,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
         targetOccupancy.courseId !== courseId &&
         targetOccupancy.isFirstCell
       ) {
-        message.error('目标位置已有其他课程');
+        message.error("目标位置已有其他课程");
         return;
       }
 
@@ -125,7 +125,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
         const checkKey = `${newWeekDay}-${checkIndex}`;
         const checkOccupancy = courseOccupancyMap[checkKey];
         if (checkOccupancy && checkOccupancy.courseId !== courseId) {
-          message.error('目标位置与已有课程冲突');
+          message.error("目标位置与已有课程冲突");
           return;
         }
       }
@@ -137,7 +137,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
           timeToMinutes(movedCourse.startTime);
       const newEndTime = calculateEndTime(
         newTimeSlot.startTime,
-        courseDuration,
+        courseDuration
       );
 
       const updatedCourses = optimisticCourses.map((course) => {
@@ -164,7 +164,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       // 调用数据更新回调
       setTimeout(() => {
         onCourseUpdate(updatedCourses);
-        console.log('数据已持久化到后端', updatedCourses);
+        console.log("数据已持久化到后端", updatedCourses);
       }, 500);
     },
     [
@@ -174,13 +174,13 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       halfDayConfigs,
       courseOccupancyMap,
       onCourseUpdate,
-    ],
+    ]
   );
 
   // 获取指定单元格的课程信息
   const getCellCourse = (
     weekDay: number,
-    timeSlotIndex: number,
+    timeSlotIndex: number
   ): CellCourseInfo => {
     const key = `${weekDay}-${timeSlotIndex}`;
     const occupancy = courseOccupancyMap[key];
@@ -206,9 +206,9 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
 
   const hasCurrentWeekData = filteredCourses.length > 0;
   const isMobileDevice =
-    typeof window !== 'undefined' &&
+    typeof window !== "undefined" &&
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      window.navigator.userAgent,
+      window.navigator.userAgent
     );
 
   return (
@@ -216,28 +216,28 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       {/* 周次选择器 */}
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           marginBottom: isMobileDevice ? 10 : 12,
-          padding: isMobileDevice ? '10px 12px' : '12px 16px',
-          backgroundColor: '#fafafa',
-          borderRadius: '8px',
-          border: '1px solid #f0f0f0',
-          flexWrap: 'wrap',
+          padding: isMobileDevice ? "10px 12px" : "12px 16px",
+          backgroundColor: "#fafafa",
+          borderRadius: "8px",
+          border: "1px solid #f0f0f0",
+          flexWrap: "wrap",
           gap: isMobileDevice ? 8 : 12,
         }}
       >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             gap: isMobileDevice ? 8 : 12,
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
           }}
         >
           <CalendarOutlined
-            style={{ fontSize: isMobileDevice ? 16 : 18, color: '#1890ff' }}
+            style={{ fontSize: isMobileDevice ? 16 : 18, color: "#1890ff" }}
           />
           <span style={{ fontWeight: 600, fontSize: isMobileDevice ? 13 : 14 }}>
             当前周次：
@@ -252,16 +252,16 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
         <div
           style={{
             fontSize: isMobileDevice ? 12 : 13,
-            color: '#666',
-            display: 'flex',
+            color: "#666",
+            display: "flex",
             gap: 8,
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
           }}
         >
           <Tag color="blue" style={{ margin: 0 }}>
             {filteredCourses.length} 门课程
           </Tag>
-          <span style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ display: "flex", alignItems: "center" }}>
             可排课时：{halfDayConfigs.filter((h) => h.isSchedulable).length}/
             {halfDayConfigs.length} 个半天
           </span>
@@ -271,39 +271,39 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       {/* 半天配置状态提示 */}
       <div
         style={{
-          display: 'flex',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexWrap: "wrap",
           gap: isMobileDevice ? 6 : 12,
           marginBottom: isMobileDevice ? 10 : 12,
-          padding: isMobileDevice ? '8px 10px' : '8px 12px',
-          backgroundColor: '#f6ffed',
-          borderRadius: '6px',
-          border: '1px solid #b7eb8f',
+          padding: isMobileDevice ? "8px 10px" : "8px 12px",
+          backgroundColor: "#f6ffed",
+          borderRadius: "6px",
+          border: "1px solid #b7eb8f",
           fontSize: isMobileDevice ? 12 : 13,
-          alignItems: 'center',
+          alignItems: "center",
         }}
       >
-        <span style={{ color: '#666', whiteSpace: 'nowrap' }}>
+        <span style={{ color: "#666", whiteSpace: "nowrap" }}>
           半天排课状态：
         </span>
         <div
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
+            display: "flex",
+            flexWrap: "wrap",
             gap: isMobileDevice ? 4 : 8,
           }}
         >
           {halfDayConfigs.map((hd) => (
             <Tag
               key={hd.type}
-              color={hd.isSchedulable ? 'green' : 'red'}
+              color={hd.isSchedulable ? "green" : "red"}
               style={{
                 margin: 0,
                 fontSize: isMobileDevice ? 11 : 13,
-                padding: isMobileDevice ? '2px 6px' : undefined,
+                padding: isMobileDevice ? "2px 6px" : undefined,
               }}
             >
-              {hd.name}: {hd.isSchedulable ? '可排课' : '禁排课'}
+              {hd.name}: {hd.isSchedulable ? "可排课" : "禁排课"}
             </Tag>
           ))}
         </div>
@@ -312,12 +312,12 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
       {/* 课表主体 */}
       <div
         style={{
-          border: '1px solid #f0f0f0',
-          borderRadius: '8px',
-          overflow: isMobileDevice ? 'auto' : 'hidden',
-          backgroundColor: '#fff',
-          WebkitOverflowScrolling: 'touch',
-          maxWidth: '100%',
+          border: "1px solid #f0f0f0",
+          borderRadius: "8px",
+          overflow: isMobileDevice ? "auto" : "hidden",
+          backgroundColor: "#fff",
+          WebkitOverflowScrolling: "touch",
+          maxWidth: "100%",
         }}
       >
         {!isMobileDevice ? (
@@ -326,23 +326,23 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
             {/* 表头：星期 + 半天标识 */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '100px repeat(7, 1fr)',
-                borderBottom: '2px solid #f0f0f0',
-                backgroundColor: '#fafafa',
-                minWidth: '700px',
+                display: "grid",
+                gridTemplateColumns: "100px repeat(7, 1fr)",
+                borderBottom: "2px solid #f0f0f0",
+                backgroundColor: "#fafafa",
+                minWidth: "700px",
               }}
             >
               <div
                 style={{
-                  padding: '12px 8px',
-                  textAlign: 'center',
+                  padding: "12px 8px",
+                  textAlign: "center",
                   fontWeight: 600,
-                  fontSize: '14px',
-                  borderRight: '1px solid #f0f0f0',
-                  backgroundColor: '#f5f5f5',
-                  gridColumn: '1 / 2',
-                  gridRow: '1 / 2',
+                  fontSize: "14px",
+                  borderRight: "1px solid #f0f0f0",
+                  backgroundColor: "#f5f5f5",
+                  gridColumn: "1 / 2",
+                  gridRow: "1 / 2",
                 }}
               >
                 节次 / 时间
@@ -351,19 +351,19 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                 <div
                   key={day.id}
                   style={{
-                    padding: '8px 4px',
-                    textAlign: 'center',
+                    padding: "8px 4px",
+                    textAlign: "center",
                     fontWeight: 600,
-                    fontSize: '14px',
-                    borderRight: index < 6 ? '1px solid #f0f0f0' : 'none',
+                    fontSize: "14px",
+                    borderRight: index < 6 ? "1px solid #f0f0f0" : "none",
                     backgroundColor: day.isEnabled
                       ? day.isSchedulable
-                        ? '#f0f5ff'
-                        : '#fff1f0'
-                      : '#f5f5f5',
+                        ? "#f0f5ff"
+                        : "#fff1f0"
+                      : "#f5f5f5",
                     opacity: day.isEnabled ? 1 : 0.5,
                     gridColumn: `${index + 2} / ${index + 3}`,
-                    gridRow: '1 / 2',
+                    gridRow: "1 / 2",
                   }}
                 >
                   {day.name}
@@ -371,13 +371,13 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
               ))}
               <div
                 style={{
-                  padding: '4px 8px',
-                  textAlign: 'center',
-                  fontSize: '12px',
-                  borderRight: '1px solid #f0f0f0',
-                  color: '#666',
-                  gridColumn: '1 / 2',
-                  gridRow: '2 / 3',
+                  padding: "4px 8px",
+                  textAlign: "center",
+                  fontSize: "12px",
+                  borderRight: "1px solid #f0f0f0",
+                  color: "#666",
+                  gridColumn: "1 / 2",
+                  gridRow: "2 / 3",
                 }}
               >
                 时段
@@ -386,12 +386,12 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                 <div
                   key={day.id}
                   style={{
-                    padding: '4px 4px',
-                    display: 'flex',
-                    gap: '2px',
-                    borderRight: index < 6 ? '1px solid #e8e8e8' : 'none',
+                    padding: "4px 4px",
+                    display: "flex",
+                    gap: "2px",
+                    borderRight: index < 6 ? "1px solid #e8e8e8" : "none",
                     gridColumn: `${index + 2} / ${index + 3}`,
-                    gridRow: '2 / 3',
+                    gridRow: "2 / 3",
                   }}
                 >
                   {halfDayConfigs.map((hd) => (
@@ -399,14 +399,14 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                       key={hd.type}
                       style={{
                         flex: 1,
-                        textAlign: 'center',
-                        fontSize: '11px',
-                        padding: '2px 0',
+                        textAlign: "center",
+                        fontSize: "11px",
+                        padding: "2px 0",
                         backgroundColor: hd.isSchedulable
-                          ? '#f6ffed'
-                          : '#fff1f0',
-                        color: hd.isSchedulable ? '#52c41a' : '#ff4d4f',
-                        borderRadius: '2px',
+                          ? "#f6ffed"
+                          : "#fff1f0",
+                        color: hd.isSchedulable ? "#52c41a" : "#ff4d4f",
+                        borderRadius: "2px",
                       }}
                     >
                       {hd.name}
@@ -419,46 +419,46 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
             {/* 表格内容 */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '100px repeat(7, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "100px repeat(7, 1fr)",
                 gap: 0,
-                minWidth: '700px',
+                minWidth: "700px",
               }}
             >
               {timeSlots.map((slot, slotIndex) => {
                 const halfDayType = getHalfDayType(slot.startTime);
                 const halfDayConfig = halfDayConfigs.find(
-                  (h) => h.type === halfDayType,
+                  (h) => h.type === halfDayType
                 );
 
                 return (
                   <React.Fragment key={slot.id}>
                     <div
                       style={{
-                        padding: '8px 4px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRight: '1px solid #f0f0f0',
+                        padding: "8px 4px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRight: "1px solid #f0f0f0",
                         borderBottom:
                           slotIndex < timeSlots.length - 1
-                            ? '1px solid #f0f0f0'
-                            : 'none',
+                            ? "1px solid #f0f0f0"
+                            : "none",
                         backgroundColor:
                           slot.isSchedulable && halfDayConfig?.isSchedulable
-                            ? '#fafafa'
-                            : '#f5f5f5',
-                        fontSize: '11px',
-                        boxSizing: 'border-box',
-                        gridColumn: '1 / 2',
+                            ? "#fafafa"
+                            : "#f5f5f5",
+                        fontSize: "11px",
+                        boxSizing: "border-box",
+                        gridColumn: "1 / 2",
                         gridRow: `${slotIndex + 1} / ${slotIndex + 2}`,
                       }}
                     >
-                      <span style={{ fontWeight: 600, color: '#666' }}>
+                      <span style={{ fontWeight: 600, color: "#666" }}>
                         {slot.label}
                       </span>
-                      <span style={{ color: '#999' }}>{slot.startTime}</span>
+                      <span style={{ color: "#999" }}>{slot.startTime}</span>
                     </div>
 
                     {weekDays.map((day, dayIndex) => {
@@ -475,11 +475,11 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                           <div
                             key={day.id}
                             style={{
-                              padding: '0',
-                              margin: '0',
+                              padding: "0",
+                              margin: "0",
                               borderRight:
-                                dayIndex < 6 ? '1px solid #f0f0f0' : 'none',
-                              borderBottom: 'none',
+                                dayIndex < 6 ? "1px solid #f0f0f0" : "none",
+                              borderBottom: "none",
                               gridColumn: `${dayIndex + 2} / ${dayIndex + 3}`,
                               gridRow: `${slotIndex + 1} / ${slotIndex + 2}`,
                               zIndex: 5,
@@ -507,16 +507,16 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                         <div
                           key={day.id}
                           style={{
-                            padding: '0',
-                            margin: '0',
+                            padding: "0",
+                            margin: "0",
                             borderRight:
-                              dayIndex < 6 ? '1px solid #f0f0f0' : 'none',
+                              dayIndex < 6 ? "1px solid #f0f0f0" : "none",
                             borderBottom:
                               spanCount > 1
-                                ? 'none'
+                                ? "none"
                                 : slotIndex < timeSlots.length - 1
-                                  ? '1px solid #f0f0f0'
-                                  : 'none',
+                                ? "1px solid #f0f0f0"
+                                : "none",
                             gridColumn: `${dayIndex + 2} / ${dayIndex + 3}`,
                             gridRow:
                               spanCount > 1
@@ -549,37 +549,37 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
           </>
         ) : (
           /* 移动端简化视图 */
-          <div style={{ padding: '8px' }}>
+          <div style={{ padding: "8px" }}>
             <div
               style={{
                 marginBottom: 8,
                 fontSize: 12,
-                color: '#999',
-                textAlign: 'center',
+                color: "#999",
+                textAlign: "center",
               }}
             >
               左右滑动查看课表 →
             </div>
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '60px repeat(7, minmax(80px, 1fr))',
+                display: "grid",
+                gridTemplateColumns: "60px repeat(7, minmax(80px, 1fr))",
                 gap: 0,
-                minWidth: '100%',
-                border: '1px solid #f0f0f0',
-                borderRadius: '6px',
-                overflow: 'hidden',
+                minWidth: "100%",
+                border: "1px solid #f0f0f0",
+                borderRadius: "6px",
+                overflow: "hidden",
               }}
             >
               <div
                 style={{
-                  padding: '8px 4px',
-                  textAlign: 'center',
+                  padding: "8px 4px",
+                  textAlign: "center",
                   fontWeight: 600,
-                  fontSize: '12px',
-                  borderRight: '1px solid #f0f0f0',
-                  borderBottom: '1px solid #f0f0f0',
-                  backgroundColor: '#f5f5f5',
+                  fontSize: "12px",
+                  borderRight: "1px solid #f0f0f0",
+                  borderBottom: "1px solid #f0f0f0",
+                  backgroundColor: "#f5f5f5",
                 }}
               >
                 节次
@@ -588,21 +588,21 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                 <div
                   key={day.id}
                   style={{
-                    padding: '6px 2px',
-                    textAlign: 'center',
+                    padding: "6px 2px",
+                    textAlign: "center",
                     fontWeight: 600,
-                    fontSize: '11px',
-                    borderRight: '1px solid #f0f0f0',
-                    borderBottom: '1px solid #f0f0f0',
+                    fontSize: "11px",
+                    borderRight: "1px solid #f0f0f0",
+                    borderBottom: "1px solid #f0f0f0",
                     backgroundColor: day.isEnabled
                       ? day.isSchedulable
-                        ? '#f0f5ff'
-                        : '#fff1f0'
-                      : '#f5f5f5',
+                        ? "#f0f5ff"
+                        : "#fff1f0"
+                      : "#f5f5f5",
                     opacity: day.isEnabled ? 1 : 0.5,
-                    writingMode: 'vertical-rl',
-                    textOrientation: 'mixed',
-                    minHeight: '40px',
+                    writingMode: "vertical-rl",
+                    textOrientation: "mixed",
+                    minHeight: "40px",
                   }}
                 >
                   {day.name}
@@ -612,18 +612,18 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                 <React.Fragment key={slot.id}>
                   <div
                     style={{
-                      padding: '6px 4px',
-                      textAlign: 'center',
-                      fontSize: '10px',
-                      borderRight: '1px solid #f0f0f0',
-                      borderBottom: '1px solid #f0f0f0',
+                      padding: "6px 4px",
+                      textAlign: "center",
+                      fontSize: "10px",
+                      borderRight: "1px solid #f0f0f0",
+                      borderBottom: "1px solid #f0f0f0",
                       backgroundColor: slot.isSchedulable
-                        ? '#fafafa'
-                        : '#f5f5f5',
+                        ? "#fafafa"
+                        : "#f5f5f5",
                     }}
                   >
                     <div style={{ fontWeight: 600 }}>{slot.label}</div>
-                    <div style={{ color: '#999', fontSize: '9px' }}>
+                    <div style={{ color: "#999", fontSize: "9px" }}>
                       {slot.startTime}
                     </div>
                   </div>
@@ -637,7 +637,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                     } = getCellCourse(day.id, slotIndex);
                     const halfDayType = getHalfDayType(slot.startTime);
                     const halfDayConfig = halfDayConfigs.find(
-                      (h) => h.type === halfDayType,
+                      (h) => h.type === halfDayType
                     );
                     const isForbidden =
                       !day.isEnabled ||
@@ -649,17 +649,17 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                       <div
                         key={day.id}
                         style={{
-                          minHeight: '44px',
-                          padding: '2px',
-                          borderRight: '1px solid #f0f0f0',
-                          borderBottom: '1px solid #f0f0f0',
+                          minHeight: "44px",
+                          padding: "2px",
+                          borderRight: "1px solid #f0f0f0",
+                          borderBottom: "1px solid #f0f0f0",
                           backgroundColor: isForbidden
-                            ? '#f5f5f5'
+                            ? "#f5f5f5"
                             : course
-                              ? '#fafafa'
-                              : '#fff',
+                            ? "#fafafa"
+                            : "#fff",
                           opacity: isForbidden ? 0.6 : 1,
-                          position: 'relative',
+                          position: "relative",
                         }}
                       >
                         {course && isFirstCell && !isRowSpanned && (
@@ -681,12 +681,12 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                         {isRowSpanned && (
                           <div
                             style={{
-                              height: '100%',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontSize: '9px',
-                              color: '#999',
+                              height: "100%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontSize: "9px",
+                              color: "#999",
                             }}
                           >
                             延续
@@ -707,30 +707,30 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
         <div
           style={{
             marginTop: isMobileDevice ? 12 : 16,
-            padding: isMobileDevice ? '24px 16px' : '40px 20px',
-            textAlign: 'center',
-            backgroundColor: '#fafafa',
-            borderRadius: '8px',
-            border: '1px dashed #d9d9d9',
+            padding: isMobileDevice ? "24px 16px" : "40px 20px",
+            textAlign: "center",
+            backgroundColor: "#fafafa",
+            borderRadius: "8px",
+            border: "1px dashed #d9d9d9",
           }}
         >
           <CalendarOutlined
             style={{
               fontSize: isMobileDevice ? 36 : 48,
-              color: '#d9d9d9',
+              color: "#d9d9d9",
               marginBottom: isMobileDevice ? 12 : 16,
             }}
           />
           <div
             style={{
               fontSize: isMobileDevice ? 14 : 16,
-              color: '#666',
+              color: "#666",
               marginBottom: 8,
             }}
           >
             第{currentWeek}周暂无课程安排
           </div>
-          <div style={{ fontSize: isMobileDevice ? 12 : 13, color: '#999' }}>
+          <div style={{ fontSize: isMobileDevice ? 12 : 13, color: "#999" }}>
             请切换周次或拖拽课程到可排课时段
           </div>
         </div>

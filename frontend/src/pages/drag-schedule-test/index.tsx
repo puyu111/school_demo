@@ -1,12 +1,12 @@
-import { useRequest } from '@umijs/max';
-import { Alert, Modal, message } from 'antd';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import ScheduleTable from './components/ScheduleTable';
-import ScheduleToolbar from './components/ScheduleToolbar';
-import TimeSlotConfigPanel from './components/TimeSlotConfigPanel';
-import WeekDayConfigPanel from './components/WeekDayConfigPanel';
+import { useRequest } from "@umijs/max";
+import { Alert, message, Modal } from "antd";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import ScheduleTable from "./components/ScheduleTable";
+import ScheduleToolbar from "./components/ScheduleToolbar";
+import TimeSlotConfigPanel from "./components/TimeSlotConfigPanel";
+import WeekDayConfigPanel from "./components/WeekDayConfigPanel";
 import {
   DEFAULT_HALF_DAY_CONFIG,
   defaultDailyConfig,
@@ -14,15 +14,15 @@ import {
   generateDefaultTimeSlots,
   generateMockCourses,
   TOTAL_WEEKS,
-} from './constants';
-import * as scheduleApi from './service';
+} from "./constants";
+import * as scheduleApi from "./service";
 import type {
   Course,
   DailyScheduleConfig,
   HalfDayConfig,
   TimeSlotConfig,
   WeekDayConfig,
-} from './types';
+} from "./types";
 
 const DragScheduleTest: React.FC = () => {
   // 课程数据（本地状态 + 接口数据）
@@ -31,13 +31,13 @@ const DragScheduleTest: React.FC = () => {
 
   // 配置数据
   const [timeSlots, setTimeSlots] = useState<TimeSlotConfig[]>(
-    generateDefaultTimeSlots,
+    generateDefaultTimeSlots
   );
   const [weekDays, setWeekDays] = useState<WeekDayConfig[]>(defaultWeekDays);
   const [dailyConfig, setDailyConfig] =
     useState<DailyScheduleConfig>(defaultDailyConfig);
   const [halfDayConfig, setHalfDayConfig] = useState<HalfDayConfig[]>(
-    DEFAULT_HALF_DAY_CONFIG,
+    DEFAULT_HALF_DAY_CONFIG
   );
 
   // 原始数据（用于撤销）
@@ -50,9 +50,9 @@ const DragScheduleTest: React.FC = () => {
 
   // 检测是否为移动设备
   const isMobileDevice = useMemo(() => {
-    if (typeof window === 'undefined') return false;
+    if (typeof window === "undefined") return false;
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      window.navigator.userAgent,
+      window.navigator.userAgent
     );
   }, []);
 
@@ -64,10 +64,10 @@ const DragScheduleTest: React.FC = () => {
       formatResult: (res) => res.data,
       manual: true,
       onError: (err) => {
-        console.error('获取课程失败:', err);
-        message.error('获取课程数据失败，使用模拟数据');
+        console.error("获取课程失败:", err);
+        message.error("获取课程数据失败，使用模拟数据");
       },
-    },
+    }
   );
 
   // 包装后的 loadCourses，支持传入周次参数
@@ -75,7 +75,7 @@ const DragScheduleTest: React.FC = () => {
     (week: number) => {
       run(week);
     },
-    [run],
+    [run]
   );
 
   // 获取配置数据
@@ -84,9 +84,9 @@ const DragScheduleTest: React.FC = () => {
     {
       formatResult: (res) => res.data,
       onError: (err) => {
-        console.error('获取配置失败:', err);
+        console.error("获取配置失败:", err);
       },
-    },
+    }
   );
 
   // 初始化加载数据
@@ -135,7 +135,7 @@ const DragScheduleTest: React.FC = () => {
   const handleCourseUpdate = useCallback(
     async (updatedCourses: Course[]) => {
       const otherWeekCourses = courses.filter(
-        (c) => !c.weeks.includes(currentWeek),
+        (c) => !c.weeks.includes(currentWeek)
       );
       const newAllCourses = [...otherWeekCourses, ...updatedCourses];
 
@@ -156,7 +156,7 @@ const DragScheduleTest: React.FC = () => {
 
       console.log(`第${currentWeek}周课程数据已更新:`, updatedCourses);
     },
-    [courses, currentWeek],
+    [courses, currentWeek]
   );
 
   // 处理时段配置变更
@@ -164,14 +164,14 @@ const DragScheduleTest: React.FC = () => {
     (
       newTimeSlots: TimeSlotConfig[],
       newDailyConfig: DailyScheduleConfig,
-      newHalfDayConfig: HalfDayConfig[],
+      newHalfDayConfig: HalfDayConfig[]
     ) => {
       setTimeSlots(newTimeSlots);
       setDailyConfig(newDailyConfig);
       setHalfDayConfig(newHalfDayConfig);
       setHasUnsavedChanges(true);
     },
-    [],
+    []
   );
 
   // 处理星期配置变更
@@ -180,20 +180,20 @@ const DragScheduleTest: React.FC = () => {
       setWeekDays(newWeekDays);
       setHasUnsavedChanges(true);
     },
-    [],
+    []
   );
 
   // 撤销操作
   const handleUndo = () => {
     Modal.confirm({
-      title: '确认撤销',
+      title: "确认撤销",
       content: `确定要撤销第${currentWeek}周的所有未保存更改吗？`,
-      okText: '确认',
-      cancelText: '取消',
+      okText: "确认",
+      cancelText: "取消",
       onOk: () => {
         setLocalCourses(originalCourses);
         setHasUnsavedChanges(false);
-        message.success('已撤销所有未保存的更改');
+        message.success("已撤销所有未保存的更改");
       },
     });
   };
@@ -214,7 +214,7 @@ const DragScheduleTest: React.FC = () => {
       setOriginalCourses(courses);
       setHasUnsavedChanges(false);
       message.success(res.data?.message || `第${currentWeek}周课表数据已保存`);
-      console.log('保存的数据:', {
+      console.log("保存的数据:", {
         week: currentWeek,
         courses: currentWeekCourses,
         timeSlots,
@@ -223,8 +223,8 @@ const DragScheduleTest: React.FC = () => {
         halfDayConfig,
       });
     } catch (err: any) {
-      console.error('保存失败:', err);
-      message.error('保存失败，请检查网络连接');
+      console.error("保存失败:", err);
+      message.error("保存失败，请检查网络连接");
     } finally {
       setLoading(false);
     }
@@ -239,10 +239,10 @@ const DragScheduleTest: React.FC = () => {
       // 刷新配置数据
       refreshConfigs();
 
-      message.success('数据已刷新');
+      message.success("数据已刷新");
     } catch (err: any) {
-      console.error('刷新失败:', err);
-      message.error('刷新失败');
+      console.error("刷新失败:", err);
+      message.error("刷新失败");
     } finally {
       setLoading(false);
     }
@@ -252,9 +252,9 @@ const DragScheduleTest: React.FC = () => {
     <DndProvider backend={HTML5Backend}>
       <div
         style={{
-          minHeight: '100vh',
-          backgroundColor: '#f0f2f5',
-          padding: isMobileDevice ? '12px 8px' : '24px',
+          minHeight: "100vh",
+          backgroundColor: "#f0f2f5",
+          padding: isMobileDevice ? "12px 8px" : "24px",
         }}
       >
         {/* 顶部工具栏 */}

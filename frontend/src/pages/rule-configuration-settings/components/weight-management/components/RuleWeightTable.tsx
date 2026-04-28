@@ -8,9 +8,9 @@ import {
   Switch,
   Table,
   Tag,
-} from 'antd';
-import React from 'react';
-import type { RuleWeight } from '../types';
+} from "antd";
+import React from "react";
+import type { RuleWeight } from "../types";
 
 interface RuleWeightTableProps {
   data: RuleWeight[];
@@ -29,23 +29,23 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
 }) => {
   const columns = [
     {
-      title: '规则名称',
-      dataIndex: 'name',
-      key: 'name',
+      title: "规则名称",
+      dataIndex: "name",
+      key: "name",
       width: 150,
       render: (text: string, record: RuleWeight) => (
         <div>
-          <div style={{ fontWeight: 'bold' }}>{text}</div>
-          <div style={{ fontSize: '12px', color: '#666' }}>
+          <div style={{ fontWeight: "bold" }}>{text}</div>
+          <div style={{ fontSize: "12px", color: "#666" }}>
             {record.description}
           </div>
         </div>
       ),
     },
     {
-      title: '状态',
-      dataIndex: 'enabled',
-      key: 'enabled',
+      title: "状态",
+      dataIndex: "enabled",
+      key: "enabled",
       width: 80,
       render: (enabled: boolean, record: RuleWeight) => (
         <Switch
@@ -58,8 +58,8 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
       ),
     },
     {
-      title: '权重范围',
-      key: 'range',
+      title: "权重范围",
+      key: "range",
       width: 120,
       render: (_: any, record: RuleWeight) => (
         <div>
@@ -68,16 +68,16 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
       ),
     },
     {
-      title: '默认权重',
-      dataIndex: 'defaultWeight',
-      key: 'defaultWeight',
+      title: "默认权重",
+      dataIndex: "defaultWeight",
+      key: "defaultWeight",
       width: 100,
       render: (value: number) => <Tag color="blue">{value}</Tag>,
     },
     {
-      title: '当前权重',
-      dataIndex: 'currentWeight',
-      key: 'currentWeight',
+      title: "当前权重",
+      dataIndex: "currentWeight",
+      key: "currentWeight",
       width: 180,
       render: (value: number, record: RuleWeight) => (
         <div>
@@ -100,7 +100,7 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
                   val !== null && onWeightChange(record.id, val)
                 }
                 disabled={!isEditing || !record.enabled}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             </Col>
           </Row>
@@ -108,8 +108,8 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
       ),
     },
     {
-      title: '操作',
-      key: 'action',
+      title: "操作",
+      key: "action",
       width: 120,
       render: (_: any, record: RuleWeight) => (
         <Space>
@@ -134,7 +134,7 @@ const RuleWeightTable: React.FC<RuleWeightTableProps> = ({
       pagination={false}
       size="middle"
       scroll={{ y: 400 }}
-      rowClassName={(record) => (!record.enabled ? 'disabled-row' : '')}
+      rowClassName={(record) => (!record.enabled ? "disabled-row" : "")}
     />
   );
 };

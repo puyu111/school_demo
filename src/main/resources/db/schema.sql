@@ -1,7 +1,7 @@
 -- =====================================================
 -- 智能排课系统 - 完整数据库设计
--- 基于前端 6 个 API 文档设计
--- 版本: v2.0
+-- 基于前端 7 个 API 文档设计
+-- 版本: v3.0
 -- 创建日期: 2026-04-28
 -- =====================================================
 
@@ -9,28 +9,30 @@
 -- 一、基础数据模块 (base-data-api.md)
 -- =====================================================
 
--- 1. 课程表 (已有)
+-- 1. 课程表
 -- 表名: course
 -- 来源: base-data-api.md 课程管理 + 现有 CourseEntity
+-- 已有 JPA Entity: CourseEntity
 
 -- 2. 课程设置表
 -- 来源: base-data-api.md 课程设置管理
 CREATE TABLE IF NOT EXISTS course_setting (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    course_name     VARCHAR(200)  NOT NULL COMMENT '课程名称',
+    name            VARCHAR(200)  NOT NULL COMMENT '课程名称',
     priority        INT           NOT NULL DEFAULT 1 COMMENT '优先级（越小越高）',
     semester        VARCHAR(50)   NOT NULL COMMENT '开课学期（如：第 1 学期）',
     created_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_course_name (course_name)
+    INDEX idx_cs_name (name),
+    INDEX idx_cs_semester (semester)
 ) COMMENT = '课程设置表';
 
 -- 3. 课程先修关系表（M:N）
 -- 来源: base-data-api.md 课程设置的 prerequisites 字段
 CREATE TABLE IF NOT EXISTS course_prerequisite (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    course_setting_id BIGINT    NOT NULL COMMENT '课程设置 ID',
-    prerequisite_name VARCHAR(200) NOT NULL COMMENT '先修课程名称',
+    id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
+    course_setting_id   BIGINT NOT NULL COMMENT '课程设置 ID',
+    prerequisite_name   VARCHAR(200) NOT NULL COMMENT '先修课程名称',
     UNIQUE KEY uk_course_prereq (course_setting_id, prerequisite_name),
     CONSTRAINT fk_prereq_setting FOREIGN KEY (course_setting_id) REFERENCES course_setting(id) ON DELETE CASCADE
 ) COMMENT = '课程先修关系表';
@@ -40,12 +42,12 @@ CREATE TABLE IF NOT EXISTS course_prerequisite (
 CREATE TABLE IF NOT EXISTS major (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
     major_id        VARCHAR(50)   NOT NULL UNIQUE COMMENT '专业业务 ID（如 M001）',
-    major_name      VARCHAR(200)  NOT NULL COMMENT '专业名称',
+    name            VARCHAR(200)  NOT NULL COMMENT '专业名称',
     class_size      INT           NOT NULL DEFAULT 45 COMMENT '默认班级人数',
     duration        INT           NOT NULL DEFAULT 4 COMMENT '学制（年）',
     created_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_major_name (major_name)
+    INDEX idx_major_name (name)
 ) COMMENT = '专业表';
 
 -- 5. 专业必修课程关联表（M:N）
@@ -58,59 +60,89 @@ CREATE TABLE IF NOT EXISTS major_required_course (
     CONSTRAINT fk_major_req_course FOREIGN KEY (major_id) REFERENCES major(id) ON DELETE CASCADE
 ) COMMENT = '专业必修课程关联表';
 
--- 6. 教师表 (已有)
+-- 6. 教师表
 -- 表名: teacher
 -- 来源: base-data-api.md 教师管理 + 现有 TeacherEntity
+-- 已有 JPA Entity: TeacherEntity
+-- 注意: TeacherEntity 中已有 job_number(department, max_daily_courses 等字段)
+--       base-data-api.md 需要额外字段: gender, degree, email, phone, id(展示 ID)
+-- 以下 ALTER 语句用于补充缺失字段（如果表已存在）
+-- ALTER TABLE teacher ADD COLUMN IF NOT EXISTS id VARCHAR(50) UNIQUE COMMENT '教师展示 ID（如 T001）';
+-- ALTER TABLE teacher ADD COLUMN IF NOT EXISTS gender VARCHAR(10) COMMENT '性别：男/女';
+-- ALTER TABLE teacher ADD COLUMN IF NOT EXISTS degree VARCHAR(50) COMMENT '学历';
+-- ALTER TABLE teacher ADD COLUMN IF NOT EXISTS email VARCHAR(100) COMMENT '邮箱';
+-- ALTER TABLE teacher ADD COLUMN IF NOT EXISTS phone VARCHAR(20) COMMENT '电话';
 
 -- 7. 教师可授课程关联表（M:N）
 -- 来源: base-data-api.md 教师的 courses 字段
 CREATE TABLE IF NOT EXISTS teacher_teachable_course (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    teacher_id      BIGINT        NOT NULL,
+    teacher_id      BIGINT        NOT NULL COMMENT '教师 ID',
     course_name     VARCHAR(200)  NOT NULL COMMENT '可授课程名称',
     UNIQUE KEY uk_teacher_course (teacher_id, course_name),
-    CONSTRAINT fk_teacher_course FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE
+    CONSTRAINT fk_teacher_teachable FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE
 ) COMMENT = '教师可授课程关联表';
+
+-- 8. 学期日历表
+-- 来源: base-data-api.md 学期日历 API
+CREATE TABLE IF NOT EXISTS semester_calendar (
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    start_date      DATE    NOT NULL COMMENT '学期开始日期',
+    end_date        DATE    NOT NULL COMMENT '学期结束日期',
+    created_time    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) COMMENT = '学期日历表';
+
+-- 9. 日历禁用日期表
+-- 来源: base-data-api.md 学期日历 API 的 disabledDates
+CREATE TABLE IF NOT EXISTS calendar_disabled_date (
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    calendar_id     BIGINT       NOT NULL COMMENT '日历 ID',
+    date_value      DATE         NOT NULL COMMENT '禁用日期',
+    remark          VARCHAR(200) NULL COMMENT '备注（如：国庆节、春节）',
+    UNIQUE KEY uk_calendar_date (calendar_id, date_value),
+    CONSTRAINT fk_disabled_calendar FOREIGN KEY (calendar_id) REFERENCES semester_calendar(id) ON DELETE CASCADE
+) COMMENT = '日历禁用日期表';
 
 
 -- =====================================================
 -- 二、课表管理模块 (schedule-api.md + drag-schedule-api.md)
 -- =====================================================
 
--- 8. 学期表 (已有)
+-- 10. 学期表
 -- 表名: semester
--- 来源: 现有 SemesterEntity
+-- 来源: 现有 SemesterEntity (已有 JPA Entity)
 
--- 9. 班级表 (已有)
+-- 11. 班级表
 -- 表名: class
--- 来源: 现有 ClassEntity
+-- 来源: 现有 ClassEntity (已有 JPA Entity)
 
--- 10. 教室表 (已有)
+-- 12. 教室表
 -- 表名: room
--- 来源: 现有 RoomEntity
+-- 来源: 现有 RoomEntity (已有 JPA Entity)
 
--- 11. 时间段表 (已有)
+-- 13. 时间段表
 -- 表名: time_slot
--- 来源: 现有 TimeSlotEntity
+-- 来源: 现有 TimeSlotEntity (已有 JPA Entity)
 
--- 12. 排课记录表 (已有)
+-- 14. 排课记录表
 -- 表名: schedule
--- 来源: 现有 ScheduleEntity
+-- 来源: 现有 ScheduleEntity (已有 JPA Entity)
 
--- 13. 教师可用时间段 (已有)
+-- 15. 教师可用时间段
 -- 表名: teacher_available_slot_v2
--- 来源: 现有 TeacherAvailableSlot
+-- 来源: 现有 TeacherAvailableSlot (已有 JPA Entity)
 
--- 14. 教师偏好时间段 (已有)
+-- 16. 教师偏好时间段
 -- 表名: teacher_preferred_slot_v2
--- 来源: 现有 TeacherPreferredSlot
+-- 来源: 现有 TeacherPreferredSlot (已有 JPA Entity)
 
 
 -- =====================================================
 -- 三、调课申请审核模块 (course-adjustment-api.md)
 -- =====================================================
 
--- 15. 调课申请表
+-- 17. 调课申请表
 -- 来源: course-adjustment-api.md 申请管理
 CREATE TABLE IF NOT EXISTS course_adjustment (
     id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -120,9 +152,13 @@ CREATE TABLE IF NOT EXISTS course_adjustment (
     department          VARCHAR(100)  NOT NULL COMMENT '所在院系',
     original_course_id  VARCHAR(50)   NOT NULL COMMENT '原课程业务 ID',
     original_course     VARCHAR(500)  NOT NULL COMMENT '原课程信息（简短描述）',
+    original_week_day   TINYINT       NULL COMMENT '原星期（1-7）',
+    original_slot       INT           NULL COMMENT '原节次',
+    original_room_id    BIGINT        NULL COMMENT '原教室 ID',
     target_course       VARCHAR(500)  NOT NULL COMMENT '调整后课程信息',
     target_week_day     TINYINT       NOT NULL COMMENT '目标星期（1-7）',
     target_slot         INT           NOT NULL COMMENT '目标节次',
+    target_room_id      BIGINT        NULL COMMENT '目标教室 ID',
     reason              VARCHAR(1000) NOT NULL COMMENT '调课原因',
     urgency             VARCHAR(20)   NOT NULL DEFAULT 'normal' COMMENT '紧急程度：high/normal',
     status              VARCHAR(20)   NOT NULL DEFAULT 'pending' COMMENT '状态：pending/approved/rejected/revoked',
@@ -130,17 +166,18 @@ CREATE TABLE IF NOT EXISTS course_adjustment (
     reviewer_id         VARCHAR(50)   NULL COMMENT '审核人 ID',
     reviewer_name       VARCHAR(100)  NULL COMMENT '审核人姓名',
     review_time         DATETIME      NULL COMMENT '审核时间',
+    revoke_time         DATETIME      NULL COMMENT '撤销时间',
     attachments         JSON          NULL COMMENT '附件列表 JSON',
     created_time        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_time        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_teacher (teacher_id),
-    INDEX idx_status (status),
-    INDEX idx_department (department),
-    INDEX idx_apply_time (created_time),
-    CONSTRAINT fk_adjust_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
+    INDEX idx_adj_teacher (teacher_id),
+    INDEX idx_adj_status (status),
+    INDEX idx_adj_dept (department),
+    INDEX idx_adj_time (created_time),
+    CONSTRAINT fk_adj_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
 ) COMMENT = '调课申请表';
 
--- 16. 调课申请审核历史表
+-- 18. 调课申请审核历史表
 -- 来源: course-adjustment-api.md 审核历史记录
 CREATE TABLE IF NOT EXISTS adjustment_history (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -152,8 +189,8 @@ CREATE TABLE IF NOT EXISTS adjustment_history (
     operator_type   VARCHAR(20)   NOT NULL COMMENT '操作人类型：teacher/admin',
     comment         VARCHAR(500)  NULL COMMENT '备注/意见',
     timestamp       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
-    INDEX idx_application (application_id),
-    CONSTRAINT fk_hist_application FOREIGN KEY (application_id) REFERENCES course_adjustment(id) ON DELETE CASCADE
+    INDEX idx_ah_app (application_id),
+    CONSTRAINT fk_ah_application FOREIGN KEY (application_id) REFERENCES course_adjustment(id) ON DELETE CASCADE
 ) COMMENT = '调课申请审核历史表';
 
 
@@ -161,79 +198,79 @@ CREATE TABLE IF NOT EXISTS adjustment_history (
 -- 四、规则配置模块 (rule-configuration-api.md)
 -- =====================================================
 
--- 17. 排课规则表
+-- 19. 排课规则表
 -- 来源: rule-configuration-api.md 规则管理
 CREATE TABLE IF NOT EXISTS scheduling_rule (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    rule_key        VARCHAR(50)   NOT NULL UNIQUE COMMENT '规则业务 Key',
-    rule_name       VARCHAR(255)  NOT NULL COMMENT '规则名称',
-    description     TEXT          NULL COMMENT '规则描述',
-    valid_date_start BIGINT      NULL COMMENT '有效期开始（毫秒时间戳）',
-    valid_date_end   BIGINT      NULL COMMENT '有效期结束（毫秒时间戳）',
-    created_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    rule_key         VARCHAR(50)   NOT NULL UNIQUE COMMENT '规则业务 Key',
+    rule_name        VARCHAR(255)  NOT NULL COMMENT '规则名称',
+    description      TEXT          NULL COMMENT '规则描述',
+    valid_date_start BIGINT        NULL COMMENT '有效期开始（毫秒时间戳）',
+    valid_date_end   BIGINT        NULL COMMENT '有效期结束（毫秒时间戳）',
+    created_time     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) COMMENT = '排课规则表';
 
--- 18. 规则-教师关联表（M:N）
+-- 20. 规则-教师关联表（M:N）
 -- 来源: rule-configuration-api.md 规则的 teachers 字段
 CREATE TABLE IF NOT EXISTS rule_teacher (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    rule_key        VARCHAR(50)   NOT NULL COMMENT '规则 Key',
-    teacher_name    VARCHAR(100)  NOT NULL COMMENT '教师姓名',
+    id           BIGINT AUTO_INCREMENT PRIMARY KEY,
+    rule_key     VARCHAR(50)  NOT NULL COMMENT '规则 Key',
+    teacher_name VARCHAR(100) NOT NULL COMMENT '教师姓名',
     UNIQUE KEY uk_rule_teacher (rule_key, teacher_name),
-    CONSTRAINT fk_rule_teacher_rule FOREIGN KEY (rule_key) REFERENCES scheduling_rule(rule_key) ON DELETE CASCADE
+    CONSTRAINT fk_rt_rule FOREIGN KEY (rule_key) REFERENCES scheduling_rule(rule_key) ON DELETE CASCADE
 ) COMMENT = '规则-教师关联表';
 
--- 19. 不可用日期表
+-- 21. 不可用日期表
 -- 来源: rule-configuration-api.md 不可用日期管理
 CREATE TABLE IF NOT EXISTS unavailable_date (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    date_key        VARCHAR(50)   NOT NULL UNIQUE COMMENT '记录 Key',
-    teacher_id      BIGINT        NOT NULL COMMENT '教师 ID',
-    teacher_name    VARCHAR(100)  NOT NULL COMMENT '教师姓名',
-    valid_date_start BIGINT      NOT NULL COMMENT '开始日期（毫秒时间戳）',
-    valid_date_end   BIGINT      NOT NULL COMMENT '结束日期（毫秒时间戳）',
-    reason          VARCHAR(255)  NULL COMMENT '原因',
-    type            VARCHAR(20)   NOT NULL COMMENT '类型：personal/holiday/other',
-    range_type      VARCHAR(20)   NOT NULL COMMENT '范围类型：single/week/month/quarter/range',
-    created_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_teacher (teacher_id),
-    INDEX idx_type (type),
-    CONSTRAINT fk_unavail_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    date_key         VARCHAR(50)  NOT NULL UNIQUE COMMENT '记录 Key',
+    teacher_id       BIGINT       NOT NULL COMMENT '教师 ID',
+    teacher_name     VARCHAR(100) NOT NULL COMMENT '教师姓名',
+    valid_date_start BIGINT       NOT NULL COMMENT '开始日期（毫秒时间戳）',
+    valid_date_end   BIGINT       NOT NULL COMMENT '结束日期（毫秒时间戳）',
+    reason           VARCHAR(255) NULL COMMENT '原因',
+    type             VARCHAR(20)  NOT NULL COMMENT '类型：personal/holiday/other',
+    range_type       VARCHAR(20)  NOT NULL COMMENT '范围类型：single/week/month/quarter/range',
+    created_time     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_ud_teacher (teacher_id),
+    INDEX idx_ud_type (type),
+    CONSTRAINT fk_ud_teacher FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
 ) COMMENT = '教师不可用日期表';
 
--- 20. 规则权重配置表
+-- 22. 规则权重配置表
 -- 来源: rule-configuration-api.md 权重管理
 CREATE TABLE IF NOT EXISTS rule_weight_config (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    weight_key      VARCHAR(50)   NOT NULL UNIQUE COMMENT '权重业务 Key',
-    name            VARCHAR(255)  NOT NULL COMMENT '规则名称',
-    category        VARCHAR(100)  NOT NULL COMMENT '分类（teacher/class/room/conflict）',
-    current_weight  INT           NOT NULL DEFAULT 8 COMMENT '当前权重（1-10）',
-    default_weight  INT           NOT NULL DEFAULT 8 COMMENT '默认权重',
-    min_weight      INT           NOT NULL DEFAULT 1 COMMENT '最小值',
-    max_weight      INT           NOT NULL DEFAULT 10 COMMENT '最大值',
-    enabled         TINYINT(1)    NOT NULL DEFAULT 1 COMMENT '是否启用',
-    description     TEXT          NULL COMMENT '描述',
-    created_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_time    DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_category (category)
+    weight_key      VARCHAR(50)  NOT NULL UNIQUE COMMENT '权重业务 Key',
+    name            VARCHAR(255) NOT NULL COMMENT '规则名称',
+    category        VARCHAR(100) NOT NULL COMMENT '分类（teacher/class/room/conflict）',
+    current_weight  INT          NOT NULL DEFAULT 8 COMMENT '当前权重（1-10）',
+    default_weight  INT          NOT NULL DEFAULT 8 COMMENT '默认权重',
+    min_weight      INT          NOT NULL DEFAULT 1 COMMENT '最小值',
+    max_weight      INT          NOT NULL DEFAULT 10 COMMENT '最大值',
+    enabled         TINYINT(1)   NOT NULL DEFAULT 1 COMMENT '是否启用',
+    description     TEXT         NULL COMMENT '描述',
+    created_time    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_rwc_category (category)
 ) COMMENT = '规则权重配置表';
 
--- 21. 权重变更记录表
+-- 23. 权重变更记录表
 -- 来源: rule-configuration-api.md 权重变更历史
 CREATE TABLE IF NOT EXISTS weight_change_history (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
-    weight_config_id BIGINT       NOT NULL COMMENT '权重配置 ID',
-    rule_name       VARCHAR(255)  NOT NULL COMMENT '规则名称',
-    old_value       INT           NOT NULL COMMENT '原权重',
-    new_value       INT           NOT NULL COMMENT '新权重',
-    change_time     DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '变更时间',
-    operator_id     VARCHAR(50)   NULL COMMENT '操作人 ID',
-    operator_name   VARCHAR(100)  NULL COMMENT '操作人姓名',
-    INDEX idx_config (weight_config_id),
-    INDEX idx_change_time (change_time),
-    CONSTRAINT fk_weight_hist_config FOREIGN KEY (weight_config_id) REFERENCES rule_weight_config(id) ON DELETE CASCADE
+    id                BIGINT AUTO_INCREMENT PRIMARY KEY,
+    weight_config_id  BIGINT       NOT NULL COMMENT '权重配置 ID',
+    rule_name         VARCHAR(255) NOT NULL COMMENT '规则名称',
+    old_value         INT          NOT NULL COMMENT '原权重',
+    new_value         INT          NOT NULL COMMENT '新权重',
+    change_time       DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '变更时间',
+    operator_id       VARCHAR(50)  NULL COMMENT '操作人 ID',
+    operator_name     VARCHAR(100) NULL COMMENT '操作人姓名',
+    INDEX idx_wch_config (weight_config_id),
+    INDEX idx_wch_time (change_time),
+    CONSTRAINT fk_wch_config FOREIGN KEY (weight_config_id) REFERENCES rule_weight_config(id) ON DELETE CASCADE
 ) COMMENT = '权重变更记录表';
 
 
@@ -242,7 +279,7 @@ CREATE TABLE IF NOT EXISTS weight_change_history (
 -- =====================================================
 -- （以下功能主要基于已有表的查询/组合，无需新建核心表）
 
--- 22. 排课操作历史表
+-- 24. 排课操作历史表
 -- 来源: smart-scheduling-api.md 操作历史
 CREATE TABLE IF NOT EXISTS schedule_operation_history (
     id              BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -257,9 +294,9 @@ CREATE TABLE IF NOT EXISTS schedule_operation_history (
     schedule_id     BIGINT        NULL COMMENT '关联的排课记录 ID',
     operator        VARCHAR(50)   NOT NULL COMMENT '操作人',
     timestamp       DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_schedule (schedule_id),
-    INDEX idx_timestamp (timestamp),
-    CONSTRAINT fk_hist_schedule FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id) ON DELETE SET NULL
+    INDEX idx_soh_schedule (schedule_id),
+    INDEX idx_soh_time (timestamp),
+    CONSTRAINT fk_soh_schedule FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id) ON DELETE SET NULL
 ) COMMENT = '排课操作历史表';
 
 
@@ -268,7 +305,7 @@ CREATE TABLE IF NOT EXISTS schedule_operation_history (
 -- =====================================================
 
 -- 初始化时间段数据（周一~周日，每天 10 节课）
-INSERT INTO time_slot (id, day_of_week, period, display_name) VALUES
+INSERT IGNORE INTO time_slot (id, day_of_week, period, display_name) VALUES
 ('Mon-1',  1, 1, '周一第 1 节'),  ('Mon-2',  1, 2, '周一第 2 节'),
 ('Mon-3',  1, 3, '周一第 3 节'),  ('Mon-4',  1, 4, '周一第 4 节'),
 ('Mon-5',  1, 5, '周一第 5 节'),  ('Mon-6',  1, 6, '周一第 6 节'),
@@ -312,10 +349,8 @@ INSERT INTO time_slot (id, day_of_week, period, display_name) VALUES
 ('Sun-9',  7, 9, '周日第 9 节'),  ('Sun-10', 7, 10, '周日第 10 节');
 
 
--- =====================================================
--- 七、初始化规则权重默认数据
--- =====================================================
-INSERT INTO rule_weight_config (weight_key, name, category, current_weight, default_weight, min_weight, max_weight, enabled, description) VALUES
+-- 初始化规则权重默认数据
+INSERT IGNORE INTO rule_weight_config (weight_key, name, category, current_weight, default_weight, min_weight, max_weight, enabled, description) VALUES
 ('teacher_time_pref',   '教师时间偏好',   'teacher', 8, 8, 1, 10, 1, '尊重教师的时间偏好'),
 ('teacher_gap',         '教师课间间隔',   'teacher', 7, 7, 1, 10, 1, '避免教师连续上课无休息'),
 ('class_gap',           '班级课间间隔',   'class',   7, 7, 1, 10, 1, '避免学生连续上课无休息'),

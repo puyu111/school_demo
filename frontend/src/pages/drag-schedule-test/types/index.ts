@@ -21,7 +21,7 @@ export interface Course {
 // ==================== 时段配置类型 ====================
 
 // 半天时段类型
-export type HalfDayType = 'morning' | 'afternoon' | 'evening';
+export type HalfDayType = "morning" | "afternoon" | "evening";
 
 // 半天时段配置
 export interface HalfDayConfig {
@@ -106,7 +106,7 @@ export interface DroppableCellProps {
   onMoveCourse: (
     courseId: string,
     newWeekDay: number,
-    newTimeSlotIndex: number,
+    newTimeSlotIndex: number
   ) => void;
   isFirstCell: boolean;
   spanCount?: number;
@@ -134,7 +134,7 @@ export interface TimeSlotConfigPanelProps {
   onChange: (
     config: TimeSlotConfig[],
     dailyConfig: DailyScheduleConfig,
-    halfDayConfig: HalfDayConfig[],
+    halfDayConfig: HalfDayConfig[]
   ) => void;
 }
 

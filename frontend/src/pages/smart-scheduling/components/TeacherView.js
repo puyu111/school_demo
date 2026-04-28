@@ -1,5 +1,4 @@
 import { Card, Table } from 'antd';
-import React from 'react';
 import { scheduleStyles } from '../styles/scheduleStyles';
 import { mockData } from '../utils/mockData';
 

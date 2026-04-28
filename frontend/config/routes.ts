@@ -29,21 +29,10 @@ export default [
     component: './Welcome',
   },
   // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   routes: [
-  //     {
-  //       path: '/admin',
-  //       redirect: '/admin/sub-page',
-  //     },
-  //     {
-  //       path: '/admin/sub-page',
-  //       name: 'sub-page',
-  //       component: './Admin',
-  //     },
-  //   ],
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './table-list',
   // },
   {
     name: 'list.table-list',
@@ -66,7 +55,6 @@ export default [
     component: './Schedule',
     locale: false,
   },
-
   // {
   //   name: 'test',
   //   icon: 'Setting',
@@ -104,6 +92,7 @@ export default [
     component: './course-adjustment-review', // 组件路径
     locale: false,
   },
+
   {
     path: '/smart-scheduling',
     name: '智能排课系统', // 菜单上显示的名字

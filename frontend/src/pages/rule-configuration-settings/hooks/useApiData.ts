@@ -1,5 +1,5 @@
-import { useRequest } from 'ahooks';
-import { useCallback, useEffect, useState } from 'react';
+import { useRequest } from "ahooks";
+import { useCallback, useEffect, useState } from "react";
 import {
   batchCreateUnavailableDates,
   batchDeleteUnavailableDates,
@@ -15,8 +15,8 @@ import {
   resetRuleWeights,
   updateRule,
   updateRuleWeight,
-} from '../services/api';
-import type { RuleData, UnavailableDate } from '../types';
+} from "../services/api";
+import type { RuleData, UnavailableDate } from "../types";
 
 /**
  * 规则数据管理 Hook - 使用 API 请求
@@ -40,7 +40,7 @@ export const useRuleDataWithApi = () => {
       const response = await updateRule(key, updates);
       return response.data;
     },
-    [],
+    []
   );
 
   // 删除规则
@@ -102,7 +102,7 @@ export const useUnavailableDatesWithApi = (teacherId?: string) => {
   }, [datesResponse]);
 
   // 添加不可用日期
-  const addDate = useCallback(async (date: Omit<UnavailableDate, 'key'>) => {
+  const addDate = useCallback(async (date: Omit<UnavailableDate, "key">) => {
     const response = await createUnavailableDate(date);
     if (response.data) {
       setDates((prev) => [...prev, response.data]);
@@ -112,14 +112,14 @@ export const useUnavailableDatesWithApi = (teacherId?: string) => {
 
   // 批量添加
   const bulkAddDates = useCallback(
-    async (newDates: Omit<UnavailableDate, 'key'>[]) => {
+    async (newDates: Omit<UnavailableDate, "key">[]) => {
       const response = await batchCreateUnavailableDates(newDates);
       if (response.data) {
         setDates((prev) => [...prev, ...response.data]);
       }
       return response.data;
     },
-    [],
+    []
   );
 
   // 删除日期
@@ -180,7 +180,7 @@ export const useRuleWeights = () => {
       const response = await updateRuleWeight(id, { currentWeight });
       return response.data;
     },
-    [],
+    []
   );
 
   // 批量更新权重
@@ -190,7 +190,7 @@ export const useRuleWeights = () => {
       setWeights(response);
       return response.data;
     },
-    [],
+    []
   );
 
   // 重置权重

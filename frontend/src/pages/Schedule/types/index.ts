@@ -1,4 +1,4 @@
-import type { Dayjs } from 'dayjs';
+import type { Dayjs } from "dayjs";
 
 // 课程数据
 export interface Course {
@@ -28,7 +28,7 @@ export interface FilterOptions {
 
 // 视图配置
 export interface ViewConfig {
-  mode: 'week' | 'day' | 'list';
+  mode: "week" | "day" | "list";
   currentWeek: number;
   currentDay: number;
 }
@@ -46,10 +46,10 @@ export interface SelectOption {
 }
 
 // 课程操作类型
-export type CourseAction = 'view' | 'edit' | 'delete';
+export type CourseAction = "view" | "edit" | "delete";
 
 // 视图模式类型
-export type ViewMode = 'week' | 'day' | 'list';
+export type ViewMode = "week" | "day" | "list";
 
 // 步骤组件 props
 export interface StepsComponentProps {
@@ -57,7 +57,7 @@ export interface StepsComponentProps {
   items?: Array<{
     title: string;
     icon?: React.ReactNode;
-    status?: 'wait' | 'process' | 'finish' | 'error';
+    status?: "wait" | "process" | "finish" | "error";
   }>;
 }
 

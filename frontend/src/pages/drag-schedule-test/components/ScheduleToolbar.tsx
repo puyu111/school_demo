@@ -6,10 +6,10 @@ import {
   SettingOutlined,
   SyncOutlined,
   UndoOutlined,
-} from '@ant-design/icons';
-import { Button, Card, Space, Tag, Tooltip, Typography } from 'antd';
-import React from 'react';
-import type { ScheduleToolbarProps } from '../types';
+} from "@ant-design/icons";
+import { Button, Card, Space, Tag, Tooltip, Typography } from "antd";
+import React from "react";
+import type { ScheduleToolbarProps } from "../types";
 
 const { Title } = Typography;
 
@@ -26,40 +26,40 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
 }) => {
   const isMobileDetected =
     isMobileProp ||
-    (typeof window !== 'undefined' &&
+    (typeof window !== "undefined" &&
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        window.navigator.userAgent,
+        window.navigator.userAgent
       ));
 
   return (
     <Card
       style={{
         marginBottom: isMobileDetected ? 10 : 16,
-        borderRadius: '8px',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+        borderRadius: "8px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
       }}
       styles={{
-        body: { padding: isMobileDetected ? '12px 16px' : '16px 24px' },
+        body: { padding: isMobileDetected ? "12px 16px" : "16px 24px" },
       }}
     >
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
           gap: isMobileDetected ? 8 : 12,
         }}
       >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: isMobileDetected ? '8px' : '12px',
+            display: "flex",
+            alignItems: "center",
+            gap: isMobileDetected ? "8px" : "12px",
           }}
         >
           <ScheduleOutlined
-            style={{ color: '#1890ff', fontSize: isMobileDetected ? 20 : 24 }}
+            style={{ color: "#1890ff", fontSize: isMobileDetected ? 20 : 24 }}
           />
           <div>
             <Title
@@ -69,14 +69,14 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
               拖拽课表编辑
             </Title>
             <Space
-              size={isMobileDetected ? 'small' : 'middle'}
-              style={{ flexWrap: 'wrap' }}
+              size={isMobileDetected ? "small" : "middle"}
+              style={{ flexWrap: "wrap" }}
             >
               <Tag
                 color="blue"
                 style={{ fontSize: isMobileDetected ? 11 : undefined }}
               >
-                <DragOutlined /> {isMobileDetected ? '拖拽' : '拖拽编辑'}
+                <DragOutlined /> {isMobileDetected ? "拖拽" : "拖拽编辑"}
               </Tag>
               <Tag
                 color="green"
@@ -96,14 +96,14 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
           </div>
         </div>
 
-        <Space wrap size={isMobileDetected ? 'small' : 'middle'}>
+        <Space wrap size={isMobileDetected ? "small" : "middle"}>
           <Tooltip title="配置时段和可排课时间">
             <Button
               icon={<SettingOutlined />}
               onClick={onToggleConfigPanel}
-              size={isMobileDetected ? 'large' : 'middle'}
+              size={isMobileDetected ? "large" : "middle"}
             >
-              {showConfigPanel ? '隐藏配置' : '显示配置'}
+              {showConfigPanel ? "隐藏配置" : "显示配置"}
             </Button>
           </Tooltip>
 
@@ -112,7 +112,7 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
               icon={<UndoOutlined />}
               onClick={onUndo}
               disabled={!hasUnsavedChanges}
-              size={isMobileDetected ? 'large' : 'middle'}
+              size={isMobileDetected ? "large" : "middle"}
             >
               撤销
             </Button>
@@ -122,7 +122,7 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
             <Button
               icon={<SyncOutlined spin={loading} />}
               onClick={onRefresh}
-              size={isMobileDetected ? 'large' : 'middle'}
+              size={isMobileDetected ? "large" : "middle"}
             >
               刷新
             </Button>
@@ -135,7 +135,7 @@ const ScheduleToolbar: React.FC<ScheduleToolbarProps> = ({
               onClick={onSave}
               loading={loading}
               disabled={!hasUnsavedChanges}
-              size={isMobileDetected ? 'large' : 'middle'}
+              size={isMobileDetected ? "large" : "middle"}
             >
               保存
             </Button>

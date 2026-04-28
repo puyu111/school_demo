@@ -1,6 +1,5 @@
 import { WarningOutlined } from '@ant-design/icons';
 import { Alert } from 'antd';
-import React from 'react';
 
 const ConflictAlert = ({ conflicts, onClose }) => {
   if (!conflicts || conflicts.length === 0) {

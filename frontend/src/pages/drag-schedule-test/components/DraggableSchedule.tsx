@@ -136,7 +136,9 @@ const timeToMinutes = (time: string): number => {
 const minutesToTime = (minutes: number): string => {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
-  return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+  return `${hours.toString().padStart(2, '0')}:${mins
+    .toString()
+    .padStart(2, '0')}`;
 };
 
 // 获取时间所属的半天类型

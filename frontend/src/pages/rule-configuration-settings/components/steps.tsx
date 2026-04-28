@@ -1,8 +1,8 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import { Steps } from 'antd';
-import React from 'react';
-import { STEP_CONFIG } from '../constants';
-import type { StepsComponentProps } from '../types';
+import { LoadingOutlined } from "@ant-design/icons";
+import { Steps } from "antd";
+import React from "react";
+import { STEP_CONFIG } from "../constants";
+import type { StepsComponentProps } from "../types";
 
 const StepsComponent: React.FC<StepsComponentProps> = ({
   current = 0,
@@ -17,14 +17,14 @@ const StepsComponent: React.FC<StepsComponentProps> = ({
     }
 
     return STEP_CONFIG.map((step, index) => {
-      let status: 'wait' | 'process' | 'finish' | 'error' = 'wait';
+      let status: "wait" | "process" | "finish" | "error" = "wait";
 
       if (index < displayCurrent) {
-        status = 'finish';
+        status = "finish";
       } else if (index === displayCurrent) {
-        status = 'process';
+        status = "process";
       } else {
-        status = 'wait';
+        status = "wait";
       }
 
       const icon =

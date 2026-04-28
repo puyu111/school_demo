@@ -1,8 +1,8 @@
-import { DeleteOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Button, Space, Table, Tag } from 'antd';
-import React from 'react';
-import { DATE_TYPE_MAP, REASON_TYPE_MAP } from '../constants';
-import type { Teacher, UnavailableDate } from '../types';
+import { DeleteOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Space, Table, Tag } from "antd";
+import React from "react";
+import { DATE_TYPE_MAP, REASON_TYPE_MAP } from "../constants";
+import type { Teacher, UnavailableDate } from "../types";
 
 interface UnavailableDateTableProps {
   data: UnavailableDate[];
@@ -22,9 +22,9 @@ const UnavailableDateTable: React.FC<UnavailableDateTableProps> = ({
 }) => {
   const columns: any = [
     {
-      title: '教师',
-      dataIndex: 'teacherName',
-      key: 'teacherName',
+      title: "教师",
+      dataIndex: "teacherName",
+      key: "teacherName",
       width: 120,
       render: (name: string, record: UnavailableDate) => (
         <Space>
@@ -37,50 +37,50 @@ const UnavailableDateTable: React.FC<UnavailableDateTableProps> = ({
       ),
     },
     {
-      title: '日期/范围',
-      dataIndex: 'validDate',
-      key: 'validDate',
+      title: "日期/范围",
+      dataIndex: "validDate",
+      key: "validDate",
       width: 200,
       render: (validDate?: [number, number]) => {
-        if (!validDate || validDate.length !== 2) return '-';
+        if (!validDate || validDate.length !== 2) return "-";
         const start = new Date(validDate[0]).toLocaleDateString();
         const end = new Date(validDate[1]).toLocaleDateString();
         return start === end ? start : `${start} ~ ${end}`;
       },
     },
     {
-      title: '类型',
-      dataIndex: 'rangeType',
-      key: 'rangeType',
+      title: "类型",
+      dataIndex: "rangeType",
+      key: "rangeType",
       width: 100,
       render: (type: string) => {
-        const config = DATE_TYPE_MAP[type] || { color: 'default', text: type };
+        const config = DATE_TYPE_MAP[type] || { color: "default", text: type };
         return <Tag color={config.color}>{config.text}</Tag>;
       },
     },
     {
-      title: '原因',
-      dataIndex: 'reason',
-      key: 'reason',
+      title: "原因",
+      dataIndex: "reason",
+      key: "reason",
       width: 150,
       ellipsis: true,
     },
     {
-      title: '状态',
-      dataIndex: 'type',
-      key: 'type',
+      title: "状态",
+      dataIndex: "type",
+      key: "type",
       width: 100,
       render: (type: string) => {
         const config = REASON_TYPE_MAP[type] || {
-          color: 'default',
+          color: "default",
           text: type,
         };
         return <Tag color={config.color}>{config.text}</Tag>;
       },
     },
     {
-      title: '操作',
-      key: 'action',
+      title: "操作",
+      key: "action",
       width: 80,
       render: (_: any, record: UnavailableDate) => (
         <Button
@@ -107,7 +107,7 @@ const UnavailableDateTable: React.FC<UnavailableDateTableProps> = ({
       size="middle"
       bordered
       locale={{
-        emptyText: '暂无不可排日期，请添加',
+        emptyText: "暂无不可排日期，请添加",
       }}
     />
   );

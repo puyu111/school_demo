@@ -5,26 +5,56 @@
 
 // API 路径配置
 export { API_PATHS } from './api';
-
+// 学期日历服务
+export {
+  getCalendar,
+  submitCalendar,
+} from './calendar';
 // 课程相关服务
 export {
+  createCourse,
+  createCourseSetting,
+  deleteCourseSettings,
+  deleteCourses,
   downloadCourseSettingsTemplate,
   downloadCoursesTemplate,
+  getCourseSettings,
+  getCourses,
   importCourseSettings,
   importCourses,
 } from './course';
-
 // 专业相关服务
-export { downloadMajorsTemplate, importMajors } from './major';
-// 请求工具（内部使用）
+export {
+  createMajor,
+  deleteMajors,
+  downloadMajorsTemplate,
+  getMajors,
+  importMajors,
+} from './major';
+// 请求工具
 export { downloadFile, uploadFile } from './request';
+
+// 批量提交服务
+export { submitAll } from './submit';
 // 教师相关服务
-export { downloadTeachersTemplate, importTeachers } from './teacher';
+export {
+  createTeacher,
+  deleteTeachers,
+  downloadTeachersTemplate,
+  getTeachers,
+  importTeachers,
+} from './teacher';
+
 // 共享类型
 export type {
+  ApiResponse,
+  CalendarSubmitRequest,
   Course,
   CourseSetting,
   ImportResponse,
+  ListResponse,
   Major,
+  SubmitRequest,
+  SubmitResponse,
   Teacher,
 } from './types';

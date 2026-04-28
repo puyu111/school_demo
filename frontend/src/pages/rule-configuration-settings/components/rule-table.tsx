@@ -2,14 +2,14 @@ import {
   CalendarOutlined,
   EditOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { Avatar, Button, Flex, message, Space, Table, Tag } from 'antd';
-import dayjs from 'dayjs';
-import React, { useMemo, useState } from 'react';
-import { useRuleDataWithApi } from '../hooks/useApiData';
-import type { RuleData } from '../types';
-import TeacherUnavailableDialog from './dialog-box';
-import RuleEditDialog from './modify-dialog-box';
+} from "@ant-design/icons";
+import { Avatar, Button, Flex, message, Space, Table, Tag } from "antd";
+import dayjs from "dayjs";
+import React, { useMemo, useState } from "react";
+import { useRuleDataWithApi } from "../hooks/useApiData";
+import type { RuleData } from "../types";
+import TeacherUnavailableDialog from "./dialog-box";
+import RuleEditDialog from "./modify-dialog-box";
 
 const RuleTable: React.FC = () => {
   const [editingRule, setEditingRule] = useState<RuleData | null>(null);
@@ -27,8 +27,8 @@ const RuleTable: React.FC = () => {
   // 格式化时间戳
   const formatTimestamp = (timestamp: number): string => {
     return dayjs(timestamp).isValid()
-      ? dayjs(timestamp).format('YYYY-MM-DD')
-      : '无效日期';
+      ? dayjs(timestamp).format("YYYY-MM-DD")
+      : "无效日期";
   };
 
   const isValidTimestamp = (timestamp: number): boolean => {
@@ -39,22 +39,22 @@ const RuleTable: React.FC = () => {
   const columns: any = useMemo(
     () => [
       {
-        title: '规则名称',
-        dataIndex: 'ruleName',
-        key: 'ruleName',
+        title: "规则名称",
+        dataIndex: "ruleName",
+        key: "ruleName",
         width: 200,
         render: (text: string, record: RuleData) => (
           <Space direction="vertical" size={2}>
             <div style={{ fontWeight: 500, fontSize: 14 }}>{text}</div>
-            <div style={{ fontSize: 12, color: '#666' }}>
+            <div style={{ fontSize: 12, color: "#666" }}>
               {record.description}
             </div>
           </Space>
         ),
       },
       {
-        title: '适用教师',
-        key: 'teachers',
+        title: "适用教师",
+        key: "teachers",
         width: 180,
         render: (_: any, record: RuleData) => (
           <Flex gap="small" align="center" wrap>
@@ -81,8 +81,8 @@ const RuleTable: React.FC = () => {
         ),
       },
       {
-        title: '有效期',
-        key: 'validDate',
+        title: "有效期",
+        key: "validDate",
         width: 180,
         render: (_: any, record: RuleData) => {
           if (record.validDate && record.validDate.length === 2) {
@@ -105,7 +105,7 @@ const RuleTable: React.FC = () => {
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
-                    color: isExpired ? '#ff4d4f' : 'inherit',
+                    color: isExpired ? "#ff4d4f" : "inherit",
                   }}
                 >
                   {startDate}
@@ -113,15 +113,15 @@ const RuleTable: React.FC = () => {
                 <div
                   style={{
                     fontSize: 12,
-                    color: isExpired ? '#ff7875' : '#666',
+                    color: isExpired ? "#ff7875" : "#666",
                   }}
                 >
                   至 {endDate}
-                  {isExpired && ' (已过期)'}
+                  {isExpired && " (已过期)"}
                 </div>
-                <div style={{ fontSize: 12, color: '#999' }}>
+                <div style={{ fontSize: 12, color: "#999" }}>
                   <CalendarOutlined style={{ marginRight: 4 }} />
-                  {isExpired ? '已过期' : '有效日期'}
+                  {isExpired ? "已过期" : "有效日期"}
                 </div>
               </Space>
             );
@@ -130,8 +130,8 @@ const RuleTable: React.FC = () => {
         },
       },
       {
-        title: '操作',
-        key: 'action',
+        title: "操作",
+        key: "action",
         width: 100,
         render: (_: any, record: RuleData) => (
           <Button
@@ -144,7 +144,7 @@ const RuleTable: React.FC = () => {
         ),
       },
     ],
-    [isValidTimestamp],
+    [isValidTimestamp]
   );
 
   // 处理编辑
@@ -161,12 +161,12 @@ const RuleTable: React.FC = () => {
       setRules((prevData: any) => ({
         ...prevData,
         data: prevData?.data?.map((item: RuleData) =>
-          item.key === updatedRule.key ? { ...item, ...updatedRule } : item,
+          item.key === updatedRule.key ? { ...item, ...updatedRule } : item
         ),
       }));
       setEditDialogVisible(false);
       setEditingRule(null);
-      message.success('规则更新成功');
+      message.success("规则更新成功");
     } finally {
       setLoading(false);
     }
@@ -194,16 +194,16 @@ const RuleTable: React.FC = () => {
           showTotal: (total) => `共 ${total} 条规则`,
         }}
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
           borderRadius: 8,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       />
 
       {/* 编辑对话框 */}
       <RuleEditDialog
         open={editDialogVisible}
-        title={`编辑规则 - ${editingRule?.ruleName || ''}`}
+        title={`编辑规则 - ${editingRule?.ruleName || ""}`}
         record={editingRule}
         onSave={handleSave}
         onCancel={() => {

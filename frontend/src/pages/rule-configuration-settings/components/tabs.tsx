@@ -1,8 +1,8 @@
-import { Tabs } from 'antd';
-import React from 'react';
-import type { MyTabsProps, TabItem } from '../types';
-import TeacherAvailableTime from './teacher-available-time';
-import RuleWeightManagement from './weight-management/index';
+import { Tabs } from "antd";
+import React from "react";
+import type { MyTabsProps, TabItem } from "../types";
+import TeacherAvailableTime from "./teacher-available-time";
+import RuleWeightManagement from "./weight-management/index";
 
 const MyTabs: React.FC<MyTabsProps> = ({
   activeStep = 1,
@@ -12,13 +12,13 @@ const MyTabs: React.FC<MyTabsProps> = ({
   // 默认 tab 配置
   const defaultTabItems: TabItem[] = [
     {
-      label: '教师不可用时间',
-      key: '1',
+      label: "教师不可用时间",
+      key: "1",
       children: <TeacherAvailableTime />,
     },
     {
-      label: '权重管理',
-      key: '2',
+      label: "权重管理",
+      key: "2",
       children: <RuleWeightManagement />,
     },
   ];
@@ -29,7 +29,7 @@ const MyTabs: React.FC<MyTabsProps> = ({
   return (
     <div style={{ padding: 24 }}>
       <Tabs
-        style={{ margin: '10.8px', backgroundColor: '#ffffff' }}
+        style={{ margin: "10.8px", backgroundColor: "#ffffff" }}
         activeKey={activeKey}
         type="card"
         size="middle"

@@ -17,6 +17,7 @@ import {
   Step5Calendar,
   Step6Submission,
 } from './pages';
+import { submitCalendar } from './services';
 
 /**
  * 基础数据管理主页面组件
@@ -53,7 +54,7 @@ const BaseData: React.FC = () => {
 
   /** 处理日历提交：保存日历设置并进入下一步 */
   const handleCalendarSubmit = useCallback(
-    (data: {
+    async (data: {
       selected: string[];
       disabled: string[];
       includeWeekends: boolean;
@@ -66,9 +67,22 @@ const BaseData: React.FC = () => {
         return;
       }
 
-      updateStepCompletion(4, true);
-      message.success('学期日历设置已保存！');
-      goToNextStep();
+      try {
+        await submitCalendar({
+          startDate: data.termStart.format('YYYY-MM-DD'),
+          endDate: data.termEnd.format('YYYY-MM-DD'),
+          disabledDates: data.disabled.map((date) => ({
+            date,
+            remark: '',
+          })),
+        });
+
+        updateStepCompletion(4, true);
+        message.success('学期日历设置已保存！');
+        goToNextStep();
+      } catch (error: any) {
+        message.error(error?.message || '保存学期日历失败，请稍后重试');
+      }
     },
     [goToNextStep, updateStepCompletion],
   );
