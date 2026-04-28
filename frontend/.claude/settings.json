@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @biomejs/biome check --write --unsafe src/pages/base-data/)",
+      "Bash(powershell.exe -Command \"Get-Process node | Stop-Process -Force\")"
+    ]
+  }
+}

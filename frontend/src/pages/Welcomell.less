@@ -1,0 +1,334 @@
+// 移除这行
+// @import '~antd/lib/style/themes/default.less';
+
+// 直接使用主题变量或使用硬编码的颜色
+.welcomeContainer {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+// 主标题区域
+.heroSection {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 80px 24px 60px;
+  text-align: center;
+  border-radius: 0 0 24px 24px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,240C960,235,1056,213,1152,213.3C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.logoArea {
+  margin-bottom: 32px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.mainTitle {
+  color: white !important;
+  margin-bottom: 8px !important;
+  font-weight: 600;
+}
+
+.subTitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 32px !important;
+  font-weight: 400;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 40px !important;
+}
+
+// 统计横幅
+.statsBanner {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.statItem {
+  text-align: center;
+  padding: 16px;
+  
+  .statNumber {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+  
+  .statLabel {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+// 通用区域样式
+.section {
+  padding: 80px 24px;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 48px !important;
+  color: #262626;  // 使用硬编码颜色替代 @heading-color
+  font-weight: 500;
+}
+
+// 功能卡片
+.featuresGrid {
+  max-width: 1200px;
+  margin: 0 auto !important;
+}
+
+.featureCard {
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
+  .featureIcon {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .featureTitle {
+    text-align: center;
+    margin-bottom: 16px !important;
+    color: #262626;  // 使用硬编码颜色替代 @heading-color
+  }
+  
+  .featureDesc {
+    text-align: center;
+    color: #8c8c8c;  // 使用硬编码颜色替代 @text-color-secondary
+    margin-bottom: 0 !important;
+  }
+}
+
+// 特点列表
+.characteristicsList {
+  .characteristicItem {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    
+    .charIndex {
+      width: 40px;
+      height: 40px;
+      background: #1890ff;  // 使用硬编码颜色替代 @primary-color
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+    
+    .charContent {
+      flex: 1;
+      
+      h4 {
+        margin-bottom: 8px !important;
+        color: #262626;  // 使用硬编码颜色替代 @heading-color
+      }
+      
+      p {
+        color: #8c8c8c;  // 使用硬编码颜色替代 @text-color-secondary
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+}
+
+.overviewCard {
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  
+  .overviewContent {
+    p {
+      margin-bottom: 16px !important;
+    }
+  }
+}
+
+// 适用对象
+.targetUsers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.userCard {
+  text-align: center;
+  padding: 32px 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
+  .userIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  
+  h4 {
+    margin-bottom: 8px !important;
+  }
+}
+
+// 技术架构
+.techArchitecture {
+  max-width: 800px;
+  margin: 0 auto;
+  
+  .ant-steps {
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+}
+
+// 页脚
+.footer {
+  background: linear-gradient(135deg, #434343 0%, #000000 100%);
+  color: white;
+  padding: 60px 24px 40px;
+  text-align: center;
+  
+  .footerContent {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+// 响应式调整 - 使用硬编码的断点
+@media (max-width: 1199px) {  // 替代 @screen-lg
+  .section {
+    padding: 60px 16px;
+  }
+  
+  .heroSection {
+    padding: 60px 16px 40px;
+  }
+  
+  .statsBanner {
+    .statNumber {
+      font-size: 28px;
+    }
+  }
+}
+
+@media (max-width: 767px) {  // 替代 @screen-sm
+  .section {
+    padding: 40px 12px;
+  }
+  
+  .heroSection {
+    padding: 40px 12px 30px;
+    
+    .mainTitle {
+      font-size: 28px !important;
+    }
+    
+    .subTitle {
+      font-size: 16px !important;
+    }
+    
+    .description {
+      font-size: 16px;
+    }
+  }
+  
+  .statItem {
+    padding: 12px;
+    
+    .statNumber {
+      font-size: 24px;
+    }
+    
+    .statLabel {
+      font-size: 12px;
+    }
+  }
+  
+  .characteristicItem {
+    flex-direction: column;
+    text-align: center;
+    
+    .charIndex {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .targetUsers {
+    grid-template-columns: 1fr;
+  }
+}
