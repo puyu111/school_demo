@@ -173,6 +173,7 @@ public class TeacherServiceImpl implements TeacherService {
                     .sheet()
                     .doRead();
         } catch (Exception e) {
+            log.error("导入失败", e);
             Map<String, Object> result = new HashMap<>();
             result.put("success", false);
             result.put("message", "导入失败：Excel 文件格式不正确");

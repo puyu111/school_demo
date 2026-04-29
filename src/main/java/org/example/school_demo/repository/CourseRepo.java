@@ -18,9 +18,9 @@ import java.util.Optional;
 public interface CourseRepo extends JpaRepository<CourseEntity, Long> {
 
     /**
-     * 根据课程名称精确查询
+     * 根据课程名称精确查询（可能有重复，取第一条）
      */
-    Optional<CourseEntity> findByCourseName(String courseName);
+    List<CourseEntity> findByCourseName(String courseName);
 
     /**
      * 根据课程名称模糊查询

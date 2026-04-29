@@ -44,7 +44,7 @@ public class CourseSettingExcelListener extends BaseExcelListener<CourseSettingD
             throw new org.example.school_demo.exception.BusinessException("开课学期不能为空");
         }
 
-        Optional<CourseEntity> courseOpt = courseRepo.findByCourseName(name);
+        Optional<CourseEntity> courseOpt = courseRepo.findByCourseName(name).stream().findFirst();
         if (courseOpt.isEmpty()) {
             throw new org.example.school_demo.exception.BusinessException("课程不存在，请先添加课程");
         }
@@ -88,6 +88,7 @@ public class CourseSettingExcelListener extends BaseExcelListener<CourseSettingD
         String courseName = trim(data.getName());
 
         CourseEntity course = courseRepo.findByCourseName(courseName)
+                .stream().findFirst()
                 .orElseThrow(() -> new org.example.school_demo.exception.BusinessException("课程不存在"));
 
         CourseSettingEntity entity = CourseSettingEntity.builder()
@@ -105,7 +106,7 @@ public class CourseSettingExcelListener extends BaseExcelListener<CourseSettingD
             for (String part : prereqs.split(";")) {
                 String p = part.trim();
                 if (!p.isEmpty()) {
-                    courseRepo.findByCourseName(p).ifPresent(prereq -> {
+                    courseRepo.findByCourseName(p).stream().findFirst().ifPresent(prereq -> {
                         CoursePrerequisiteEntity cp = CoursePrerequisiteEntity.builder()
                                 .courseId(course.getCourseId())
                                 .prereqId(prereq.getCourseId())

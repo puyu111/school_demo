@@ -76,7 +76,7 @@ public class CourseSettingServiceImpl implements CourseSettingService {
     public Map<String, Object> createCourseSetting(CourseSettingCreateReq req) {
         Map<String, Object> result = new HashMap<>();
 
-        Optional<CourseEntity> courseOpt = courseRepo.findByCourseName(req.getName());
+        Optional<CourseEntity> courseOpt = courseRepo.findByCourseName(req.getName()).stream().findFirst();
         if (courseOpt.isEmpty()) {
             result.put("success", false);
             result.put("message", "课程不存在: " + req.getName());
@@ -109,7 +109,7 @@ public class CourseSettingServiceImpl implements CourseSettingService {
 
     private void savePrerequisites(Long courseId, List<String> prerequisiteNames) {
         for (String prereqName : prerequisiteNames) {
-            courseRepo.findByCourseName(prereqName.trim())
+            courseRepo.findByCourseName(prereqName.trim()).stream().findFirst()
                     .ifPresent(prereq -> {
                         CoursePrerequisiteEntity cp = CoursePrerequisiteEntity.builder()
                                 .courseId(courseId)
@@ -183,6 +183,7 @@ public class CourseSettingServiceImpl implements CourseSettingService {
                     .sheet()
                     .doRead();
         } catch (Exception e) {
+            log.error("导入失败", e);
             result.put("success", false);
             result.put("message", "导入失败：Excel 文件格式不正确");
             return result;

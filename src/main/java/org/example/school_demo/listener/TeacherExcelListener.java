@@ -7,7 +7,7 @@ import org.example.school_demo.entity.TeacherEntity;
 import org.example.school_demo.repository.TeacherCourseRepo;
 import org.example.school_demo.repository.TeacherRepo;
 
-import java.time.LocalDateTime;
+import org.example.school_demo.exception.BusinessException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,11 +21,12 @@ public class TeacherExcelListener extends BaseExcelListener<TeacherDataDTO, Teac
     public TeacherExcelListener(TeacherRepo teacherRepo, TeacherCourseRepo teacherCourseRepo) {
         this.teacherRepo = teacherRepo;
         this.teacherCourseRepo = teacherCourseRepo;
-        this.existingNames = teacherRepo.findAll().stream()
+        List<TeacherEntity> all = teacherRepo.findAll();
+        this.existingNames = all.stream()
                 .map(TeacherEntity::getName)
                 .filter(name -> name != null && !name.isBlank())
                 .collect(Collectors.toSet());
-        this.existingIds = teacherRepo.findAll().stream()
+        this.existingIds = all.stream()
                 .map(TeacherEntity::getId)
                 .filter(id -> id != null && !id.isBlank())
                 .collect(Collectors.toSet());
@@ -35,36 +36,39 @@ public class TeacherExcelListener extends BaseExcelListener<TeacherDataDTO, Teac
     protected void validate(TeacherDataDTO data, int rowNum) {
         String name = trim(data.getName());
         if (name == null || name.isEmpty()) {
-            throw new org.example.school_demo.exception.BusinessException("教师姓名不能为空");
+            throw new BusinessException("教师姓名不能为空");
         }
         if (existingNames.contains(name)) {
-            throw new org.example.school_demo.exception.BusinessException("教师姓名已存在");
+            throw new BusinessException("教师姓名已存在");
         }
 
         String gender = trim(data.getGender());
         if (gender == null || gender.isEmpty()) {
-            throw new org.example.school_demo.exception.BusinessException("性别不能为空");
+            throw new BusinessException("性别不能为空");
         }
         if (!"男".equals(gender) && !"女".equals(gender)) {
-            throw new org.example.school_demo.exception.BusinessException("性别必须是男或女");
+            throw new BusinessException("性别必须是男或女");
         }
 
         String degree = trim(data.getDegree());
         if (degree == null || degree.isEmpty()) {
-            throw new org.example.school_demo.exception.BusinessException("学历不能为空");
+            throw new BusinessException("学历不能为空");
         }
         if (!Set.of("本科", "硕士研究生", "博士研究生").contains(degree)) {
-            throw new org.example.school_demo.exception.BusinessException("学历必须是本科、硕士研究生或博士研究生");
+            throw new BusinessException("学历必须是本科、硕士研究生或博士研究生");
         }
 
         String id = trim(data.getId());
-        if (id != null && !id.isEmpty() && existingIds.contains(id)) {
-            throw new org.example.school_demo.exception.BusinessException("教师ID已存在");
+        if (id == null || id.isEmpty()) {
+            throw new BusinessException("教师ID不能为空");
+        }
+        if (existingIds.contains(id)) {
+            throw new BusinessException("教师ID已存在");
         }
     }
 
     @Override
-    protected Map<String, Object> buildErrorData(TeacherDataDTO data, org.example.school_demo.exception.BusinessException e) {
+    protected Map<String, Object> buildErrorData(TeacherDataDTO data, BusinessException e) {
         Map<String, Object> map = new LinkedHashMap<>();
         String id = trim(data.getId());
         if (id != null && !id.isEmpty()) {

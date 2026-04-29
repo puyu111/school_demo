@@ -14,6 +14,7 @@ import org.example.school_demo.service.SemesterCalendarService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +35,17 @@ public class SemesterCalendarServiceImpl implements SemesterCalendarService {
             throw new BusinessException("结束日期不能早于开始日期");
         }
 
-        semesterCalendarRepo.findAll().forEach(calendar -> {
-            semesterCalendarRepo.delete(calendar);
-            disabledDateRepo.deleteByCalendarId(calendar.getCalendarId());
-        });
+        List<SemesterCalendarEntity> existingCalendars = semesterCalendarRepo.findAll();
+        if (!existingCalendars.isEmpty()) {
+            for (SemesterCalendarEntity calendar : existingCalendars) {
+                List<DisabledDateEntity> disabledDates = disabledDateRepo.findByCalendarId(calendar.getCalendarId());
+                for (DisabledDateEntity d : disabledDates) {
+                    disabledDateRepo.delete(d);
+                }
+                semesterCalendarRepo.delete(calendar);
+            }
+            semesterCalendarRepo.flush();
+        }
 
         String semesterName = buildSemesterName(req.getStartDate(), req.getEndDate());
 
