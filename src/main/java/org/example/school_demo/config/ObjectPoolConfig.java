@@ -1,180 +1,109 @@
 package org.example.school_demo.config;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
-import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.example.school_demo.model.TimetableSolution;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 对象池配置
- * 为模拟退火算法中的高频创建对象提供池化支持
+ * 通用对象池配置
+ * 基于 Apache Commons Pool 2，提供可复用的对象池
  *
- * 性能说明：
- * - 适用场景：对象创建成本高、频繁创建/销毁、对象可重用
- * - 不适用场景：对象轻量级、池化开销大于创建开销、对象状态复杂难重置
+ * 使用方式:
+ * <pre>
+ * {@code
+ * @Autowired
+ * private GenericObjectPool<MyReusableObject> objectPool;
  *
- * 在 SA 算法中，TimetableSolution 的副本创建是高频操作，使用对象池可以：
- * 1. 减少 GC 压力
- * 2. 提高内存分配效率
- * 3. 降低延迟波动
+ * // 借出对象
+ * MyReusableObject obj = objectPool.borrowObject();
+ * try {
+ *     obj.doSomething();
+ * } finally {
+ *     // 归还对象
+ *     objectPool.returnObject(obj);
+ * }
+ * }
+ * </pre>
  */
 @Slf4j
-@Data
 @Configuration
-@ConfigurationProperties(prefix = "objectpool.solution")
+@SuppressWarnings("deprecation")
 public class ObjectPoolConfig {
 
-    /**
-     * 最大总对象数
-     */
-    private int maxTotal = 50;
+    @Value("${objectpool.solution.max-total:50}")
+    private int maxTotal;
 
-    /**
-     * 最大空闲对象数
-     */
-    private int maxIdle = 20;
+    @Value("${objectpool.solution.max-idle:20}")
+    private int maxIdle;
 
-    /**
-     * 最小空闲对象数
-     */
-    private int minIdle = 5;
+    @Value("${objectpool.solution.min-idle:5}")
+    private int minIdle;
 
-    /**
-     * 当池耗尽时是否阻塞
-     */
-    private boolean blockWhenExhausted = true;
+    @Value("${objectpool.solution.block-when-exhausted:true}")
+    private boolean blockWhenExhausted;
 
-    /**
-     * 借出时是否验证
-     */
-    private boolean testOnBorrow = false;
+    @Value("${objectpool.solution.test-on-borrow:false}")
+    private boolean testOnBorrow;
 
-    /**
-     * 归还时是否验证
-     */
-    private boolean testOnReturn = false;
+    @Value("${objectpool.solution.test-on-return:false}")
+    private boolean testOnReturn;
 
-    /**
-     * 空闲时验证
-     */
-    private boolean testWhileIdle = true;
+    @Value("${objectpool.solution.test-while-idle:true}")
+    private boolean testWhileIdle;
 
-    /**
-     * 验证间隔（毫秒）
-     */
-    private long timeBetweenEvictionRunsMillis = 30000;
+    @Value("${objectpool.solution.time-between-eviction-runs-millis:30000}")
+    private long timeBetweenEvictionRunsMillis;
 
-    /**
-     * 对象最小空闲时间（毫秒）
-     */
-    private long minEvictableIdleTimeMillis = 600000;
+    @Value("${objectpool.solution.min-evictable-idle-time-millis:600000}")
+    private long minEvictableIdleTimeMillis;
 
-    /**
-     * JMX 名称前缀（设为空禁用 JMX 注册，避免与 Spring Actuator 冲突）
-     */
-    private String jmxNamePrefix = "";
+    // ==================== 通用对象池 Bean ====================
 
-    /**
-     * 是否启用 JMX 注册（禁用以避免与 Spring Boot Actuator 冲突）
-     */
-    private boolean jmxEnabled = false;
+    @Bean
+    public GenericObjectPool<PooledObject<?>> genericObjectPool() {
+        GenericObjectPoolConfig<PooledObject<?>> config = new GenericObjectPoolConfig<>();
+        config.setMaxTotal(maxTotal);
+        config.setMaxIdle(maxIdle);
+        config.setMinIdle(minIdle);
+        config.setBlockWhenExhausted(blockWhenExhausted);
+        config.setTestOnBorrow(testOnBorrow);
+        config.setTestOnReturn(testOnReturn);
+        config.setTestWhileIdle(testWhileIdle);
+        config.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+        config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
 
-    /**
-     * 创建 TimetableSolution 对象池
-     */
-    @Bean(name = "timetableSolutionPool")
-    public GenericObjectPool<TimetableSolution> timetableSolutionPool() {
-        GenericObjectPoolConfig<TimetableSolution> poolConfig = new GenericObjectPoolConfig<>();
-
-        // 池大小配置
-        poolConfig.setMaxTotal(maxTotal);
-        poolConfig.setMaxIdle(maxIdle);
-        poolConfig.setMinIdle(minIdle);
-        poolConfig.setBlockWhenExhausted(blockWhenExhausted);
-
-        // 验证配置
-        poolConfig.setTestOnBorrow(testOnBorrow);
-        poolConfig.setTestOnReturn(testOnReturn);
-        poolConfig.setTestWhileIdle(testWhileIdle);
-
-        // 空闲回收配置
-        poolConfig.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        poolConfig.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-
-        // 禁用 JMX 注册（避免与 Spring Boot Actuator 冲突）
-        poolConfig.setJmxEnabled(jmxEnabled);
-        poolConfig.setJmxNamePrefix(jmxNamePrefix);
-
-        // 创建工厂
-        TimetableSolutionFactory factory = new TimetableSolutionFactory();
-
-        GenericObjectPool<TimetableSolution> pool = new GenericObjectPool<>(factory, poolConfig);
-
-        log.info("TimetableSolution 对象池初始化完成 - maxTotal: {}, maxIdle: {}, minIdle: {}",
-                maxTotal, maxIdle, minIdle);
-
-        return pool;
+        log.info("对象池初始化: maxTotal={}, maxIdle={}, minIdle={}", maxTotal, maxIdle, minIdle);
+        return new GenericObjectPool<>(null, config);
     }
 
+    // ==================== 工具方法：创建自定义对象池 ====================
+
     /**
-     * TimetableSolution 对象池工厂
+     * 创建指定类型的对象池
+     *
+     * @param factory 对象工厂
+     * @param <T>     对象类型
+     * @return 配置好的对象池
      */
-    static class TimetableSolutionFactory implements PooledObjectFactory<TimetableSolution> {
+    public <T> GenericObjectPool<T> createPool(PooledObjectFactory<T> factory) {
+        GenericObjectPoolConfig<T> config = new GenericObjectPoolConfig<>();
+        config.setMaxTotal(maxTotal);
+        config.setMaxIdle(maxIdle);
+        config.setMinIdle(minIdle);
+        config.setBlockWhenExhausted(blockWhenExhausted);
+        config.setTestOnBorrow(testOnBorrow);
+        config.setTestOnReturn(testOnReturn);
+        config.setTestWhileIdle(testWhileIdle);
+        config.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+        config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
 
-        @Override
-        public PooledObject<TimetableSolution> makeObject() throws Exception {
-            TimetableSolution solution = new TimetableSolution();
-            log.debug("创建新的 TimetableSolution 对象");
-            return new DefaultPooledObject<>(solution);
-        }
-
-        @Override
-        public void destroyObject(PooledObject<TimetableSolution> p) throws Exception {
-            TimetableSolution solution = p.getObject();
-            // 清空对象状态，便于 GC 回收
-            if (solution != null) {
-                solution.getAssignments().clear();
-                solution.getCourses().clear();
-                solution.getTeachers().clear();
-                solution.getClassrooms().clear();
-                solution.getAllTimeSlots().clear();
-            }
-            log.debug("销毁 TimetableSolution 对象");
-        }
-
-        @Override
-        public boolean validateObject(PooledObject<TimetableSolution> p) {
-            // 验证对象是否有效
-            return p != null && p.getObject() != null;
-        }
-
-        @Override
-        public void activateObject(PooledObject<TimetableSolution> p) throws Exception {
-            // 激活对象，重置状态
-            TimetableSolution solution = p.getObject();
-            if (solution != null) {
-                solution.getAssignments().clear();
-                solution.setFitnessScore(null);
-                solution.setHardConstraintViolations(0);
-                solution.setSoftConstraintCost(0.0);
-                solution.setFeasible(null);
-            }
-        }
-
-        @Override
-        public void passivateObject(PooledObject<TimetableSolution> p) throws Exception {
-            // 钝化对象，清理状态准备归还
-            TimetableSolution solution = p.getObject();
-            if (solution != null) {
-                solution.getAssignments().clear();
-            }
-        }
+        GenericObjectPool<T> pool = new GenericObjectPool<>(factory, config);
+        log.info("自定义对象池已创建: maxTotal={}, maxIdle={}, minIdle={}", maxTotal, maxIdle, minIdle);
+        return pool;
     }
 }
