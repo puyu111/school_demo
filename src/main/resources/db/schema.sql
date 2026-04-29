@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `schedule` (
     `schedule_id`     BIGINT          NOT NULL AUTO_INCREMENT COMMENT '排课记录ID',
     `course_id`       BIGINT          NOT NULL            COMMENT '课程ID (关联 course.db_id)',
     `teacher_id`      BIGINT          NOT NULL            COMMENT '教师ID (关联 teacher.db_id)',
-    `class_id`        BIGINT          DEFAULT NULL        COMMENT '班级ID',
+    `class_id`        VARCHAR(20)       DEFAULT NULL        COMMENT '班级ID',
     `room_id`         BIGINT          DEFAULT NULL        COMMENT '教室ID (关联 room.db_id)',
     `weekday`         INT             NOT NULL            COMMENT '星期 (1-7)',
     `start_time`      TIME            NOT NULL            COMMENT '开始时间 (HH:mm)',
