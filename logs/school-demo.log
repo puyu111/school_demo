@@ -6518,3 +6518,35 @@ org.springframework.http.converter.HttpMessageNotReadableException: Required req
 2026-04-29 10:24:51.039 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
 2026-04-29 10:24:51.039 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
 2026-04-29 10:24:51.039 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:25:21.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:25:21.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:25:21.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:25:51.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:25:51.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:25:51.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:26:21.040 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:26:21.041 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:26:21.041 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:26:51.041 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:26:51.041 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:26:51.041 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:27:21.042 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:27:21.042 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:27:21.042 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:27:35.396 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 10:27:35.398 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-29 10:27:35.402 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:27:35.402 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:27:35.402 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:27:35.402 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:27:35.402 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:27:35.403 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 10:27:35.405 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown initiated...
+2026-04-29 10:27:35.405 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before shutdown stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:27:35.405 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6fc28e5b: (connection evicted)
+2026-04-29 10:27:35.408 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3730a317: (connection evicted)
+2026-04-29 10:27:35.408 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@760da92c: (connection evicted)
+2026-04-29 10:27:35.408 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4731bd8f: (connection evicted)
+2026-04-29 10:27:35.408 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@16225663: (connection evicted)
+2026-04-29 10:27:35.408 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2026-04-29 10:27:35.409 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown completed.
