@@ -30,8 +30,19 @@ public abstract class BaseExcelListener<T, R> implements ReadListener<T> {
             R record = convertToEntity(data);
             createdRecords.add(record);
         } catch (org.example.school_demo.exception.BusinessException e) {
-            errors.add(ImportError.builder().row(rowNum).message(e.getMessage()).build());
+            errors.add(ImportError.builder()
+                    .row(rowNum)
+                    .message(e.getMessage())
+                    .data(buildErrorData(data, e))
+                    .build());
         }
+    }
+
+    /**
+     * 构建错误详情数据（默认返回 null，子类可重写）
+     */
+    protected java.util.Map<String, Object> buildErrorData(T data, org.example.school_demo.exception.BusinessException e) {
+        return null;
     }
 
     @Override

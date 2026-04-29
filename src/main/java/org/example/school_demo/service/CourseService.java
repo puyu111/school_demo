@@ -21,7 +21,7 @@ public interface CourseService {
 
 
     Map<String, Object> createCourse(CourseCreateReq req);
-    Map<String, Object> batchDelete(List<Long> dbIds);
+    Map<String, Object> batchDelete(List<String> dbIds);
     Map<String, Object> importCourses(InputStream inputStream);
 
 }

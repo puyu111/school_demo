@@ -17,5 +17,5 @@ import java.util.List;
 @AllArgsConstructor
 public class BatchDeleteReq {
     @NotEmpty(message = "删除ID列表不能为空")
-    private List<Long> dbIds;
+    private List<String> dbIds;
 }

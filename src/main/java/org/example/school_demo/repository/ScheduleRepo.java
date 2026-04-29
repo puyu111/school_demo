@@ -31,11 +31,6 @@ public interface ScheduleRepo extends JpaRepository<ScheduleEntity, Long> {
     List<ScheduleEntity> findByClassId(Long classId);
 
     /**
-     * 根据教室 ID 查询排课记录
-     */
-    List<ScheduleEntity> findByRoomId(Long roomId);
-
-    /**
      * 根据学期 ID 查询排课记录
      */
     List<ScheduleEntity> findBySemesterId(Long semesterId);
@@ -51,11 +46,6 @@ public interface ScheduleRepo extends JpaRepository<ScheduleEntity, Long> {
     List<ScheduleEntity> findByTeacherIdAndClassTime(Long teacherId, LocalDate date);
 
     /**
-     * 根据教室和日期查询
-     */
-    List<ScheduleEntity> findByRoomIdAndClassTime(Long roomId, LocalDate date);
-
-    /**
      * 根据周次和节次查询（用于检查时间冲突）
      */
     List<ScheduleEntity> findByWeekAndPeriod(Integer week, Integer period);
@@ -65,4 +55,9 @@ public interface ScheduleRepo extends JpaRepository<ScheduleEntity, Long> {
      */
     @Query("SELECT s FROM ScheduleEntity s WHERE s.semesterId = :semesterId")
     List<ScheduleEntity> findBySemester(@Param("semesterId") Long semesterId);
+
+    /**
+     * 根据课程 ID 列表批量删除排课记录
+     */
+    void deleteByCourseIdIn(List<Long> courseIds);
 }

@@ -9,18 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-/**
- * 教师实体类
- * <p>
- * 对应数据库表：teacher
- * 存储教师的基础信息。
- *
- * @author 排课系统开发团队
- * @since 2025-03-01
- */
 @Data
 @Builder
 @NoArgsConstructor
@@ -32,86 +21,43 @@ import java.util.Set;
 })
 public class TeacherEntity {
 
-    /**
-     * 主键 ID（数据库主键）
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
     private Long teacherId;
 
-    /**
-     * 教师姓名
-     */
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    /**
-     * 工号
-     */
-    @Column(name = "job_number", length = 50, nullable = false, unique = true)
-    private String jobNumber;
+    @Column(name = "job_number", length = 50, unique = true)
+    private String id;
 
-    /**
-     * 所属院系
-     */
+    @Column(name = "gender", length = 10)
+    private String gender;
+
+    @Column(name = "degree", length = 50)
+    private String degree;
+
+    @Column(name = "email", length = 100)
+    private String email;
+
+    @Column(name = "phone", length = 20)
+    private String phone;
+
     @Column(name = "department", length = 100)
     private String department;
 
-    /**
-     * 每日最大授课节数
-     */
     @Column(name = "max_daily_courses", nullable = false)
     @Builder.Default
     private Integer maxDailyCourses = 6;
 
-    /**
-     * 可用时间段集合
-     */
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private Set<TeacherAvailableSlot> availableSlots = new HashSet<>();
-
-    /**
-     * 偏好时间段集合
-     */
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @Builder.Default
-    private Set<TeacherPreferredSlot> preferredSlots = new HashSet<>();
-
-    /**
-     * 创建时间
-     */
     @CreationTimestamp
-    @Column(name = "created_time", nullable = false, updatable = false)
+    @Column(name = "created_time", nullable = false, updatable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdTime;
 
-    /**
-     * 更新时间
-     */
     @UpdateTimestamp
-    @Column(name = "updated_time", nullable = false)
+    @Column(name = "updated_time", nullable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedTime;
-
-    /**
-     * 添加可用时间段
-     */
-    public void addAvailableSlot(TimeSlotEntity timeSlot) {
-        TeacherAvailableSlot slot = TeacherAvailableSlot.builder()
-                .teacher(this)
-                .timeSlot(timeSlot)
-                .build();
-        availableSlots.add(slot);
-    }
-
-    /**
-     * 添加偏好时间段
-     */
-    public void addPreferredSlot(TimeSlotEntity timeSlot) {
-        TeacherPreferredSlot slot = TeacherPreferredSlot.builder()
-                .teacher(this)
-                .timeSlot(timeSlot)
-                .build();
-        preferredSlots.add(slot);
-    }
 }

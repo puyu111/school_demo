@@ -19,10 +19,9 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BatchDeleteResp {
     private Integer deletedCount;
-    private List<Long> deletedDbIds;
+    private List<String> deletedDbIds;
     private List<String> deletedDisplayIds;
     private Integer failedCount;
-    private List<Long> failedDbIds;
-    private List<FailedReason> failedReasons;
+    private List<String> failedDbIds;
     private LocalDateTime deleteTime;
 }
