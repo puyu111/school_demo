@@ -9026,3 +9026,496 @@ org.springframework.transaction.UnexpectedRollbackException: Transaction silentl
 2026-04-29 12:01:21.786 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
 2026-04-29 12:01:21.786 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
 2026-04-29 12:01:21.787 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:01:52.237 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:01:52.238 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:01:52.238 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:02:22.238 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:02:22.239 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:02:22.239 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:02:52.642 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:02:52.642 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:02:52.642 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:03:22.643 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:03:22.643 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:03:22.643 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:03:52.107 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:03:52.108 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:03:52.108 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:04:22.109 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:04:22.109 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:04:22.109 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:04:52.110 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:04:52.111 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:04:52.111 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:05:22.111 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:05:22.112 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:05:22.112 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:05:52.112 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:05:52.113 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:05:52.113 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:06:21.628 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:06:21.629 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:06:21.629 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:06:52.072 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:06:52.072 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:06:52.073 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:07:22.073 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:07:22.074 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:07:22.074 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:07:52.074 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:07:52.074 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:07:52.074 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:08:22.075 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:08:22.076 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:08:22.076 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:08:52.076 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:08:52.077 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:08:52.077 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:09:22.077 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:09:22.078 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:09:22.078 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:09:52.078 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:09:52.079 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:09:52.093 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:09:53.070 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:10:22.093 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:10:22.094 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:10:22.094 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:10:23.071 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:10:23.071 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:10:23.071 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:10:23.071 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:10:52.094 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:10:52.095 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:10:52.095 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:11:22.096 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:11:22.097 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:11:22.097 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:11:52.097 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:11:52.097 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:11:52.097 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:12:22.098 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:12:22.098 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:12:22.098 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:12:52.099 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:12:52.099 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:12:52.099 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:13:22.100 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:13:22.100 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:13:22.100 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:13:52.101 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:13:52.101 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:13:52.101 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:14:22.607 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:14:22.607 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:14:22.607 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:14:52.060 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:14:52.061 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:14:52.061 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:15:22.061 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:15:22.062 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:15:22.062 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:15:52.491 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:15:52.491 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:15:52.492 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:16:22.492 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:16:22.492 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:16:22.492 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:16:52.492 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:16:52.493 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:16:52.493 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:17:22.493 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:17:22.494 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:17:22.494 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:17:52.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:17:52.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:17:52.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:18:22.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:18:22.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:18:22.030 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:18:52.031 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:18:52.032 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:18:52.032 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:19:22.032 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:19:22.033 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:19:22.033 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:19:52.033 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:19:52.033 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:19:52.033 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:20:22.034 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:20:22.034 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:20:22.034 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:20:23.001 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:20:23.009 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:20:52.034 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:20:52.035 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:20:52.035 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:20:53.010 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:21:22.036 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:21:22.036 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:21:22.036 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:21:23.011 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:21:23.011 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:21:52.036 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:21:52.037 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:21:52.037 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:22:22.037 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:22:22.038 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:22:22.038 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:22:52.688 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:22:52.689 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:22:52.689 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:23:22.689 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:23:22.690 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:23:22.690 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:23:51.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:23:51.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:23:51.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:24:22.299 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:24:22.300 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:24:22.300 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:24:52.300 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:24:52.300 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:24:52.301 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:25:22.301 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:25:22.302 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:25:22.302 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:25:52.302 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:25:52.302 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:25:52.303 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:26:22.303 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:26:22.303 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:26:22.304 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:26:51.847 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:26:51.847 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:26:51.847 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:27:21.847 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:27:21.848 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:27:21.848 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:27:51.848 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:27:51.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:27:51.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:28:09.972 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2f248ac6: (connection has passed maxLifetime)
+2026-04-29 12:28:09.992 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@36064467
+2026-04-29 12:28:21.849 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:28:21.850 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:28:21.850 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:28:23.219 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1e709337: (connection has passed maxLifetime)
+2026-04-29 12:28:23.240 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@405db382
+2026-04-29 12:28:32.324 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5f4d990c: (connection has passed maxLifetime)
+2026-04-29 12:28:32.342 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@39190bd4
+2026-04-29 12:28:37.921 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@217b0952: (connection has passed maxLifetime)
+2026-04-29 12:28:37.937 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@339bd7a4
+2026-04-29 12:28:47.926 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@7e5f6c78: (connection has passed maxLifetime)
+2026-04-29 12:28:47.950 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@15f0bfc5
+2026-04-29 12:28:51.418 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:28:51.418 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:28:51.418 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:29:21.418 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:29:21.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:29:21.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:29:51.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:29:51.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:29:51.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:30:21.420 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:30:21.420 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:30:21.420 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:30:52.015 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:30:52.016 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:30:52.016 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:31:22.016 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:31:22.016 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:31:22.016 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:31:22.980 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:31:22.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:31:22.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:31:22.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:31:52.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:31:52.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:31:52.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:31:52.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:31:52.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:31:52.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:31:52.981 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:31:52.982 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:31:52.982 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:32:22.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:32:22.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:32:22.017 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:32:52.018 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:32:52.018 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:32:52.018 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:33:22.018 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:33:22.019 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:33:22.019 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:33:52.020 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:33:52.020 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:33:52.020 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:34:22.021 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:34:22.021 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:34:22.021 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:34:52.021 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:34:52.022 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:34:52.022 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:35:22.022 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:35:22.022 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:35:22.022 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:35:52.552 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:35:52.552 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:35:52.553 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:36:22.553 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:36:22.553 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:36:22.553 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:36:52.553 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:36:52.554 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:36:52.554 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:37:23.000 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:37:23.000 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:37:23.000 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:37:53.000 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:37:53.001 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:37:53.001 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:38:22.124 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:38:22.125 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:38:22.125 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:38:52.603 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:38:52.603 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:38:52.603 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:39:22.197 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:39:22.197 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:39:22.197 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:39:52.673 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:39:52.673 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:39:52.673 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:40:22.673 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:40:22.674 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:40:22.674 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:40:52.674 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:40:52.674 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:40:52.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:41:22.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:41:22.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:41:22.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:41:23.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:41:23.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:41:23.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:41:23.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:41:52.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:41:52.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:41:52.675 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:41:53.631 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:42:22.676 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:42:22.676 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:42:22.676 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:42:53.202 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:42:53.203 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:42:53.203 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:43:22.796 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:43:22.796 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:43:22.796 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:43:53.290 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:43:53.291 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:43:53.291 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:44:22.763 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:44:22.763 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:44:22.763 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:44:52.764 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:44:52.764 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:44:52.764 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:45:22.765 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:45:22.765 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:45:22.765 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:45:52.765 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:45:52.766 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:45:52.766 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:46:22.766 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:46:22.766 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:46:22.766 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:46:52.319 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:46:52.319 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:46:52.319 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:47:22.884 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:47:22.884 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:47:22.892 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:47:52.892 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:47:52.892 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:47:52.892 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:48:22.893 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:48:22.893 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:48:22.893 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:48:52.893 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:48:52.894 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:48:52.894 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:49:22.371 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:49:22.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:49:22.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:49:52.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:49:52.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:49:52.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:50:22.372 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:50:22.373 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:50:22.373 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:50:52.374 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:50:52.374 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:50:52.374 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:51:22.375 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:51:22.375 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:51:22.375 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:51:51.774 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:51:51.774 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:51:51.774 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:52:21.774 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:52:21.775 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:52:21.775 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:52:22.712 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:52:52.359 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:52:52.359 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:52:52.359 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:52:53.297 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:52:53.297 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 12:52:53.297 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:52:53.297 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 12:53:21.700 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:53:21.701 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:53:21.701 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:53:51.701 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:53:51.702 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:53:51.702 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:54:22.199 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:54:22.199 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:54:22.200 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:54:51.479 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:54:51.479 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:54:51.480 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:55:21.480 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:55:21.480 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:55:21.480 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:55:51.481 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:55:51.481 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:55:51.481 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:56:21.481 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:56:21.482 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:56:21.482 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:56:51.483 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:56:51.483 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:56:51.483 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:57:21.483 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:57:21.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:57:21.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:57:51.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:57:51.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:57:51.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:58:08.076 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@36064467: (connection has passed maxLifetime)
+2026-04-29 12:58:08.096 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ea7fc95
+2026-04-29 12:58:08.128 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@15f0bfc5: (connection has passed maxLifetime)
+2026-04-29 12:58:08.135 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f9af6ae
+2026-04-29 12:58:14.535 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@39190bd4: (connection has passed maxLifetime)
+2026-04-29 12:58:14.541 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@44ddb72a
+2026-04-29 12:58:17.665 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@339bd7a4: (connection has passed maxLifetime)
+2026-04-29 12:58:17.684 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e0bd11
+2026-04-29 12:58:19.721 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@405db382: (connection has passed maxLifetime)
+2026-04-29 12:58:19.729 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@342fbf5d
+2026-04-29 12:58:21.484 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:58:21.485 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:58:21.485 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:58:51.485 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:58:51.485 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:58:51.485 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:59:21.486 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:59:21.486 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:59:21.486 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 12:59:51.487 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:59:51.487 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 12:59:51.487 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:00:21.488 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:00:21.488 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:00:21.488 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:00:51.488 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:00:51.488 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:00:51.489 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:01:21.489 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:01:21.489 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:01:21.489 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:01:51.490 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:01:51.490 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:01:51.498 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:02:22.059 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:02:22.059 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:02:22.059 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:02:22.978 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:02:22.979 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:02:22.979 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:02:22.979 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 13:02:22.979 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 13:02:22.979 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 13:02:52.059 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:02:52.060 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:02:52.060 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:03:21.555 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:03:21.555 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:03:21.555 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:03:22.474 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:03:22.474 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 13:03:51.555 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:03:51.556 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:03:51.556 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:03:52.475 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:03:52.475 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 13:04:22.049 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:04:22.050 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:04:22.050 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:04:52.050 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:04:52.050 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:04:52.050 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:05:22.453 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:05:22.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:05:22.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:05:52.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:05:52.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:05:52.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:06:22.454 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:06:22.455 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:06:22.455 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:06:52.455 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:06:52.455 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:06:52.455 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:07:22.456 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:07:22.456 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:07:22.456 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 13:07:31.452 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 13:07:31.454 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-29 13:07:31.458 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:07:31.458 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:07:31.458 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:07:31.458 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:07:31.458 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 13:07:31.459 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 13:07:31.461 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown initiated...
+2026-04-29 13:07:31.461 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before shutdown stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 13:07:31.462 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6ea7fc95: (connection evicted)
+2026-04-29 13:07:31.462 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2f9af6ae: (connection evicted)
+2026-04-29 13:07:31.462 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@44ddb72a: (connection evicted)
+2026-04-29 13:07:31.462 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5e0bd11: (connection evicted)
+2026-04-29 13:07:31.462 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@342fbf5d: (connection evicted)
+2026-04-29 13:07:31.462 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2026-04-29 13:07:31.462 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown completed.
