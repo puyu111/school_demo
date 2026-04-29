@@ -6550,3 +6550,345 @@ org.springframework.http.converter.HttpMessageNotReadableException: Required req
 2026-04-29 10:27:35.408 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@16225663: (connection evicted)
 2026-04-29 10:27:35.408 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After shutdown stats (total=0, active=0, idle=0, waiting=0)
 2026-04-29 10:27:35.409 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown completed.
+2026-04-29 10:41:48.917 [main] INFO  o.e.s.SchoolDemoApplication - Starting SchoolDemoApplication using Java 17.0.18 with PID 943038 (/home/jbh/school_project/school_demo/build/classes/java/main started by jbh in /home/jbh/school_project/school_demo)
+2026-04-29 10:41:48.918 [main] DEBUG o.e.s.SchoolDemoApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-04-29 10:41:48.919 [main] INFO  o.e.s.SchoolDemoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-29 10:41:49.881 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-29 10:41:49.974 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 82 ms. Found 8 JPA repository interfaces.
+2026-04-29 10:41:50.634 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-29 10:41:50.641 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-29 10:41:50.642 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-04-29 10:41:50.672 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-29 10:41:50.672 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1709 ms
+2026-04-29 10:41:50.868 [main] DEBUG com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1dbd16a6
+2026-04-29 10:41:51.141 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-29 10:41:51.160 [main] DEBUG com.zaxxer.hikari.HikariConfig - SchedulerHikariPool - configuration:
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................true
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTestQuery............."SELECT 1"
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTimeout...............30000
+2026-04-29 10:41:51.162 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSource......................none
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceProperties............{password=<masked>}
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - driverClassName................."com.mysql.cj.jdbc.Driver"
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2026-04-29 10:41:51.163 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - idleTimeout.....................600000
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:mysql://localhost:3306/my_demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - keepaliveTime...................0
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........60000
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - maxLifetime.....................1800000
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - maximumPoolSize.................20
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........none
+2026-04-29 10:41:51.164 [main] DEBUG com.zaxxer.hikari.HikariConfig - minimumIdle.....................5
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - password........................<masked>
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - poolName........................"SchedulerHikariPool"
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - readOnly........................false
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - registerMbeans..................true
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - schema..........................none
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - transactionIsolation............default
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - username........................"root"
+2026-04-29 10:41:51.165 [main] DEBUG com.zaxxer.hikari.HikariConfig - validationTimeout...............5000
+2026-04-29 10:41:51.165 [main] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Starting...
+2026-04-29 10:41:51.294 [main] INFO  com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@4cacccbf
+2026-04-29 10:41:51.297 [main] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Start completed.
+2026-04-29 10:41:51.320 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-29 10:41:51.321 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-29 10:41:51.397 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=1, active=0, idle=1, waiting=0)
+2026-04-29 10:41:51.398 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=1, active=0, idle=1, waiting=0)
+2026-04-29 10:41:51.401 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@9d95415
+2026-04-29 10:41:51.415 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@48e45e2e
+2026-04-29 10:41:51.428 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@79e6959c
+2026-04-29 10:41:51.441 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Added connection com.mysql.cj.jdbc.ConnectionImpl@28cba161
+2026-04-29 10:41:51.451 [SchedulerHikariPool connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After adding stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:41:51.930 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 10:41:52.167 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-29 10:41:52.640 [main] INFO  o.e.s.config.ObjectPoolConfig - TimetableSolution 对象池初始化完成 - maxTotal: 50, maxIdle: 20, minIdle: 5
+2026-04-29 10:41:52.647 [main] INFO  o.e.s.config.ThreadPoolConfig - 线程池初始化完成 - 核心线程数：4, 最大线程数：8, 队列容量：100
+2026-04-29 10:41:53.295 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 15 endpoint(s) beneath base path '/actuator'
+2026-04-29 10:41:53.357 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path ''
+2026-04-29 10:41:53.366 [main] INFO  o.e.s.SchoolDemoApplication - Started SchoolDemoApplication in 4.799 seconds (process running for 5.134)
+2026-04-29 10:41:53.490 [RMI TCP Connection(3)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-29 10:41:53.491 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-29 10:41:53.492 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-29 10:42:21.399 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:42:21.399 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:42:21.399 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:42:22.641 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:42:22.654 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:42:22.655 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:42:22.655 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:42:22.655 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:42:51.399 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:42:51.400 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:42:51.400 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:43:21.400 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:43:21.401 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:43:21.401 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:43:51.401 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:43:51.401 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:43:51.401 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:44:21.402 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:44:21.402 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:44:21.402 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:44:51.403 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:44:51.403 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:44:51.403 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:45:21.404 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:45:21.404 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:45:21.405 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:45:51.405 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:45:51.406 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:45:51.406 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:46:21.406 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:46:21.406 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:46:21.407 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:46:51.407 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:46:51.407 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:46:51.407 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:47:21.408 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:47:21.408 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:47:21.408 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:47:51.408 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:47:51.409 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:47:51.409 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:48:21.409 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:48:21.410 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:48:21.410 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:48:51.410 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:48:51.410 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:48:51.410 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:49:21.411 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:49:21.411 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:49:21.411 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:49:51.411 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:49:51.412 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:49:51.412 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:50:21.413 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:50:21.413 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:50:21.413 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:50:51.414 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:50:51.415 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:50:51.415 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:51:21.415 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:51:21.416 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:51:21.416 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:51:51.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:51:51.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:51:51.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:52:21.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:52:21.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:52:21.417 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:52:22.662 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:52:22.662 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:52:22.662 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:52:22.662 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:52:22.662 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:52:22.663 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:52:51.418 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:52:51.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:52:51.419 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:52:52.663 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:52:52.663 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:52:52.664 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:52:52.664 [commons-pool-evictor] DEBUG o.e.s.config.ObjectPoolConfig - 创建新的 TimetableSolution 对象
+2026-04-29 10:53:21.420 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:53:21.421 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:53:21.421 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:53:51.422 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:53:51.422 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:53:51.422 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:54:21.423 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:54:21.423 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:54:21.423 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:54:51.423 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:54:51.424 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:54:51.424 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:55:21.424 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:55:21.425 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:55:21.425 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:55:51.426 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:55:51.426 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:55:51.426 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:56:18.886 [http-nio-8081-exec-1] ERROR o.e.s.e.GlobalExceptionHandler - 系统异常：No static resource api/base-data/calendar.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/base-data/calendar.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-04-29 10:56:21.426 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:56:21.427 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:56:21.427 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:56:25.031 [http-nio-8081-exec-2] ERROR o.e.s.e.GlobalExceptionHandler - 系统异常：No static resource api/base-data/calendar.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/base-data/calendar.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-04-29 10:56:51.435 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:56:51.436 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:56:51.436 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:56:58.225 [http-nio-8081-exec-3] ERROR o.e.s.e.GlobalExceptionHandler - 系统异常：No static resource api/base-data/calendar.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/base-data/calendar.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-04-29 10:57:21.436 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:57:21.436 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:57:21.436 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:57:51.437 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:57:51.438 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:57:51.438 [SchedulerHikariPool housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2026-04-29 10:58:01.526 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-29 10:58:01.528 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-29 10:58:01.532 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:58:01.532 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:58:01.533 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:58:01.533 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:58:01.533 [SpringApplicationShutdownHook] DEBUG o.e.s.config.ObjectPoolConfig - 销毁 TimetableSolution 对象
+2026-04-29 10:58:01.534 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-29 10:58:01.536 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown initiated...
+2026-04-29 10:58:01.536 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - Before shutdown stats (total=5, active=0, idle=5, waiting=0)
+2026-04-29 10:58:01.537 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4cacccbf: (connection evicted)
+2026-04-29 10:58:01.540 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@9d95415: (connection evicted)
+2026-04-29 10:58:01.540 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@48e45e2e: (connection evicted)
+2026-04-29 10:58:01.540 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@79e6959c: (connection evicted)
+2026-04-29 10:58:01.540 [SchedulerHikariPool connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - SchedulerHikariPool - Closing connection com.mysql.cj.jdbc.ConnectionImpl@28cba161: (connection evicted)
+2026-04-29 10:58:01.541 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - SchedulerHikariPool - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2026-04-29 10:58:01.541 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - SchedulerHikariPool - Shutdown completed.
