@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import lombok.extern.slf4j.Slf4j;
 import org.example.school_demo.dto.drag_schedule.request.*;
 import org.example.school_demo.dto.drag_schedule.response.*;
 import org.example.school_demo.entity.*;
@@ -22,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class DragScheduleService {
 
@@ -54,6 +56,7 @@ public class DragScheduleService {
     // ========================= Course CRUD =========================
 
     public List<CourseVO> getCourses(Integer week, String classId, String teacherId, String roomId) {
+
         List<ScheduleEntity> schedules = scheduleRepository.findByWeek(week);
         return schedules.stream()
                 .filter(s -> classId == null || classId.equals(s.getClassId()))
