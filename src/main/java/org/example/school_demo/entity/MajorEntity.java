@@ -15,41 +15,27 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "teacher", indexes = {
-        @Index(name = "uk_job_number", columnList = "job_number", unique = true),
-        @Index(name = "idx_department", columnList = "department")
+@Table(name = "major", indexes = {
+        @Index(name = "uk_major_id", columnList = "id", unique = true)
 })
-public class TeacherEntity {
+public class MajorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teacher_id")
-    private Long teacherId;
+    @Column(name = "major_id")
+    private Long majorId;
+
+    @Column(name = "id", length = 50, unique = true)
+    private String id;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "job_number", length = 50, unique = true)
-    private String id;
+    @Column(name = "class_size", nullable = false)
+    private Integer classSize;
 
-    @Column(name = "gender", length = 10)
-    private String gender;
-
-    @Column(name = "degree", length = 50)
-    private String degree;
-
-    @Column(name = "email", length = 100)
-    private String email;
-
-    @Column(name = "phone", length = 20)
-    private String phone;
-
-    @Column(name = "department", length = 100)
-    private String department;
-
-    @Column(name = "max_daily_courses", nullable = false)
-    @Builder.Default
-    private Integer maxDailyCourses = 6;
+    @Column(name = "duration", nullable = false)
+    private Integer duration;
 
     @CreationTimestamp
     @Column(name = "created_time", nullable = false, updatable = false,

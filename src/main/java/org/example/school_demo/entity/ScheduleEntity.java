@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * 排课记录实体类
  * <p>
  * 对应数据库表：schedule
- * 存储排课记录，是核心关联表，关联课程、教师、班级、教室、学期。
+ * 存储排课记录，是核心关联表，关联课程、教师、班级、学期。
  *
  * @author 排课系统开发团队
  * @since 2025-03-01
@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
         @Index(name = "idx_course_id", columnList = "course_id"),
         @Index(name = "idx_teacher_id", columnList = "teacher_id"),
         @Index(name = "idx_class_id", columnList = "class_id"),
-        @Index(name = "idx_room_id", columnList = "room_id"),
         @Index(name = "idx_semester_id", columnList = "semester_id"),
         @Index(name = "idx_class_time", columnList = "class_time"),
         @Index(name = "idx_week", columnList = "week")
@@ -63,13 +62,7 @@ public class ScheduleEntity {
     private Long classId;
 
     /**
-     * 教室 ID（外键 -> room.room_id）
-     */
-    @Column(name = "room_id", nullable = false)
-    private Long roomId;
-
-    /**
-     * 学期 ID（外键 -> semester.semester_id）
+     * 学期 ID（外键 -> semester_calendar.calendar_id）
      */
     @Column(name = "semester_id", nullable = false)
     private Long semesterId;
@@ -104,13 +97,15 @@ public class ScheduleEntity {
      * 创建时间
      */
     @CreationTimestamp
-    @Column(name = "created_time", nullable = false, updatable = false)
+    @Column(name = "created_time", nullable = false, updatable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdTime;
 
     /**
      * 更新时间
      */
     @UpdateTimestamp
-    @Column(name = "updated_time", nullable = false)
+    @Column(name = "updated_time", nullable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedTime;
 }

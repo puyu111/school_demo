@@ -9,6 +9,7 @@ import org.example.school_demo.dto.response.*;
 import org.example.school_demo.entity.CourseEntity;
 import org.example.school_demo.listener.CourseExcelListener;
 import org.example.school_demo.repository.CourseRepo;
+import org.example.school_demo.repository.ScheduleRepo;
 import org.example.school_demo.service.CourseService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepo courseRepo;
+    private final ScheduleRepo scheduleRepo;
 
     @Override
     public PageResult<CourseListResp> getPageList(PageReq pageReq) {
@@ -45,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseListResp entityToResp(CourseEntity entity) {
         return CourseListResp.builder()
                 .dbId(entity.getCourseId())
-                .id(String.valueOf(entity.getCourseId()))
+                .id(entity.getId())
                 .name(entity.getCourseName())
                 .credits(entity.getCredits().intValue())
                 .type(entity.getCourseType())
@@ -91,26 +93,26 @@ public class CourseServiceImpl implements CourseService {
     }
     @Override
     @Transactional
-    public Map<String, Object> batchDelete(List<Long> dbIds) {
+    public Map<String, Object> batchDelete(List<String> dbIds) {
         log.info("批量删除课程，dbIds: {}", dbIds);
 
         List<CourseEntity> found = courseRepo.findByIdIn(dbIds);
-        Set<Long> foundIds = found.stream()
-                .map(CourseEntity::getCourseId)
+        Set<String> foundIds = found.stream()
+                .map(CourseEntity::getId)
                 .collect(Collectors.toSet());
 
-        List<Long> notFoundIds = dbIds.stream()
+        List<String> notFoundIds = dbIds.stream()
                 .filter(id -> !foundIds.contains(id))
                 .collect(Collectors.toList());
 
         if (found.isEmpty()) {
             Map<String, Object> result = new HashMap<>();
             result.put("success", false);
-            result.put("message", "课程不存在: " + notFoundIds.stream()
-                    .map(String::valueOf).collect(Collectors.joining(", ")));
+            result.put("message", "课程不存在: " + String.join(", ", notFoundIds));
             return result;
         }
 
+        scheduleRepo.deleteByCourseIdIn(found.stream().map(CourseEntity::getCourseId).collect(Collectors.toList()));
         courseRepo.deleteAll(found);
 
         if (!notFoundIds.isEmpty()) {
@@ -119,14 +121,10 @@ public class CourseServiceImpl implements CourseService {
 
         BatchDeleteResp resp = BatchDeleteResp.builder()
                 .deletedCount(found.size())
-                .deletedDbIds(found.stream().map(CourseEntity::getCourseId).collect(Collectors.toList()))
+                .deletedDbIds(found.stream().map(c -> String.valueOf(c.getCourseId())).collect(Collectors.toList()))
                 .deletedDisplayIds(found.stream().map(CourseEntity::getId).collect(Collectors.toList()))
                 .failedCount(notFoundIds.size())
-                .failedDbIds(notFoundIds)
-                .failedReasons(notFoundIds.isEmpty() ? null :
-                        notFoundIds.stream()
-                                .map(id -> FailedReason.builder().dbId(id).message("记录不存在").build())
-                                .collect(Collectors.toList()))
+                .failedDbIds(notFoundIds.isEmpty() ? null : notFoundIds)
                 .deleteTime(LocalDateTime.now())
                 .build();
 

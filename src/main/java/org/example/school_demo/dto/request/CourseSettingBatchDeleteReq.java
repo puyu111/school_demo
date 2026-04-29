@@ -8,14 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * 批量删除请求（通用）
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BatchDeleteReq {
+public class CourseSettingBatchDeleteReq {
+
     @NotEmpty(message = "删除ID列表不能为空")
     private List<String> dbIds;
 }

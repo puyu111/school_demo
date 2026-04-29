@@ -9,12 +9,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 课程数据访问层接口
  */
 @Repository
 public interface CourseRepo extends JpaRepository<CourseEntity, Long> {
+
+    /**
+     * 根据课程名称精确查询
+     */
+    Optional<CourseEntity> findByCourseName(String courseName);
 
     /**
      * 根据课程名称模糊查询
@@ -32,7 +38,7 @@ public interface CourseRepo extends JpaRepository<CourseEntity, Long> {
     @Query("SELECT COUNT(c) > 0 FROM CourseEntity c WHERE c.id = :id")
     boolean existsByBusinessId(@Param("id") String id);
 
-    @Query("SELECT c FROM CourseEntity c WHERE c.courseId IN :ids")
-    List<CourseEntity> findByIdIn(@Param("ids") List<Long> ids);
+    @Query("SELECT c FROM CourseEntity c WHERE c.id IN :ids")
+    List<CourseEntity> findByIdIn(@Param("ids") List<String> ids);
 
 }

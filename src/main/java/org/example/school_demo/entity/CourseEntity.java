@@ -56,7 +56,7 @@ public class CourseEntity {
      */
     @Column(name = "duration", nullable = false)
     @Builder.Default
-    private Integer duration = 45;
+    private Integer duration = 4;
 
     /**
      * 排课优先级（数字越小优先级越高）
@@ -83,13 +83,15 @@ public class CourseEntity {
      * 创建时间
      */
     @CreationTimestamp
-    @Column(name = "created_time", nullable = false, updatable = false)
+    @Column(name = "created_time", nullable = false, updatable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdTime;
 
     /**
      * 更新时间
      */
     @UpdateTimestamp
-    @Column(name = "updated_time", nullable = false)
+    @Column(name = "updated_time", nullable = false,
+            columnDefinition = "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedTime;
 }
