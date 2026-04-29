@@ -1,109 +1,135 @@
 package org.example.school_demo.config;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * 线程池配置
- * 为异步任务提供自定义执行器
+ * 通用线程池配置
+ * 提供三种线程池: 异步任务、排课计算、定时任务
  */
 @Slf4j
-@Data
 @Configuration
-@ConfigurationProperties(prefix = "threadpool.async")
+@EnableAsync
 public class ThreadPoolConfig {
 
-    /**
-     * 核心线程数
-     */
-    private int corePoolSize = 4;
+    @Value("${threadpool.async.core-pool-size:4}")
+    private int corePoolSize;
 
-    /**
-     * 最大线程数
-     */
-    private int maxPoolSize = 8;
+    @Value("${threadpool.async.max-pool-size:8}")
+    private int maxPoolSize;
 
-    /**
-     * 队列容量
-     */
-    private int queueCapacity = 100;
+    @Value("${threadpool.async.queue-capacity:100}")
+    private int queueCapacity;
 
-    /**
-     * 空闲线程存活时间（秒）
-     */
-    private int keepAliveSeconds = 60;
+    @Value("${threadpool.async.keep-alive-seconds:60}")
+    private int keepAliveSeconds;
 
-    /**
-     * 线程名称前缀
-     */
-    private String threadNamePrefix = "async-scheduler-";
+    @Value("${threadpool.async.thread-name-prefix:async-scheduler-}")
+    private String threadNamePrefix;
 
-    /**
-     * 关闭时等待任务完成的最大时间（秒）
-     */
-    private int awaitTerminationSeconds = 30;
+    @Value("${threadpool.async.await-termination-seconds:30}")
+    private int awaitTerminationSeconds;
 
-    /**
-     * 是否等待任务完成
-     */
-    private boolean waitForTasksToCompleteOnShutdown = true;
+    @Value("${threadpool.async.wait-for-tasks-to-complete-on-shutdown:true}")
+    private boolean waitForTasksToCompleteOnShutdown;
 
-    /**
-     * 拒绝执行策略：caller-runs, abort, discard
-     */
-    private String rejectedExecutionHandler = "caller-runs";
+    @Value("${threadpool.async.rejected-execution-handler:caller-runs}")
+    private String rejectedExecutionHandler;
 
-    /**
-     * 创建异步任务执行器
-     * 使用 @Async("schedulingTaskExecutor") 绑定到此执行器
-     */
-    @Bean(name = "schedulingTaskExecutor")
-    public Executor schedulingTaskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    // ==================== 1. 通用异步任务线程池 ====================
 
-        // 核心配置
-        executor.setCorePoolSize(corePoolSize);
-        executor.setMaxPoolSize(maxPoolSize);
-        executor.setQueueCapacity(queueCapacity);
-        executor.setKeepAliveSeconds(keepAliveSeconds);
-        executor.setThreadNamePrefix(threadNamePrefix);
-
-        // 拒绝执行策略
-        executor.setRejectedExecutionHandler(getRejectedExecutionHandler());
-
-        // 优雅停机配置
+    @Bean("asyncTaskExecutor")
+    public Executor asyncTaskExecutor() {
+        ThreadPoolTaskExecutor executor = createExecutor(
+                "通用异步线程池",
+                threadNamePrefix,
+                corePoolSize,
+                maxPoolSize,
+                queueCapacity
+        );
+        executor.setRejectedExecutionHandler(parseRejectionPolicy(rejectedExecutionHandler));
         executor.setWaitForTasksToCompleteOnShutdown(waitForTasksToCompleteOnShutdown);
         executor.setAwaitTerminationSeconds(awaitTerminationSeconds);
-
-        // 初始化
         executor.initialize();
-
-        log.info("线程池初始化完成 - 核心线程数：{}, 最大线程数：{}, 队列容量：{}",
-                corePoolSize, maxPoolSize, queueCapacity);
-
+        logPool("通用异步线程池", executor);
         return executor;
     }
 
-    /**
-     * 获取拒绝执行策略
-     */
-    private RejectedExecutionHandler getRejectedExecutionHandler() {
-        return switch (rejectedExecutionHandler.toLowerCase()) {
+    // ==================== 2. 排课计算专用线程池 ====================
+
+    @Bean("schedulingTaskExecutor")
+    public Executor schedulingTaskExecutor() {
+        ThreadPoolTaskExecutor executor = createExecutor(
+                "排课计算线程池",
+                "scheduling-",
+                Math.max(2, corePoolSize / 2),
+                Math.max(4, maxPoolSize),
+                Math.max(50, queueCapacity / 2)
+        );
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(60);
+        executor.initialize();
+        logPool("排课计算线程池", executor);
+        return executor;
+    }
+
+    // ==================== 3. 批量处理线程池 ====================
+
+    @Bean("batchTaskExecutor")
+    public Executor batchTaskExecutor() {
+        ThreadPoolTaskExecutor executor = createExecutor(
+                "批量处理线程池",
+                "batch-",
+                Math.max(2, corePoolSize / 2),
+                maxPoolSize,
+                queueCapacity * 2
+        );
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(awaitTerminationSeconds);
+        executor.initialize();
+        logPool("批量处理线程池", executor);
+        return executor;
+    }
+
+    // ==================== 工具方法 ====================
+
+    private ThreadPoolTaskExecutor createExecutor(String logName, String prefix,
+                                                   int core, int max, int capacity) {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setThreadNamePrefix(prefix);
+        executor.setCorePoolSize(core);
+        executor.setMaxPoolSize(max);
+        executor.setQueueCapacity(capacity);
+        executor.setKeepAliveSeconds(keepAliveSeconds);
+        return executor;
+    }
+
+    private void logPool(String name, ThreadPoolTaskExecutor executor) {
+        log.info("线程池初始化: {} | 核心={}, 最大={}, 队列容量={}, 拒绝策略={}",
+                name,
+                executor.getCorePoolSize(),
+                executor.getMaxPoolSize(),
+                executor.getQueueCapacity(),
+                rejectedExecutionHandler);
+    }
+
+    private java.util.concurrent.RejectedExecutionHandler parseRejectionPolicy(String policy) {
+        return switch (policy.toLowerCase()) {
             case "abort" -> new ThreadPoolExecutor.AbortPolicy();
             case "discard" -> new ThreadPoolExecutor.DiscardPolicy();
             case "discard-oldest" -> new ThreadPoolExecutor.DiscardOldestPolicy();
             case "caller-runs" -> new ThreadPoolExecutor.CallerRunsPolicy();
             default -> {
-                log.warn("未知的拒绝策略：{}，使用默认的 CallerRunsPolicy", rejectedExecutionHandler);
+                log.warn("未知拒绝策略: {}, 使用 CallerRunsPolicy", policy);
                 yield new ThreadPoolExecutor.CallerRunsPolicy();
             }
         };
