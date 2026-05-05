@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.school_demo.common.Result;
 import org.example.school_demo.dto.base_data.CourseSettingDataDTO;
-import org.example.school_demo.dto.base_data.request.CourseSettingBatchDeleteReq;
+import org.example.school_demo.dto.base_data.request.BatchDeleteReq;
 import org.example.school_demo.dto.base_data.request.CourseSettingCreateReq;
 import org.example.school_demo.dto.base_data.request.PageReq;
 import org.example.school_demo.dto.base_data.response.*;
@@ -52,7 +52,7 @@ public class CourseSettingController {
     }
 
     @PostMapping("/batch-delete")
-    public Result<BatchDeleteResp> batchDelete(@Validated @RequestBody CourseSettingBatchDeleteReq req) {
+    public Result<BatchDeleteResp> batchDelete(@Validated @RequestBody BatchDeleteReq req) {
         log.info("【批量删除课程设置】请求，dbIds: {}", req.getDbIds());
         Map<String, Object> result = courseSettingService.batchDelete(req.getDbIds());
         boolean success = (boolean) result.get("success");
