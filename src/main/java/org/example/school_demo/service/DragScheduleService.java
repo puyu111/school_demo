@@ -713,7 +713,7 @@ public class DragScheduleService {
             return Long.parseLong(teacherId);
         } catch (NumberFormatException e) {
             // Try as business id (T001)
-            return teacherRepository.findById(teacherId)
+            return teacherRepository.findByBusinessId(teacherId)
                     .map(TeacherEntity::getDbId)
                     .orElseThrow(() -> new RuntimeException("教师不存在: " + teacherId));
         }

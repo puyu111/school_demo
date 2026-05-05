@@ -68,23 +68,23 @@ public class SmartSchedulingService {
     public List<CourseDTO> getCourses(String semesterId) {
         List<CourseEntity> courses = courseRepository.findAll();
         List<TeacherEntity> teachers = teacherRepository.findAll();
-        List<MajorEntity> majors = majorRepository.findAll();
-        List<CourseSettingEntity> settings = courseSettingRepository.findAll();
+        List<Major> majors = majorRepository.findAll();
+        List<CourseSetting> settings = courseSettingRepository.findAll();
 
-        Map<String, CourseSettingEntity> settingMap = settings.stream()
-                .collect(Collectors.toMap(CourseSettingEntity::getCourseName, s -> s, (a, b) -> a));
+        Map<String, CourseSetting> settingMap = settings.stream()
+                .collect(Collectors.toMap(CourseSetting::getCourseName, s -> s, (a, b) -> a));
 
         // 教师可教课程映射: courseName -> teacher
         Map<String, TeacherEntity> courseTeacherMap = buildCourseTeacherMap(courses, teachers);
 
         // 专业课程映射: courseName -> major
-        Map<String, MajorEntity> courseMajorMap = buildCourseMajorMap(courses, majors);
+        Map<String, Major> courseMajorMap = buildCourseMajorMap(courses, majors);
 
         List<CourseDTO> result = new ArrayList<>();
         for (CourseEntity course : courses) {
             TeacherEntity teacher = courseTeacherMap.get(course.getName());
-            MajorEntity major = courseMajorMap.get(course.getName());
-            CourseSettingEntity setting = settingMap.get(course.getName());
+            Major major = courseMajorMap.get(course.getName());
+            CourseSetting setting = settingMap.get(course.getName());
 
             int duration = calcDurationInSlots(course);
 
@@ -152,9 +152,9 @@ public class SmartSchedulingService {
      * 获取班级列表。
      */
     public List<ClassDTO> getClasses() {
-        List<MajorEntity> majors = majorRepository.findAll();
+        List<Major> majors = majorRepository.findAll();
         List<ClassDTO> result = new ArrayList<>();
-        for (MajorEntity m : majors) {
+        for (Major m : majors) {
             result.add(ClassDTO.builder()
                     .id(m.getId() != null ? m.getId() : String.valueOf(m.getDbId()))
                     .name(m.getName())
@@ -213,7 +213,7 @@ public class SmartSchedulingService {
             CourseEntity course = courseMap.get(s.getCourseId());
             TeacherEntity teacher = teacherMap.get(s.getTeacherId());
             RoomEntity room = s.getRoomId() != null ? roomMap.get(s.getRoomId()) : null;
-            MajorEntity major = findMajorByClassId(s.getClassId());
+            Major major = findMajorByClassId(s.getClassId());
 
             // 周次取第1个
             int weekNumber = (s.getWeeks() != null && !s.getWeeks().isEmpty()) ? s.getWeeks().get(0) : 1;
@@ -743,11 +743,11 @@ public class SmartSchedulingService {
         return result;
     }
 
-    private Map<String, MajorEntity> buildCourseMajorMap(List<CourseEntity> courses, List<MajorEntity> majors) {
-        Map<String, MajorEntity> result = new HashMap<>();
+    private Map<String, Major> buildCourseMajorMap(List<CourseEntity> courses, List<Major> majors) {
+        Map<String, Major> result = new HashMap<>();
         Set<String> courseNames = courses.stream().map(CourseEntity::getName).collect(Collectors.toSet());
 
-        for (MajorEntity major : majors) {
+        for (Major major : majors) {
             if (major.getCourses() == null || major.getCourses().isBlank()) continue;
             try {
                 List<String> majorCourses = objectMapper.readValue(
@@ -768,14 +768,14 @@ public class SmartSchedulingService {
         return teachers.stream().filter(t -> t.getDbId().equals(dbId)).findFirst().orElse(null);
     }
 
-    private MajorEntity findMajorByClassId(String classId) {
+    private Major findMajorByClassId(String classId) {
         if (classId == null) return null;
         return majorRepository.findAll().stream()
                 .filter(m -> classId.equals(m.getId()))
                 .findFirst().orElse(null);
     }
 
-    private String resolveClassName(String classId, MajorEntity major) {
+    private String resolveClassName(String classId, Major major) {
         if (classId != null) {
             if (major != null) return major.getName();
             return "班级-" + classId;
@@ -808,7 +808,7 @@ public class SmartSchedulingService {
     }
 
     private Long resolveTeacherDbId(String bizId) {
-        TeacherEntity t = teacherRepository.findById(bizId).orElse(null);
+        TeacherEntity t = teacherRepository.findByBusinessId(bizId).orElse(null);
         if (t != null) return t.getDbId();
         try {
             return Long.parseLong(bizId);

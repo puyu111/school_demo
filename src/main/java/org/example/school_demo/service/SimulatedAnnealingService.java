@@ -13,7 +13,18 @@ import org.example.school_demo.algorithm.Solution;
 import org.example.school_demo.dto.algorithm.request.AutoScheduleRequest;
 import org.example.school_demo.dto.algorithm.response.AutoScheduleResultVO;
 import org.example.school_demo.dto.drag_schedule.response.CourseVO;
-import org.example.school_demo.entity.*;
+import org.example.school_demo.entity.Calendar;
+import org.example.school_demo.entity.CourseEntity;
+import org.example.school_demo.entity.CourseSetting;
+import org.example.school_demo.entity.DisabledDate;
+import org.example.school_demo.entity.Major;
+import org.example.school_demo.entity.RoomEntity;
+import org.example.school_demo.entity.RuleWeightEntity;
+import org.example.school_demo.entity.ScheduleEntity;
+import org.example.school_demo.entity.TeacherEntity;
+import org.example.school_demo.entity.TimeSlotConfigEntity;
+import org.example.school_demo.entity.UnavailableDateEntity;
+import org.example.school_demo.entity.WeekDayConfigEntity;
 import org.example.school_demo.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -194,7 +205,7 @@ public class SimulatedAnnealingService {
                 .collect(Collectors.toSet());
 
         // ---------- 日历 & 禁用日期 ----------
-        List<CalendarEntity> calendars = calendarRepository.findAll();
+        List<Calendar> calendars = calendarRepository.findAll();
         if (!calendars.isEmpty()) {
             data.semesterStart = calendars.get(0).getStartDate();
             // 计算该周的实际日期区间
@@ -202,10 +213,10 @@ public class SimulatedAnnealingService {
             LocalDate weekEnd = weekStart.plusDays(6);
 
             // 加载禁用日期并排除对应 weekday
-            List<DisabledDateEntity> disabledDates = disabledDateRepository.findByCalendarId(
+            List<DisabledDate> disabledDates = disabledDateRepository.findByCalendarId(
                     calendars.get(0).getCalendarId());
             Set<LocalDate> disabledDateSet = disabledDates.stream()
-                    .map(DisabledDateEntity::getDate)
+                    .map(DisabledDate::getDate)
                     .collect(Collectors.toSet());
 
             // 遍历该周每一天，检查是否被禁用
@@ -239,14 +250,14 @@ public class SimulatedAnnealingService {
         }
 
         // ---------- 课程设置 (course_setting) ----------
-        List<CourseSettingEntity> allSettings = courseSettingRepository.findAll();
-        Map<String, CourseSettingEntity> settingByName = new HashMap<>();
-        for (CourseSettingEntity cs : allSettings) {
+        List<CourseSetting> allSettings = courseSettingRepository.findAll();
+        Map<String, CourseSetting> settingByName = new HashMap<>();
+        for (CourseSetting cs : allSettings) {
             settingByName.put(cs.getCourseName(), cs);
         }
 
         // ---------- 专业数据 (major) ----------
-        List<MajorEntity> majors = majorRepository.findAll();
+        List<Major> majors = majorRepository.findAll();
         // 构建 courseName -> (classId, studentCount) 映射
         Map<String, MajorClassInfo> courseMajorMap = buildCourseMajorMap(majors, courses);
 
@@ -267,7 +278,7 @@ public class SimulatedAnnealingService {
             int sessionCount = Math.max(1, weeklyHours / slotDuration);
 
             // 优先级
-            CourseSettingEntity setting = settingByName.get(course.getName());
+            CourseSetting setting = settingByName.get(course.getName());
             int priority = (setting != null) ? setting.getPriority() : 50;
 
             // 学生人数 & 班级
@@ -326,11 +337,11 @@ public class SimulatedAnnealingService {
         final int classSize;
     }
 
-    private Map<String, MajorClassInfo> buildCourseMajorMap(List<MajorEntity> majors, List<CourseEntity> courses) {
+    private Map<String, MajorClassInfo> buildCourseMajorMap(List<Major> majors, List<CourseEntity> courses) {
         Map<String, MajorClassInfo> result = new HashMap<>();
         Set<String> courseNames = courses.stream().map(CourseEntity::getName).collect(Collectors.toSet());
 
-        for (MajorEntity major : majors) {
+        for (Major major : majors) {
             if (major.getCourses() == null || major.getCourses().isBlank()) continue;
             try {
                 List<String> majorCourses = objectMapper.readValue(

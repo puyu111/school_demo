@@ -16,7 +16,8 @@ public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
 
     boolean existsByName(String name);
 
-    Optional<TeacherEntity> findById(String id);
+    @Query("SELECT t FROM TeacherEntity t WHERE t.id = :id")
+    Optional<TeacherEntity> findByBusinessId(@Param("id") String id);
 
     Page<TeacherEntity> findByNameContaining(String name, Pageable pageable);
 

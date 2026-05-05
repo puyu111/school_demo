@@ -35,3 +35,15 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Logs ###
+logs/
+*.log
+
+### Claude ###
+.claude/
+
+### Temp files ###
+*~
+*.swp
+*.swo

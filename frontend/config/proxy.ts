@@ -14,25 +14,25 @@ export default {
   dev: {
     // 拖拽排课模块接口代理
     "/api/drag-schedule": {
-      target: "http://192.168.1.105:8000",
+      target: "http://localhost:8081",
       changeOrigin: true,
       pathRewrite: { "^/api/drag-schedule": "/api/drag-schedule" },
     },
     // 基础数据管理模块接口代理
     "/api/base-data": {
-      target: "http://192.168.1.105:8000",
+      target: "http://localhost:8081",
       changeOrigin: true,
       pathRewrite: { "^/api/base-data": "/api/base-data" },
     },
     // 智能排课系统接口代理
     "/api/smart-scheduling": {
-      target: "http://192.168.1.105:8000",
+      target: "http://localhost:8081",
       changeOrigin: true,
       pathRewrite: { "^/api/smart-scheduling": "/api/smart-scheduling" },
     },
     // 调课申请审核模块接口代理
     "/api/course-adjustment": {
-      target: "http://192.168.1.105:8000",
+      target: "http://localhost:8081",
       changeOrigin: true,
       pathRewrite: { "^/api/course-adjustment": "/api/course-adjustment" },
     },
