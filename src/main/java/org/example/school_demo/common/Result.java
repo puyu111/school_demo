@@ -52,6 +52,13 @@ public class Result<T> {
     private Long timestamp;
 
     /**
+     * 是否成功（前端 ApiResponse 兼容字段）
+     */
+    public boolean isSuccess() {
+        return code != null && code == 200;
+    }
+
+    /**
      * 构造成功响应（带数据）
      */
     public static <T> Result<T> success(T data) {
