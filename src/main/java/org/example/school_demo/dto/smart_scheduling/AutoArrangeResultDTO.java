@@ -18,6 +18,7 @@ public class AutoArrangeResultDTO {
     private List<ScheduledItem> scheduled;
     private List<FailedItem> failed;
     private Stats stats;
+    private Integer totalWeeks;
 
     @Data
     @Builder

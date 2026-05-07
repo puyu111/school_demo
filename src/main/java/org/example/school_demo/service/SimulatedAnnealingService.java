@@ -167,6 +167,8 @@ public class SimulatedAnnealingService {
         RuleEvaluator evaluator;
         /** 学期日历：week -> 该周实际日期区间 */
         LocalDate semesterStart;
+        /** 学期总周数 */
+        int totalWeeks;
     }
 
     /**
@@ -207,7 +209,13 @@ public class SimulatedAnnealingService {
         // ---------- 日历 & 禁用日期 ----------
         List<Calendar> calendars = calendarRepository.findAll();
         if (!calendars.isEmpty()) {
-            data.semesterStart = calendars.get(0).getStartDate();
+            Calendar cal = calendars.get(0);
+            data.semesterStart = cal.getStartDate();
+
+            // 计算总周数
+            long daysBetween = java.time.temporal.ChronoUnit.DAYS.between(cal.getStartDate(), cal.getEndDate());
+            data.totalWeeks = Math.max(1, (int) Math.ceil(daysBetween / 7.0));
+
             // 计算该周的实际日期区间
             LocalDate weekStart = data.semesterStart.plusWeeks(week - 1);
             LocalDate weekEnd = weekStart.plusDays(6);
@@ -229,6 +237,9 @@ public class SimulatedAnnealingService {
                 }
                 day = day.plusDays(1);
             }
+        }
+        if (data.totalWeeks == 0) {
+            data.totalWeeks = 16;
         }
         data.enabledWeekdays = schedulableWeekdays.stream().sorted().collect(Collectors.toList());
 
@@ -274,7 +285,8 @@ public class SimulatedAnnealingService {
             }
 
             int slotDuration = data.timeSlots.isEmpty() ? 45 : data.timeSlots.get(0).getDuration();
-            int weeklyHours = Math.max(1, course.getTotalHours() / 16); // 按 16 周计算每周课时
+            int totalWeeksForCalc = data.totalWeeks > 0 ? data.totalWeeks : 16;
+            int weeklyHours = Math.max(1, course.getTotalHours() / totalWeeksForCalc);
             int sessionCount = Math.max(1, weeklyHours / slotDuration);
 
             // 优先级

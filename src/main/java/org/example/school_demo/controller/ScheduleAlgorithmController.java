@@ -1,6 +1,7 @@
 package org.example.school_demo.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.school_demo.common.Result;
 import org.example.school_demo.dto.algorithm.request.AutoScheduleRequest;
 import org.example.school_demo.dto.algorithm.response.AutoScheduleResultVO;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * 排课算法接口。
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class ScheduleAlgorithmController {
@@ -26,6 +28,7 @@ public class ScheduleAlgorithmController {
      */
     @PostMapping("/api/algorithm/auto-schedule")
     public Result<AutoScheduleResultVO> autoSchedule(@RequestBody AutoScheduleRequest request) {
+        log.info("【算法-自动排课】week: {}, courseIds: {}", request.getWeek(), request.getCourseIds());
         try {
             AutoScheduleResultVO result = saService.autoSchedule(request, true);
             return Result.success("自动排课完成", result);
@@ -41,6 +44,7 @@ public class ScheduleAlgorithmController {
      */
     @PostMapping("/api/algorithm/preview")
     public Result<AutoScheduleResultVO> preview(@RequestBody AutoScheduleRequest request) {
+        log.info("【算法-预览排课】week: {}, courseIds: {}", request.getWeek(), request.getCourseIds());
         try {
             AutoScheduleResultVO result = saService.autoSchedule(request, false);
             return Result.success("预览完成", result);
@@ -56,6 +60,7 @@ public class ScheduleAlgorithmController {
      */
     @GetMapping("/api/algorithm/rules")
     public Result<List<RuleWeightVO>> getRules() {
+        log.info("【算法-规则列表】");
         try {
             List<RuleWeightVO> rules = ruleConfigService.getRuleWeights();
             return Result.success(rules);

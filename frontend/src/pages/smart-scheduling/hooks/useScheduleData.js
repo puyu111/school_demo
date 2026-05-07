@@ -406,31 +406,31 @@ export const useScheduleData = () => {
       return { scheduled: scheduledCount, failed: failed.length };
     }
 
-    // 正式模式：调用后端 API
+    // 正式模式：调用后端 API（不传 week = 排整学期）
     try {
       const res = await autoArrange({ strategy: 'priority' });
 
       if (res.success) {
-        const { scheduled, failed, stats } = res.data;
+        const { stats } = res.data;
 
-        const newSchedule = { ...schedule };
-        scheduled.forEach((item) => {
-          if (!newSchedule[item.day][item.slot]) {
-            newSchedule[item.day][item.slot] = [];
-          }
-          newSchedule[item.day][item.slot].push({
-            ...item,
-            color: generateCourseColor(item.courseId),
-          });
-        });
+        // 不直接用 response 填充课表网格，改为从后端重新加载当前周数据
+        const [schedulesRes, coursesRes] = await Promise.all([
+          getSchedules(1),
+          getCourses(),
+        ]);
 
-        setSchedule(newSchedule);
-        setPendingCourses(failed.map((f) => f.course));
+        if (schedulesRes?.data) {
+          const formattedSchedule = formatScheduleData(schedulesRes.data);
+          setSchedule(formattedSchedule);
+        }
+        if (coursesRes?.data) {
+          setPendingCourses(coursesRes.data || []);
+        }
 
         message.success(
-          `自动排课完成：成功 ${stats.scheduled} 门，失败 ${stats.failed} 门`,
+          `自动排课完成：成功 ${stats.scheduled} 门`,
         );
-        return { scheduled: stats.scheduled, failed: stats.failed };
+        return { scheduled: stats.scheduled, failed: 0 };
       } else {
         message.error(res.message || '自动排课失败');
         return { scheduled: 0, failed: 0 };

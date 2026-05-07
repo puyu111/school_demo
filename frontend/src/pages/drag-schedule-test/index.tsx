@@ -12,7 +12,6 @@ import {
   defaultDailyConfig,
   defaultWeekDays,
   generateDefaultTimeSlots,
-  generateMockCourses,
   TOTAL_WEEKS,
 } from "./constants";
 import * as scheduleApi from "./service";
@@ -56,26 +55,20 @@ const DragScheduleTest: React.FC = () => {
     );
   }, []);
 
-  // 获取课程数据 - 使用 umi useRequest
-  const { data: apiCoursesData, run } = useRequest(
-    (week: number) => scheduleApi.getCourses({ week }),
+  // 获取课程数据 - 按当前周次从后端请求
+  const {
+    data: apiCoursesData,
+    loading: coursesLoading,
+    refresh: refreshCourses,
+  } = useRequest(
+    () => scheduleApi.getCourses({ week: currentWeek }),
     {
-      ready: false, // 初始不自动请求，手动触发
+      refreshDeps: [currentWeek],
       formatResult: (res) => res.data,
-      manual: true,
       onError: (err) => {
         console.error("获取课程失败:", err);
-        message.error("获取课程数据失败，使用模拟数据");
       },
     }
-  );
-
-  // 包装后的 loadCourses，支持传入周次参数
-  const loadCourses = useCallback(
-    (week: number) => {
-      run(week);
-    },
-    [run]
   );
 
   // 获取配置数据
@@ -89,37 +82,24 @@ const DragScheduleTest: React.FC = () => {
     }
   );
 
-  // 初始化加载数据
+  // API 数据加载完成后同步到本地状态
   useEffect(() => {
-    // 初始使用模拟数据，后续可以切换到接口数据
-    const mockCourses = generateMockCourses();
-    setLocalCourses(mockCourses);
-    setOriginalCourses(mockCourses);
-
-    // 如果有接口数据，使用接口数据
     if (apiCoursesData) {
       setLocalCourses(apiCoursesData);
       setOriginalCourses(apiCoursesData);
     }
+  }, [apiCoursesData]);
 
+  useEffect(() => {
     if (apiConfigData) {
       setTimeSlots(apiConfigData.timeSlots || generateDefaultTimeSlots());
       setDailyConfig(apiConfigData.dailyConfig || defaultDailyConfig);
       setHalfDayConfig(apiConfigData.halfDayConfigs || DEFAULT_HALF_DAY_CONFIG);
     }
-  }, []);
+  }, [apiConfigData]);
 
-  // 周次切换时加载对应周的课程
-  useEffect(() => {
-    if (currentWeek > 0) {
-      loadCourses(currentWeek);
-    }
-  }, [currentWeek]);
-
-  // 使用接口数据或本地数据
-  const courses = useMemo(() => {
-    return apiCoursesData || localCourses;
-  }, [apiCoursesData, localCourses]);
+  // 使用接口数据
+  const courses = localCourses;
 
   // 当前周的课程数据
   const currentWeekCourses = useMemo(() => {
@@ -202,6 +182,7 @@ const DragScheduleTest: React.FC = () => {
   const handleSave = async () => {
     setLoading(true);
     try {
+      // 1. 保存课程数据
       const res = await scheduleApi.saveWeekSchedule({
         week: currentWeek,
         courses: currentWeekCourses,
@@ -209,6 +190,13 @@ const DragScheduleTest: React.FC = () => {
         weekDays,
         dailyConfig,
         halfDayConfig,
+      });
+
+      // 2. 保存时段配置（独立的 API）
+      await scheduleApi.updateTimeSlots({
+        timeSlots,
+        dailyConfig,
+        halfDayConfigs: halfDayConfig,
       });
 
       setOriginalCourses(courses);
@@ -234,11 +222,8 @@ const DragScheduleTest: React.FC = () => {
   const handleRefresh = async () => {
     setLoading(true);
     try {
-      // 刷新课程数据
-      loadCourses(currentWeek);
-      // 刷新配置数据
+      refreshCourses();
       refreshConfigs();
-
       message.success("数据已刷新");
     } catch (err: any) {
       console.error("刷新失败:", err);

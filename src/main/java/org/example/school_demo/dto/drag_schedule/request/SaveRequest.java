@@ -51,6 +51,6 @@ public class SaveRequest {
     @Data
     public static class HalfDayData {
         private String type;
-        private boolean isSchedulable;
+        private Boolean isSchedulable;
     }
 }

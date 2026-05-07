@@ -29,20 +29,38 @@ import StatisticsPanel from './components/StatisticsPanel';
 import WeightHistoryTable from './components/WeightHistoryTable';
 import WeightPresetCard from './components/WeightPresetCard';
 import { defaultRuleWeights } from './constants/defaultRuleWeights';
-// 导入常量和类型
 import { ruleCategories } from './constants/ruleCategories';
 import { weightPresets } from './constants/weightPresets';
 import type { RuleWeight, WeightChangeRecord } from './types';
+import { useRuleWeights } from '../../hooks/useApiData';
 
 const { TabPane } = Tabs;
 
 const RuleWeightManagement: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [ruleWeights, setRuleWeights] =
-    useState<RuleWeight[]>(defaultRuleWeights);
+  const [ruleWeights, setRuleWeights] = useState<RuleWeight[]>(defaultRuleWeights as RuleWeight[]);
   const [totalWeight, setTotalWeight] = useState<number>(0);
+
+  // 从后端 API 获取权重数据
+  const { weights, weightsLoading, loadWeights, bulkUpdateWeights, resetWeights, weightHistory, loadHistory } = useRuleWeights();
+
+  // 初始化加载权重和历史
+  useEffect(() => {
+    loadWeights();
+    loadHistory();
+  }, []);
+
+  // API 数据同步到本地状态（仅在 API 返回有效数据时覆盖）
+  useEffect(() => {
+    if (weights && weights.length > 0) {
+      setRuleWeights(weights);
+    }
+  }, [weights]);
+
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [selectedPreset, setSelectedPreset] = useState<string>('balanced');
+  const [selectedPreset, setSelectedPreset] = useState<string>(
+    localStorage.getItem('weightPreset') || 'balanced'
+  );
   const [weightChangeHistory, setWeightChangeHistory] = useState<
     WeightChangeRecord[]
   >([]);
@@ -103,8 +121,9 @@ const RuleWeightManagement: React.FC = () => {
   };
 
   // 应用预设权重
-  const applyWeightPreset = (presetId: string) => {
+  const applyWeightPreset = async (presetId: string) => {
     setSelectedPreset(presetId);
+    localStorage.setItem('weightPreset', presetId);
     let updatedRules = [...ruleWeights];
 
     switch (presetId) {
@@ -168,21 +187,45 @@ const RuleWeightManagement: React.FC = () => {
     message.success(
       `已应用${weightPresets.find((p) => p.id === presetId)?.name}预设`,
     );
+
+    // 持久化保存到后端，防止刷新后丢失
+    try {
+      const updates = updatedRules.map((rule) => ({
+        id: rule.id,
+        currentWeight: rule.currentWeight,
+      }));
+      await bulkUpdateWeights(updates);
+    } catch (e) {
+      message.warning('预设已应用，但保存到后端失败');
+    }
   };
 
   // 保存权重设置
-  const saveWeightSettings = () => {
-    // 在实际应用中，这里应该调用API保存到后端
-    message.success('权重设置已保存');
-    setIsEditing(false);
+  const saveWeightSettings = async () => {
+    try {
+      const updates = ruleWeights.map((rule) => ({
+        id: rule.id,
+        currentWeight: rule.currentWeight,
+      }));
+      await bulkUpdateWeights(updates);
+      message.success('权重设置已保存');
+      setIsEditing(false);
+    } catch (e) {
+      message.error('保存失败，请重试');
+    }
   };
 
   // 重置为默认值
-  const resetToDefaults = () => {
-    setRuleWeights(defaultRuleWeights);
-    setSelectedPreset('balanced');
-    setResetModalVisible(false);
-    message.info('已重置为默认权重设置');
+  const resetToDefaults = async () => {
+    try {
+      await resetWeights();
+      setSelectedPreset('balanced');
+      localStorage.setItem('weightPreset', 'balanced');
+      setResetModalVisible(false);
+      message.info('已重置为默认权重设置');
+    } catch (e) {
+      message.error('重置失败，请重试');
+    }
   };
 
   // 重置单个规则
@@ -397,7 +440,7 @@ const RuleWeightManagement: React.FC = () => {
                   </TabPane>
                   <TabPane tab="权重历史" key="history">
                     <WeightHistoryTable
-                      data={weightChangeHistory.slice(-10).reverse()}
+                      data={weightHistory.length > 0 ? weightHistory : weightChangeHistory.slice(-10).reverse()}
                     />
                   </TabPane>
                 </Tabs>

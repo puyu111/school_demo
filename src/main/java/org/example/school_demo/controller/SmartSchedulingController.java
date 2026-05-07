@@ -1,6 +1,7 @@
 package org.example.school_demo.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.school_demo.common.Result;
 import org.example.school_demo.dto.smart_scheduling.*;
 import org.example.school_demo.service.SmartSchedulingService;
@@ -16,6 +17,7 @@ import java.util.Map;
  * 对应 smart-scheduling-api.md 定义的所有端点：
  * 基础数据、排课操作、智能排课、统计与导出。
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/smart-scheduling")
 @RequiredArgsConstructor
@@ -31,6 +33,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/courses")
     public Result<List<CourseDTO>> getCourses(@RequestParam(required = false) String semesterId) {
+        log.info("【智能排课-课程列表】semesterId: {}", semesterId);
         try {
             List<CourseDTO> courses = service.getCourses(semesterId);
             return Result.success(courses);
@@ -45,6 +48,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/teachers")
     public Result<List<TeacherDTO>> getTeachers() {
+        log.info("【智能排课-教师列表】");
         try {
             List<TeacherDTO> teachers = service.getTeachers();
             return Result.success(teachers);
@@ -59,6 +63,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/classes")
     public Result<List<ClassDTO>> getClasses() {
+        log.info("【智能排课-班级列表】");
         try {
             List<ClassDTO> classes = service.getClasses();
             return Result.success(classes);
@@ -73,6 +78,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/rooms")
     public Result<List<RoomDTO>> getRooms() {
+        log.info("【智能排课-教室列表】");
         try {
             List<RoomDTO> rooms = service.getRooms();
             return Result.success(rooms);
@@ -89,6 +95,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/schedules")
     public Result<List<ScheduleItemDTO>> getSchedules(@RequestParam(required = false) Integer week) {
+        log.info("【智能排课-已排列表】week: {}", week);
         try {
             List<ScheduleItemDTO> schedules = service.getSchedules(week);
             return Result.success(schedules);
@@ -103,6 +110,7 @@ public class SmartSchedulingController {
      */
     @PostMapping("/schedules")
     public Result<Map<String, Object>> saveSchedule(@RequestBody Map<String, Object> body) {
+        log.info("【智能排课-保存排课】courseId: {}, day: {}", body.get("courseId"), body.get("day"));
         try {
             String courseId = (String) body.get("courseId");
             String day = (String) body.get("day");
@@ -132,6 +140,7 @@ public class SmartSchedulingController {
      */
     @PostMapping("/schedules/batch")
     public Result<BatchScheduleResultDTO> batchSaveSchedules(@RequestBody BatchScheduleRequest request) {
+        log.info("【智能排课-批量保存】courses: {}, week: {}", request.getCourses() != null ? request.getCourses().size() : 0, request.getWeek());
         try {
             BatchScheduleResultDTO result = service.batchSaveSchedules(request);
             return Result.success("批量保存成功", result);
@@ -146,6 +155,7 @@ public class SmartSchedulingController {
      */
     @DeleteMapping("/schedules/{id}")
     public Result<Map<String, Object>> deleteSchedule(@PathVariable String id) {
+        log.info("【智能排课-删除排课】id: {}", id);
         try {
             Map<String, Object> result = service.deleteSchedule(id);
             return Result.success("删除成功", result);
@@ -162,6 +172,7 @@ public class SmartSchedulingController {
      */
     @PostMapping("/schedules/clear")
     public Result<Map<String, Object>> clearSchedules(@RequestBody(required = false) Map<String, Object> body) {
+        log.info("【智能排课-清空排课】");
         try {
             String semesterId = body != null ? (String) body.get("semesterId") : null;
             Map<String, Object> result = service.clearSchedules(semesterId);
@@ -179,10 +190,10 @@ public class SmartSchedulingController {
      */
     @PostMapping("/auto-arrange")
     public Result<AutoArrangeResultDTO> autoArrange(@RequestBody(required = false) Map<String, Object> body) {
+        log.info("【智能排课-自动排课】strategy: {}", body != null ? body.get("strategy") : "priority");
         try {
             String strategy = body != null ? (String) body.getOrDefault("strategy", "priority") : "priority";
-            Integer week = body != null && body.containsKey("week") ? ((Number) body.get("week")).intValue() : 1;
-            AutoArrangeResultDTO result = service.autoArrange(strategy, week);
+            AutoArrangeResultDTO result = service.autoArrange(strategy);
             return Result.success("自动排课完成", result);
         } catch (Exception e) {
             return Result.error("自动排课失败: " + e.getMessage());
@@ -195,6 +206,7 @@ public class SmartSchedulingController {
      */
     @PostMapping("/check-conflict")
     public Result<ConflictResultDTO> checkConflict(@RequestBody Map<String, Object> body) {
+        log.info("【智能排课-冲突检测】courseId: {}, day: {}", body.get("courseId"), body.get("day"));
         try {
             String courseId = (String) body.get("courseId");
             String day = (String) body.get("day");
@@ -221,6 +233,7 @@ public class SmartSchedulingController {
      */
     @PostMapping("/recommend")
     public Result<List<TimeRecommendationDTO>> recommendTime(@RequestBody Map<String, Object> body) {
+        log.info("【智能排课-推荐时间】courseId: {}", body.get("courseId"));
         try {
             String courseId = (String) body.get("courseId");
             if (courseId == null) {
@@ -241,6 +254,7 @@ public class SmartSchedulingController {
      */
     @GetMapping("/stats")
     public Result<ScheduleStatsDTO> getStats(@RequestParam(required = false) String semesterId) {
+        log.info("【智能排课-统计数据】semesterId: {}", semesterId);
         try {
             ScheduleStatsDTO stats = service.getStats(semesterId);
             return Result.success(stats);
@@ -258,6 +272,7 @@ public class SmartSchedulingController {
             @RequestParam(required = false) String format,
             @RequestParam(required = false) Integer week,
             @RequestParam(required = false) String type) {
+        log.info("【智能排课-导出】format: {}, week: {}, type: {}", format, week, type);
         try {
             ExportResultDTO result = service.exportSchedule(format, week, type);
             return Result.success("导出成功", result);
@@ -274,6 +289,7 @@ public class SmartSchedulingController {
     public Result<HistoryResultDTO> getHistory(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "20") int pageSize) {
+        log.info("【智能排课-操作历史】page: {}, pageSize: {}", page, pageSize);
         try {
             HistoryResultDTO result = service.getHistory(page, pageSize);
             return Result.success(result);

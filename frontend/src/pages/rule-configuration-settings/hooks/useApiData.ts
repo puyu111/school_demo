@@ -32,7 +32,7 @@ export const useRuleDataWithApi = () => {
     manual: true,
   });
 
-  const rules = rulesResponse?.data || [];
+  const rules = rulesResponse?.data?.data || rulesResponse?.data || [];
 
   // 更新规则
   const updateRuleMutation = useCallback(
@@ -202,7 +202,7 @@ export const useRuleWeights = () => {
   // 获取历史记录
   const loadHistory = useCallback(async () => {
     const response = await getWeightHistory({ current: 1, pageSize: 20 });
-    setWeightHistory(response.data || []);
+    setWeightHistory(response.data?.data || response.data || []);
   }, []);
 
   return {

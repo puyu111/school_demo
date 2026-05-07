@@ -10,8 +10,6 @@ import defaultSettings from "../config/defaultSettings";
 import { errorConfig } from "./requestErrorConfig";
 
 const isDev = process.env.NODE_ENV === "development";
-const loginPath = "/user/login";
-
 /**
  * @see https://umijs.org/docs/api/runtime-config#getinitialstate
  * */
@@ -28,14 +26,14 @@ export async function getInitialState(): Promise<{
       });
       return msg.data;
     } catch (_error) {
-      history.push(loginPath);
+      return undefined;
     }
     return undefined;
   };
   // 如果不是登录页面，执行
   const { location } = history;
   if (
-    ![loginPath, "/user/register", "/user/register-result"].includes(
+    !["/user/register", "/user/register-result"].includes(
       location.pathname
     )
   ) {
@@ -72,9 +70,8 @@ export const layout: RunTimeLayoutConfig = ({
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
+      // 如果没有登录，不再重定向（登录页已删除）
+      if (!initialState?.currentUser) {
       }
     },
     bgLayoutImgList: [

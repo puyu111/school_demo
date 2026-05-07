@@ -60,14 +60,64 @@ export interface BatchMoveParams {
  * 获取课表数据
  * @param params 请求参数
  */
+/**
+ * 后端字段名 -> 前端字段名映射
+ */
+const FIELD_MAP: Record<string, string> = {
+  weekday: 'weekDay',
+};
+
+/**
+ * 后端字段 -> 前端字段的映射表
+ */
+const REVERSE_FIELD_MAP: Record<string, string> = {
+  weekDay: 'weekday',
+};
+
+/**
+ * 递归转换对象字段名（后端 -> 前端）
+ */
+function transformFields(obj: any): any {
+  if (Array.isArray(obj)) {
+    return obj.map(transformFields);
+  }
+  if (obj !== null && typeof obj === 'object') {
+    const transformed: Record<string, any> = {};
+    for (const key of Object.keys(obj)) {
+      const newKey = FIELD_MAP[key] || key;
+      transformed[newKey] = transformFields(obj[key]);
+    }
+    return transformed;
+  }
+  return obj;
+}
+
+/**
+ * 递归转换对象字段名（前端 -> 后端）
+ */
+function reverseTransformFields(obj: any): any {
+  if (Array.isArray(obj)) {
+    return obj.map(reverseTransformFields);
+  }
+  if (obj !== null && typeof obj === 'object') {
+    const transformed: Record<string, any> = {};
+    for (const key of Object.keys(obj)) {
+      const newKey = REVERSE_FIELD_MAP[key] || key;
+      transformed[newKey] = reverseTransformFields(obj[key]);
+    }
+    return transformed;
+  }
+  return obj;
+}
+
 export const getScheduleData = async (
   params: ScheduleRequestParams,
 ): Promise<Course[]> => {
   const { week, ...rest } = params;
-  return request<ApiResponse<Course[]>>(`${API_BASE}/courses`, {
+  return request<ApiResponse<any[]>>(`${API_BASE}/courses`, {
     method: 'GET',
     params: { week, ...rest },
-  }).then((res) => res.data);
+  }).then((res) => transformFields(res.data) as Course[]);
 };
 
 /**
@@ -75,9 +125,9 @@ export const getScheduleData = async (
  * @param courseId 课程 ID
  */
 export const getCourseDetail = async (courseId: string): Promise<Course> => {
-  return request<ApiResponse<Course>>(`${API_BASE}/courses/${courseId}`, {
+  return request<ApiResponse<any>>(`${API_BASE}/courses/${courseId}`, {
     method: 'GET',
-  }).then((res) => res.data);
+  }).then((res) => transformFields(res.data) as Course);
 };
 
 /**
@@ -87,10 +137,10 @@ export const getCourseDetail = async (courseId: string): Promise<Course> => {
 export const createCourse = async (
   course: Omit<Course, 'id'>,
 ): Promise<Course> => {
-  return request<ApiResponse<Course>>(`${API_BASE}/courses`, {
+  return request<ApiResponse<any>>(`${API_BASE}/courses`, {
     method: 'POST',
-    data: course,
-  }).then((res) => res.data);
+    data: reverseTransformFields(course),
+  }).then((res) => transformFields(res.data) as Course);
 };
 
 /**
@@ -102,10 +152,10 @@ export const updateCourse = async (
   id: string,
   updates: Partial<Course>,
 ): Promise<Course> => {
-  return request<ApiResponse<Course>>(`${API_BASE}/courses/${id}`, {
+  return request<ApiResponse<any>>(`${API_BASE}/courses/${id}`, {
     method: 'PUT',
-    data: updates,
-  }).then((res) => res.data);
+    data: reverseTransformFields(updates),
+  }).then((res) => transformFields(res.data) as Course);
 };
 
 /**
@@ -173,10 +223,10 @@ export const saveSchedule = async (params: CourseSaveParams) => {
  * @param week 周次
  */
 export const refreshSchedule = async (week: number): Promise<Course[]> => {
-  return request<ApiResponse<Course[]>>(`${API_BASE}/refresh`, {
+  return request<ApiResponse<any[]>>(`${API_BASE}/refresh`, {
     method: 'GET',
     params: { week },
-  }).then((res) => res.data);
+  }).then((res) => transformFields(res.data) as Course[]);
 };
 
 /**

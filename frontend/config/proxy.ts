@@ -10,50 +10,51 @@
  * @doc https://umijs.org/docs/guides/proxy
  */
 export default {
-  // 本地开发环境 - 接口代理到后端服务器
-  dev: {
-    // 拖拽排课模块接口代理
-    "/api/drag-schedule": {
-      target: "http://localhost:8081",
-      changeOrigin: true,
-      pathRewrite: { "^/api/drag-schedule": "/api/drag-schedule" },
-    },
-    // 基础数据管理模块接口代理
-    "/api/base-data": {
-      target: "http://localhost:8081",
-      changeOrigin: true,
-      pathRewrite: { "^/api/base-data": "/api/base-data" },
-    },
-    // 智能排课系统接口代理
-    "/api/smart-scheduling": {
-      target: "http://localhost:8081",
-      changeOrigin: true,
-      pathRewrite: { "^/api/smart-scheduling": "/api/smart-scheduling" },
-    },
-    // 调课申请审核模块接口代理
-    "/api/course-adjustment": {
-      target: "http://localhost:8081",
-      changeOrigin: true,
-      pathRewrite: { "^/api/course-adjustment": "/api/course-adjustment" },
-    },
+  // 拖拽排课模块接口代理
+  "/api/drag-schedule": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
   },
-  /**
-   * @name 详细的代理配置
-   * @doc https://github.com/chimurai/http-proxy-middleware
-   */
-  test: {
-    // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
-    "/api/": {
-      target: "https://proapi.azurewebsites.net",
-      changeOrigin: true,
-      pathRewrite: { "^": "" },
-    },
+  // 基础数据管理模块接口代理
+  "/api/base-data": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
   },
-  pre: {
-    "/api/": {
-      target: "your pre url",
-      changeOrigin: true,
-      pathRewrite: { "^": "" },
-    },
+  // 智能排课系统接口代理
+  "/api/smart-scheduling": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  // 调课申请审核模块接口代理
+  "/api/course-adjustment": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  // 课表发布与统计模块接口代理
+  "/api/schedule": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  // 规则配置模块接口代理
+  "/api/rules": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  "/api/teachers": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  "/api/unavailable-dates": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  "/api/rule-weights": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
+  },
+  // 排课算法接口代理
+  "/api/algorithm": {
+    target: "http://127.0.0.1:8080",
+    changeOrigin: true,
   },
 };

@@ -10,7 +10,7 @@ export interface RuleWeight {
   id: string;
   category: string;
   name: string;
-  description: string;
+  description?: string;
   defaultWeight: number;
   currentWeight: number;
   minWeight: number;

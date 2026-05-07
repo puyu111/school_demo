@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class ConflictCheckResultVO {
-    private boolean hasConflicts;
+    private Boolean hasConflicts;
     private List<ConflictItem> conflicts;
     private List<Recommendation> recommendations;
 

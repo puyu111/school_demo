@@ -9,6 +9,7 @@ import lombok.Data;
 public class UnavailableDateEntity {
 
     @Id
+    @Column(name = "`key`")
     private String key;
 
     @Column(name = "teacher_id", nullable = false, length = 50)

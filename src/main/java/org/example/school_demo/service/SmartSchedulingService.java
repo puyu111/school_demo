@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,7 @@ public class SmartSchedulingService {
     private final ScheduleHistoryRepository scheduleHistoryRepository;
     private final TimeSlotConfigRepository timeSlotConfigRepository;
     private final UnavailableDateRepository unavailableDateRepository;
+    private final CalendarRepository calendarRepository;
     private final EntityManager entityManager;
     private final ObjectMapper objectMapper;
     private final SimulatedAnnealingService simulatedAnnealingService;
@@ -415,17 +417,41 @@ public class SmartSchedulingService {
     // ==================== 3. 智能排课 ====================
 
     /**
-     * 一键智能排课（贪心算法）。
+     * 一键智能排课（整学期）。
      */
     @Transactional
-    public AutoArrangeResultDTO autoArrange(String strategy, Integer week) {
-        int weekVal = week != null ? week : 1;
+    public AutoArrangeResultDTO autoArrange(String strategy) {
+        return autoArrangeFullSemester(strategy);
+    }
 
-        // 使用模拟退火算法进行排课
+    // ==================== 整学期排课 ====================
+
+    /**
+     * 从学期日历计算总周数。
+     */
+    private int computeTotalWeeks() {
+        List<org.example.school_demo.entity.Calendar> calendars = calendarRepository.findAll();
+        if (calendars.isEmpty()) {
+            log.warn("未找到学期日历配置，默认使用 16 周");
+            return 16;
+        }
+        org.example.school_demo.entity.Calendar cal = calendars.get(0);
+        long daysBetween = ChronoUnit.DAYS.between(cal.getStartDate(), cal.getEndDate());
+        int totalWeeks = (int) Math.ceil(daysBetween / 7.0);
+        return Math.max(totalWeeks, 1);
+    }
+
+    /**
+     * 排整学期：用 week=1 跑 SA，结果写入所有周。
+     */
+    private AutoArrangeResultDTO autoArrangeFullSemester(String strategy) {
+        int totalWeeks = computeTotalWeeks();
+        log.info("【整学期排课】总周数: {}", totalWeeks);
+
+        // 用 week=1 跑 SA，不持久化
         AutoScheduleRequest request = new AutoScheduleRequest();
-        request.setWeek(weekVal);
+        request.setWeek(1);
 
-        // strategy 影响退火参数：priority → 标准配置，balanced → 更多迭代找均衡解
         if ("balanced".equals(strategy)) {
             SAConfig config = new SAConfig();
             config.setInitialTemp(200);
@@ -438,7 +464,7 @@ public class SmartSchedulingService {
 
         AutoScheduleResultVO annealResult;
         try {
-            annealResult = simulatedAnnealingService.autoSchedule(request, true);
+            annealResult = simulatedAnnealingService.autoSchedule(request, false);
         } catch (Exception e) {
             log.error("模拟退火排课失败", e);
             return AutoArrangeResultDTO.builder()
@@ -448,8 +474,120 @@ public class SmartSchedulingService {
                     .build();
         }
 
-        // 将退火结果转换为前端期望的格式
-        List<AutoArrangeResultDTO.ScheduledItem> scheduled = new ArrayList<>();
+        // 持久化到所有周
+        persistSolutionForAllWeeks(annealResult, totalWeeks);
+
+        // 构建返回结果
+        List<AutoArrangeResultDTO.ScheduledItem> scheduled = buildScheduledItems(annealResult);
+        int total = scheduled.size();
+
+        return AutoArrangeResultDTO.builder()
+                .scheduled(scheduled)
+                .failed(Collections.emptyList())
+                .stats(AutoArrangeResultDTO.Stats.builder()
+                        .scheduled(total)
+                        .failed(0)
+                        .total(total)
+                        .successRate(100.0)
+                        .build())
+                .totalWeeks(totalWeeks)
+                .build();
+    }
+
+    /**
+     * 将 SA 结果持久化到所有周。
+     * 先清空所有课表，再写入，每条记录的 weeks = [1..totalWeeks]。
+     */
+    private void persistSolutionForAllWeeks(AutoScheduleResultVO annealResult, int totalWeeks) {
+        if (annealResult.getSchedules() == null || annealResult.getSchedules().isEmpty()) {
+            log.warn("无排课结果可持久化");
+            return;
+        }
+
+        // 加载基础数据
+        List<TimeSlotConfigEntity> timeSlots = timeSlotConfigRepository.findAll();
+        Map<String, CourseEntity> courseNameMap = new HashMap<>();
+        Map<String, Long> courseBizIdToDbId = new HashMap<>();
+        for (CourseEntity ce : courseRepository.findAll()) {
+            courseNameMap.put(ce.getName(), ce);
+            String bizId = ce.getId() != null ? ce.getId() : String.valueOf(ce.getDbId());
+            courseBizIdToDbId.put(bizId, ce.getDbId());
+        }
+
+        List<Integer> allWeeks = new ArrayList<>();
+        for (int w = 1; w <= totalWeeks; w++) {
+            allWeeks.add(w);
+        }
+
+        // 先清空所有课表
+        scheduleRepository.deleteAll();
+        entityManager.flush();
+        entityManager.clear();
+
+        List<ScheduleEntity> entities = new ArrayList<>();
+        for (CourseVO cv : annealResult.getSchedules()) {
+            ScheduleEntity entity = new ScheduleEntity();
+
+            // 查找 courseId
+            Long courseDbId = null;
+            if (cv.getId() != null && courseBizIdToDbId.containsKey(cv.getId())) {
+                courseDbId = courseBizIdToDbId.get(cv.getId());
+            } else if (cv.getCourseName() != null) {
+                CourseEntity ce = courseNameMap.get(cv.getCourseName());
+                if (ce != null) courseDbId = ce.getDbId();
+            }
+            if (courseDbId == null) continue;
+            entity.setCourseId(courseDbId);
+
+            // teacherId
+            if (cv.getTeacherId() != null) {
+                try {
+                    entity.setTeacherId(Long.parseLong(cv.getTeacherId()));
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+            } else {
+                continue;
+            }
+
+            entity.setClassId(cv.getClassId());
+            entity.setWeekday(cv.getWeekDay() != null ? cv.getWeekDay() : 1);
+            entity.setWeeks(allWeeks);
+
+            // 解析时间
+            if (cv.getStartTime() != null) {
+                entity.setStartTime(LocalTime.parse(cv.getStartTime()));
+            } else if (!timeSlots.isEmpty()) {
+                entity.setStartTime(timeSlots.get(0).getStartTime());
+            }
+            if (cv.getEndTime() != null) {
+                entity.setEndTime(LocalTime.parse(cv.getEndTime()));
+            } else if (!timeSlots.isEmpty()) {
+                entity.setEndTime(timeSlots.get(timeSlots.size() - 1).getEndTime());
+            }
+            entity.setDuration(cv.getDuration() != null ? cv.getDuration() : 90);
+            entity.setColor(cv.getColor() != null ? cv.getColor() : generateColor(courseDbId));
+
+            entities.add(entity);
+        }
+
+        // 批量插入
+        int batchSize = 50;
+        for (int i = 0; i < entities.size(); i += batchSize) {
+            List<ScheduleEntity> batch = entities.subList(i, Math.min(i + batchSize, entities.size()));
+            scheduleRepository.saveAll(batch);
+            entityManager.flush();
+            entityManager.clear();
+        }
+
+        log.info("整学期排课完成：{} 条记录，周次 1-{}", entities.size(), totalWeeks);
+    }
+
+    /**
+     * 从 SA 结果构建前端需要的 ScheduledItem 列表。
+     */
+    private List<AutoArrangeResultDTO.ScheduledItem> buildScheduledItems(AutoScheduleResultVO annealResult) {
+        List<AutoArrangeResultDTO.ScheduledItem> items = new ArrayList<>();
         List<TimeSlotConfigEntity> timeSlots = timeSlotConfigRepository.findAll();
 
         Map<String, CourseEntity> courseBizIdMap = new HashMap<>();
@@ -468,7 +606,6 @@ public class SmartSchedulingService {
                 if (cv.getId() != null && courseBizIdMap.containsKey(cv.getId())) {
                     bizCourseId = cv.getId();
                 } else {
-                    // 通过 courseName 查找业务 ID
                     for (Map.Entry<String, CourseEntity> e : courseBizIdMap.entrySet()) {
                         if (e.getValue().getName().equals(cv.getCourseName())) {
                             bizCourseId = e.getKey();
@@ -477,30 +614,18 @@ public class SmartSchedulingService {
                     }
                 }
 
-                scheduled.add(AutoArrangeResultDTO.ScheduledItem.builder()
+                items.add(AutoArrangeResultDTO.ScheduledItem.builder()
                         .courseId(bizCourseId)
                         .courseName(cv.getCourseName())
                         .day(cv.getWeekDay() != null && cv.getWeekDay() >= 1 && cv.getWeekDay() <= 7
                                 ? WEEKDAY_NAMES[cv.getWeekDay()] : "monday")
                         .slot(slotNumber)
-                        .week(weekVal)
+                        .week(1)
                         .duration(cv.getDuration() != null ? (int) Math.ceil(cv.getDuration() / 45.0) : 1)
                         .build());
             }
         }
-
-        // 退火算法总是能排完所有课程（有冲突则通过高权重惩罚），无严格"失败"概念
-        int total = scheduled.size();
-        return AutoArrangeResultDTO.builder()
-                .scheduled(scheduled)
-                .failed(Collections.emptyList())
-                .stats(AutoArrangeResultDTO.Stats.builder()
-                        .scheduled(total)
-                        .failed(0)
-                        .total(total)
-                        .successRate(100.0)
-                        .build())
-                .build();
+        return items;
     }
 
     /**

@@ -13,7 +13,7 @@ public class TimeSlotUpdateRequest {
     @Data
     public static class HalfDayConfigUpdate {
         private String type;
-        private boolean isSchedulable;
+        private Boolean isSchedulable;
     }
 
     @Data
@@ -22,7 +22,7 @@ public class TimeSlotUpdateRequest {
         private String startTime;
         private String endTime;
         private Integer duration;
-        private boolean isSchedulable;
+        private Boolean isSchedulable;
     }
 
     @Data

@@ -17,7 +17,7 @@ const RuleTable: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   // 使用 API 获取规则数据
-  const { rules, rulesLoading, loadRules, setRules } = useRuleDataWithApi();
+  const { rules, rulesLoading, loadRules, setRules, updateRule } = useRuleDataWithApi();
 
   // 初始化加载数据
   useMemo(() => {
@@ -157,16 +157,15 @@ const RuleTable: React.FC = () => {
   const handleSave = async (updatedRule: RuleData) => {
     setLoading(true);
     try {
-      // 本地更新
-      setRules((prevData: any) => ({
-        ...prevData,
-        data: prevData?.data?.map((item: RuleData) =>
-          item.key === updatedRule.key ? { ...item, ...updatedRule } : item
-        ),
-      }));
+      // 调用 API 持久化保存
+      await updateRule(updatedRule.key, updatedRule);
+      // 重新从后端加载数据，确保数据一致
+      await loadRules();
       setEditDialogVisible(false);
       setEditingRule(null);
       message.success("规则更新成功");
+    } catch (e) {
+      message.error("保存失败，请重试");
     } finally {
       setLoading(false);
     }

@@ -68,11 +68,8 @@ const SmartSchedulingPage = () => {
     );
   }
 
-  const handleAutoSchedule = () => {
-    const result = autoSchedule();
-    message.success(
-      `自动排课完成：成功 ${result.scheduled} 门，失败 ${result.failed} 门`,
-    );
+  const handleAutoSchedule = async () => {
+    await autoSchedule();
   };
 
   const handleClearAll = () => {

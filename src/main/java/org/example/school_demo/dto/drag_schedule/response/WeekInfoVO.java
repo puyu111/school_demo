@@ -10,6 +10,6 @@ public class WeekInfoVO {
     private String startDate;
     private String endDate;
     private Integer courseCount;
-    private boolean isCurrentWeek;
-    private boolean hasUnsavedChanges;
+    private Boolean isCurrentWeek;
+    private Boolean hasUnsavedChanges;
 }

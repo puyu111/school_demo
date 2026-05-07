@@ -245,7 +245,7 @@ public class DragScheduleService {
                 List<TimeSlotConfigEntity> slots = timeSlotConfigRepository.findAll();
                 for (TimeSlotConfigEntity slot : slots) {
                     if (hc.getType().equals(slot.getHalfDayType())) {
-                        slot.setIsSchedulable(hc.isSchedulable());
+                        slot.setIsSchedulable(hc.getIsSchedulable());
                         timeSlotConfigRepository.save(slot);
                     }
                 }
@@ -259,7 +259,7 @@ public class DragScheduleService {
                     if (tu.getStartTime() != null) slot.setStartTime(LocalTime.parse(tu.getStartTime(), TIME_FMT));
                     if (tu.getEndTime() != null) slot.setEndTime(LocalTime.parse(tu.getEndTime(), TIME_FMT));
                     if (tu.getDuration() != null) slot.setDuration(tu.getDuration());
-                    slot.setIsSchedulable(tu.isSchedulable());
+                    slot.setIsSchedulable(tu.getIsSchedulable());
                     timeSlotConfigRepository.save(slot);
                 });
             }
@@ -362,7 +362,7 @@ public class DragScheduleService {
         String endStr = calculateWeekDate(weekNumber, 6);
         LocalDate start = LocalDate.parse(startStr);
         LocalDate end = LocalDate.parse(endStr);
-        vo.setCurrentWeek(!today.isBefore(start) && !today.isAfter(end));
+        vo.setIsCurrentWeek(!today.isBefore(start) && !today.isAfter(end));
 
         vo.setHasUnsavedChanges(false);
         return vo;
@@ -505,7 +505,7 @@ public class DragScheduleService {
         }
 
         // Generate recommendations if conflicts exist
-        if (result.isHasConflicts()) {
+        if (result.getHasConflicts()) {
             result.setRecommendations(generateRecommendations(course, week));
         }
 
@@ -791,9 +791,9 @@ public class DragScheduleService {
         item.setEndTime(e.getEndTime().format(TIME_FMT));
         item.setDuration(e.getDuration());
         item.setHalfDayType(e.getHalfDayType());
-        item.setBreak(Boolean.TRUE.equals(e.getIsBreak()));
+        item.setIsBreak(Boolean.TRUE.equals(e.getIsBreak()));
         item.setBreakAfter(e.getBreakAfter());
-        item.setSchedulable(Boolean.TRUE.equals(e.getIsSchedulable()));
+        item.setIsSchedulable(Boolean.TRUE.equals(e.getIsSchedulable()));
         return item;
     }
 
@@ -811,7 +811,7 @@ public class DragScheduleService {
             List<TimeSlotConfigEntity> s = entry.getValue();
             hc.setStartTime(s.stream().map(TimeSlotConfigEntity::getStartTime).min(LocalTime::compareTo).map(t -> t.format(TIME_FMT)).orElse(""));
             hc.setEndTime(s.stream().map(TimeSlotConfigEntity::getEndTime).max(LocalTime::compareTo).map(t -> t.format(TIME_FMT)).orElse(""));
-            hc.setSchedulable(true);
+            hc.setIsSchedulable(true);
             return hc;
         }).collect(Collectors.toList());
     }

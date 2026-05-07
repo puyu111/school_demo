@@ -24,7 +24,7 @@ public class SchoolDemoApplication {
         SpringApplication.run(SchoolDemoApplication.class, args);
         log.info("========================================");
         log.info("  智能排课系统已启动");
-        log.info("  API 端口：http://localhost:8081");
+        log.info("  API 端口：http://localhost:8080");
         log.info("========================================");
     }
 

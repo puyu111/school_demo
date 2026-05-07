@@ -16,7 +16,7 @@ public class TimeSlotConfigVO {
         private String name;
         private String startTime;
         private String endTime;
-        private boolean isSchedulable;
+        private Boolean isSchedulable;
     }
 
     @Data
@@ -27,9 +27,9 @@ public class TimeSlotConfigVO {
         private String endTime;
         private Integer duration;
         private String halfDayType;
-        private boolean isBreak;
+        private Boolean isBreak;
         private Integer breakAfter;
-        private boolean isSchedulable;
+        private Boolean isSchedulable;
     }
 
     @Data
