@@ -60,4 +60,8 @@ export interface DataStepConfig<T extends BaseDataItem> {
   onDownloadTemplate?: () => void;
   /** 数据总数（用于后端分页） */
   total?: number;
+  /** 新建保存回调（先调后端，成功后本地更新） */
+  onSaveItem?: (formData: Partial<T>) => Promise<any>;
+  /** 批量删除回调（先调后端，成功后本地更新） */
+  onDeleteItems?: (selectedItems: T[]) => Promise<any>;
 }

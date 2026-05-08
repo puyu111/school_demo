@@ -22,6 +22,12 @@ export interface DataManagementStepProps {
   onBatchImport?: (file: File) => Promise<void>;
   /** 下载模板回调 */
   onDownloadTemplate?: () => void;
+  /** 新建保存回调 */
+  onSaveItem?: (formData: any) => Promise<any>;
+  /** 批量删除回调 */
+  onDeleteItems?: (items: any[]) => Promise<any>;
+  /** 课程名称选项（覆盖多选下拉的默认选项） */
+  courseNameOptions?: { label: string; value: string }[];
 }
 
 /**
@@ -40,6 +46,9 @@ export function createDataManagementStep<T extends BaseDataItem>(
     initialData,
     onBatchImport,
     onDownloadTemplate,
+    onSaveItem,
+    onDeleteItems,
+    courseNameOptions,
   }) => {
     // 生成初始数据（使用配置中的默认数据或传入的数据）
     const presetInitialData = config.generateInitialData(initialData);
@@ -50,12 +59,21 @@ export function createDataManagementStep<T extends BaseDataItem>(
       message.success(`${tableTitle || config.tableTitle}提交成功！`);
     };
 
+    // 用真实课程名覆盖多选下拉的默认选项
+    const formFields = courseNameOptions?.length
+      ? config.formFields.map((field) =>
+          field.type === 'select' && field.mode === 'multiple'
+            ? { ...field, options: courseNameOptions }
+            : field,
+        )
+      : config.formFields;
+
     return (
       <CommonDataManager<T>
         initialData={presetInitialData}
         tableTitle={tableTitle || config.tableTitle}
         columns={config.columns}
-        formFields={config.formFields}
+        formFields={formFields}
         searchPlaceholder={searchPlaceholder || config.searchPlaceholder}
         modalTitleNew={config.modalTitleNew}
         modalTitleEdit={config.modalTitleEdit}
@@ -65,6 +83,8 @@ export function createDataManagementStep<T extends BaseDataItem>(
         onSubmit={handleManagerSubmit}
         onBatchImport={onBatchImport || config.onBatchImport}
         onDownloadTemplate={onDownloadTemplate || config.onDownloadTemplate}
+        onSaveItem={onSaveItem || config.onSaveItem}
+        onDeleteItems={onDeleteItems || config.onDeleteItems}
       />
     );
   };

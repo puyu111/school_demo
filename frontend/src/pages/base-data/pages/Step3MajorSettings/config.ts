@@ -3,7 +3,7 @@
  * 聚合所有配置供 DataStepFactory 使用
  */
 
-import { downloadMajorsTemplate } from '../../services';
+import { createMajor, deleteMajors, downloadMajorsTemplate, importMajors } from '../../services';
 import type { DataStepConfig } from '../../types';
 import { downloadTemplate } from '../../utils';
 import {
@@ -37,5 +37,11 @@ export const MAJOR_STEP_CONFIG: DataStepConfig<MajorData> = {
   // 下载模板回调
   onDownloadTemplate: async () => {
     await downloadTemplate(downloadMajorsTemplate, '专业设置模板.xlsx');
+  },
+  onBatchImport: async (file) => importMajors(file),
+  onSaveItem: async (formData) => createMajor(formData as any),
+  onDeleteItems: async (items) => {
+    const dbIds = items.map((i: any) => String(i.dbId));
+    return deleteMajors(dbIds);
   },
 };

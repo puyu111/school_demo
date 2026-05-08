@@ -19,11 +19,13 @@ export async function uploadFile(
   const formData = new FormData();
   formData.append('file', file);
 
-  return request(url, {
+  const res = await fetch(url, {
     method: 'POST',
-    data: formData,
-    requestType: 'form',
+    body: formData,
   });
+  const data = await res.json();
+  if (data.code !== 200) throw new Error(data.message || '上传失败');
+  return data.data;
 }
 
 /**

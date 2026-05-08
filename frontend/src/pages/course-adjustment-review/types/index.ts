@@ -81,10 +81,11 @@ export interface ReviewFormProps {
 // ==================== API 响应类型 ====================
 
 export interface ApiResponse<T = any> {
-  success: boolean;
-  data?: T;
+  code: number;
   message?: string;
-  errorCode?: string;
+  data?: T;
+  timestamp?: number;
+  success?: boolean;
 }
 
 export interface ApplicationListResponse {

@@ -20,6 +20,6 @@ public interface MajorRepository extends JpaRepository<Major, Long> {
     @Query("SELECT COUNT(m) > 0 FROM Major m WHERE m.id = :id")
     boolean existsByBusinessId(@Param("id") String id);
 
-    @Query("SELECT m FROM Major m WHERE m.id IN :ids")
-    List<Major> findByIdIn(@Param("ids") List<String> ids);
+    @Query("SELECT m FROM Major m WHERE m.dbId IN :ids")
+    List<Major> findByIdIn(@Param("ids") List<Long> ids);
 }

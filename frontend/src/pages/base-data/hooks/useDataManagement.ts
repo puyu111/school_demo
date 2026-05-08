@@ -103,6 +103,12 @@ export function useDataManagement<T extends BaseDataItem>({
     [],
   );
 
+  // 从父组件同步初始数据（父组件异步加载数据后更新 initialData）
+  useEffect(() => {
+    setData(initialData);
+    setFilteredData(initialData);
+  }, [initialData]);
+
   // ============== 表单状态 ==============
   const [modalVisible, setModalVisible] = useState(false);
   const [currentRecord, setCurrentRecord] = useState<T | null>(null);
@@ -169,7 +175,7 @@ export function useDataManagement<T extends BaseDataItem>({
   }, []);
 
   /** 保存：验证表单并执行新增/更新 */
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback((backendRecord?: T) => {
     // 检查必填字段
     const hasEmptyRequired = formFields
       .filter((field) => field.required)
@@ -199,7 +205,10 @@ export function useDataManagement<T extends BaseDataItem>({
         ),
       );
     } else {
-      const newData = [...data, { ...formData } as T];
+      const record = backendRecord
+        ? { ...backendRecord, key: (backendRecord as any)?.dbId ?? (backendRecord as any)?.id } as T
+        : ({ ...formData } as T);
+      const newData = [...data, record];
       setData(newData);
       setFilteredData(newData);
     }
@@ -250,7 +259,7 @@ export function useDataManagement<T extends BaseDataItem>({
       setUploadFile(null);
       message.success('文件上传成功，等待后端处理');
     } catch (error) {
-      message.error('上传失败，请重试');
+      message.error('上传失败: ' + (error?.message || error || '未知错误'));
       console.error('文件上传错误:', error);
     }
   }, [uploadFile, onBatchImport]);

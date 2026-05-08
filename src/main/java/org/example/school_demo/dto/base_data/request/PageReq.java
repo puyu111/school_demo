@@ -18,7 +18,7 @@ public class PageReq {
     private Integer page = 1;
 
     @Min(value = 1, message = "每页记录数最小值为 1")
-    @Max(value = 100, message = "每页记录数最大值为 100")
+    @Max(value = 9999, message = "每页记录数最大值为 9999")
     @Builder.Default
     private Integer pageSize = 10;
 

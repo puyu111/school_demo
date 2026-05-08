@@ -73,12 +73,8 @@ public class TeacherController {
         if (file.getSize() > 10 * 1024 * 1024) return Result.error(400, "导入失败：文件大小不能超过10MB");
 
         String filename = file.getOriginalFilename();
-        String contentType = file.getContentType();
         boolean validExt = filename != null && (filename.endsWith(".xlsx") || filename.endsWith(".xls"));
-        boolean validType = contentType != null &&
-                (contentType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                 || contentType.equals("application/vnd.ms-excel"));
-        if (!validExt || !validType) {
+        if (!validExt) {
             return Result.error(400, "导入失败：文件格式不正确，请上传 .xlsx 或 .xls 文件");
         }
 

@@ -19,6 +19,6 @@ public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
     @Query("SELECT COUNT(c) > 0 FROM CourseEntity c WHERE c.id = :id")
     boolean existsByBusinessId(@Param("id") String id);
 
-    @Query("SELECT c FROM CourseEntity c WHERE c.id IN :ids")
-    List<CourseEntity> findByIdIn(@Param("ids") List<String> ids);
+    @Query("SELECT c FROM CourseEntity c WHERE c.dbId IN :ids")
+    List<CourseEntity> findByIdIn(@Param("ids") List<Long> ids);
 }

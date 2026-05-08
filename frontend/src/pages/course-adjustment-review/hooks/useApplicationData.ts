@@ -1,6 +1,7 @@
 import { Modal, message } from 'antd';
 import type { Key } from 'antd/lib/table/interface';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import * as api from '../services';
 import type { CourseAdjustmentRecord, FilterOptions } from '../types';
 
 /**
@@ -30,13 +31,16 @@ export const useApplicationData = () => {
   const loadApplications = useCallback(async () => {
     setLoading(true);
     try {
-      // TODO: 调用实际 API
-      // const res = await api.getApplications(filters);
-      // if (res.success) {
-      //   setData(res.data.list);
-      // }
-
-      // 暂时使用模拟数据
+      const res = await api.getApplications({
+        page: 1,
+        pageSize: 9999,
+        status: filters.status,
+        urgency: filters.urgency,
+        department: filters.department,
+      });
+      if (res.code === 200) {
+        setData(res.data?.list || []);
+      }
       setLoading(false);
     } catch (err) {
       console.error('加载申请列表失败:', err);
@@ -44,6 +48,11 @@ export const useApplicationData = () => {
       setLoading(false);
     }
   }, [filters]);
+
+  // 初始化加载
+  useEffect(() => {
+    loadApplications();
+  }, [loadApplications]);
 
   // 筛选数据
   const filteredData = useCallback(() => {
@@ -72,32 +81,38 @@ export const useApplicationData = () => {
 
   // 处理审核
   const handleReview = useCallback(
-    (
+    async (
       record: CourseAdjustmentRecord,
       status: 'approved' | 'rejected',
       comment: string,
     ) => {
-      // 更新状态
-      const newData = data.map((item) =>
-        item.key === record.key
-          ? ({
-              ...item,
-              status,
-              reviewComment: comment,
-              reviewTime: new Date().toLocaleString(),
-            } as CourseAdjustmentRecord)
-          : item,
-      );
-      setData(newData);
-      setModalVisible(false);
-      message.success(`申请已${status === 'approved' ? '通过' : '驳回'}`);
-
-      // TODO: 调用实际 API
-      // api.reviewApplication({
-      //   applicationId: record.id,
-      //   status,
-      //   reviewComment: comment,
-      // });
+      try {
+        const res = await api.reviewApplication({
+          applicationId: record.id,
+          status,
+          reviewComment: comment,
+        });
+        if (res.code === 200) {
+          const newData = data.map((item) =>
+            item.key === record.key
+              ? ({
+                  ...item,
+                  status,
+                  reviewComment: comment,
+                  reviewTime: new Date().toLocaleString(),
+                } as CourseAdjustmentRecord)
+              : item,
+          );
+          setData(newData);
+          setModalVisible(false);
+          message.success(`申请已${status === 'approved' ? '通过' : '驳回'}`);
+        } else {
+          message.error(res.message || '审核失败');
+        }
+      } catch (err) {
+        console.error('审核失败:', err);
+        message.error('审核失败');
+      }
     },
     [data],
   );
@@ -113,24 +128,31 @@ export const useApplicationData = () => {
       Modal.confirm({
         title: `确认批量${action === 'approve' ? '通过' : '驳回'}选中的 ${selectedRowKeys.length} 条申请？`,
         onOk: async () => {
-          const newData = data.map((item) =>
-            selectedRowKeys.includes(item.key as Key) &&
-            item.status === 'pending'
-              ? ({
-                  ...item,
-                  status: action === 'approve' ? 'approved' : 'rejected',
-                } as CourseAdjustmentRecord)
-              : item,
-          );
-          setData(newData);
-          setSelectedRowKeys([]);
-          message.success(`已批量处理 ${selectedRowKeys.length} 条申请`);
-
-          // TODO: 调用实际 API
-          // await api.batchReviewApplications({
-          //   applicationIds: selectedRowKeys.map((k) => String(k)),
-          //   status: action === 'approve' ? 'approved' : 'rejected',
-          // });
+          try {
+            const res = await api.batchReviewApplications({
+              applicationIds: selectedRowKeys.map((k) => String(k)),
+              status: action === 'approve' ? 'approved' : 'rejected',
+            });
+            if (res.code === 200) {
+              const newData = data.map((item) =>
+                selectedRowKeys.includes(item.key as Key) &&
+                item.status === 'pending'
+                  ? ({
+                      ...item,
+                      status: action === 'approve' ? 'approved' : 'rejected',
+                    } as CourseAdjustmentRecord)
+                  : item,
+              );
+              setData(newData);
+              setSelectedRowKeys([]);
+              message.success(`已批量处理 ${selectedRowKeys.length} 条申请`);
+            } else {
+              message.error(res.message || '批量处理失败');
+            }
+          } catch (err) {
+            console.error('批量审核失败:', err);
+            message.error('批量处理失败');
+          }
         },
       });
     },

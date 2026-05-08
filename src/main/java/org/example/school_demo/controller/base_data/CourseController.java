@@ -71,12 +71,8 @@ public class CourseController {
         if (file.getSize() > 10 * 1024 * 1024) return Result.error(400, "导入失败：文件大小不能超过10MB");
 
         String filename = file.getOriginalFilename();
-        String contentType = file.getContentType();
         boolean validExt = filename != null && (filename.endsWith(".xlsx") || filename.endsWith(".xls"));
-        boolean validType = contentType != null &&
-                (contentType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                 || contentType.equals("application/vnd.ms-excel"));
-        if (!validExt || !validType) {
+        if (!validExt) {
             return Result.error(400, "导入失败：文件格式不正确，请上传 .xlsx 或 .xls 文件");
         }
 
@@ -98,7 +94,7 @@ public class CourseController {
     public void downloadTemplate(HttpServletResponse response) throws IOException {
         ExcelUtils.setExcelResponseHeader(response, "课程导入模板");
         List<CourseDataDTO> demoList = Arrays.asList(
-                buildDemo("C001", "高等数学", 4.0, "必修", 64.0),
+                buildDemo("C001", "高等", 4.0, "必修", 64.0),
                 buildDemo("C002", "线性代数", 3.0, "必修", 48.0),
                 buildDemo("C003", "程序设计基础", 3.0, "选修", 48.0)
         );

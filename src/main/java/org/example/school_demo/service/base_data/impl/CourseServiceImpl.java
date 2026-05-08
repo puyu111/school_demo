@@ -97,7 +97,8 @@ public class CourseServiceImpl implements CourseService {
     public Map<String, Object> batchDelete(List<String> dbIds) {
         log.info("批量删除课程，dbIds: {}", dbIds);
 
-        List<CourseEntity> found = courseRepo.findByIdIn(dbIds);
+        List<Long> ids = dbIds.stream().map(Long::valueOf).collect(Collectors.toList());
+        List<CourseEntity> found = courseRepo.findByIdIn(ids);
 
         if (found.isEmpty()) {
             Map<String, Object> result = new HashMap<>();

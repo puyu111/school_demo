@@ -24,8 +24,8 @@ public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
     @Query("SELECT COUNT(t) > 0 FROM TeacherEntity t WHERE t.id = :id")
     boolean existsByBusinessId(@Param("id") String id);
 
-    @Query("SELECT t FROM TeacherEntity t WHERE t.id IN :ids")
-    List<TeacherEntity> findByIdIn(@Param("ids") List<String> ids);
+    @Query("SELECT t FROM TeacherEntity t WHERE t.dbId IN :ids")
+    List<TeacherEntity> findByIdIn(@Param("ids") List<Long> ids);
 
     Page<TeacherEntity> findByDegreeContaining(String degree, Pageable pageable);
 }

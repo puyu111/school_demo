@@ -96,7 +96,8 @@ public class MajorServiceImpl implements MajorService {
     @Override
     @Transactional
     public Map<String, Object> batchDelete(List<String> dbIds) {
-        List<Major> found = majorRepo.findByIdIn(dbIds);
+        List<Long> ids = dbIds.stream().map(Long::valueOf).collect(Collectors.toList());
+        List<Major> found = majorRepo.findByIdIn(ids);
 
         if (found.isEmpty()) {
             Map<String, Object> result = new HashMap<>();

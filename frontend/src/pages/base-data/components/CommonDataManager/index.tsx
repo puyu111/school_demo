@@ -57,6 +57,10 @@ export interface CommonDataManagerProps<T extends BaseDataItem> {
   onBatchImport?: (file: File) => Promise<void>;
   /** 下载模板回调 */
   onDownloadTemplate?: () => void;
+  /** 新建保存回调（先调后端） */
+  onSaveItem?: (formData: Partial<T>) => Promise<any>;
+  /** 批量删除回调（先调后端） */
+  onDeleteItems?: (items: T[]) => Promise<any>;
 }
 
 /** 动态表单组件 Props */
@@ -260,13 +264,17 @@ const CommonDataManager = <T extends BaseDataItem>({
   onSubmit,
   onBatchImport,
   onDownloadTemplate,
+  onSaveItem,
+  onDeleteItems,
 }: CommonDataManagerProps<T>) => {
   // 使用统一数据管理 Hook
   const {
+    data,
     filteredData,
     modalVisible,
     currentRecord,
     formData,
+    selectedRowKeys,
     uploadFile,
     batchModalVisible,
     handleSearch,
@@ -298,8 +306,25 @@ const CommonDataManager = <T extends BaseDataItem>({
     onSubmit?.();
   };
 
-  // 保存处理：显示操作结果提示
-  const handleSaveWithMessage = () => {
+  // 保存处理：新建时先调后端，成功后本地更新
+  const handleSaveWithMessage = async () => {
+    if (!currentRecord && onSaveItem) {
+      try {
+        const res = await onSaveItem(formData);
+        if (res?.code !== 200) {
+          message.error(res?.message || '保存失败');
+          return;
+        }
+        const result = handleSave(res.data);
+        if (result.success) {
+          message.success(`${tableTitle}添加成功！`);
+        }
+        return;
+      } catch (e: any) {
+        message.error('保存失败: ' + (e?.message || '网络错误'));
+        return;
+      }
+    }
     const result = handleSave();
     if (result.success) {
       message.success(
@@ -310,8 +335,26 @@ const CommonDataManager = <T extends BaseDataItem>({
     }
   };
 
-  // 删除处理：显示操作结果提示
-  const handleDeleteWithMessage = () => {
+  // 删除处理：先调后端删 dbId 的记录，成功后本地删除
+  const handleDeleteWithMessage = async () => {
+    if (onDeleteItems && selectedRowKeys.length > 0) {
+      const itemsToDelete = data.filter((item) =>
+        selectedRowKeys.includes(item.key),
+      );
+      const dbItems = itemsToDelete.filter((i: any) => i.dbId != null);
+      if (dbItems.length > 0) {
+        try {
+          const res = await onDeleteItems(dbItems);
+          if (res?.code !== 200) {
+            message.error(res?.message || '删除失败');
+            return;
+          }
+        } catch (e: any) {
+          message.error('删除失败: ' + (e?.message || '网络错误'));
+          return;
+        }
+      }
+    }
     const result = handleDelete();
     if (result.success) {
       message.success(result.message);

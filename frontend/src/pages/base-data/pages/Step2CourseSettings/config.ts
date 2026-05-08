@@ -3,7 +3,7 @@
  * 聚合所有配置供 DataStepFactory 使用
  */
 
-import { downloadCourseSettingsTemplate } from '../../services';
+import { createCourseSetting, deleteCourseSettings, downloadCourseSettingsTemplate, importCourseSettings } from '../../services';
 import type { DataStepConfig } from '../../types';
 import { downloadTemplate } from '../../utils';
 import {
@@ -37,5 +37,11 @@ export const COURSE_SETTING_STEP_CONFIG: DataStepConfig<CourseSettingData> = {
   // 下载模板回调
   onDownloadTemplate: async () => {
     await downloadTemplate(downloadCourseSettingsTemplate, '课程设置模板.xlsx');
+  },
+  onBatchImport: async (file) => importCourseSettings(file),
+  onSaveItem: async (formData) => createCourseSetting(formData as any),
+  onDeleteItems: async (items) => {
+    const dbIds = items.map((i: any) => String(i.dbId));
+    return deleteCourseSettings(dbIds);
   },
 };
